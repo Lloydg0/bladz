@@ -1,7 +1,16 @@
 import ReactDOM from "react-dom";
+import Welcome from "./welcome";
 
-ReactDOM.render(<HelloWorld />, document.querySelector("main"));
+// we only called ReactDOM.render once in the whole project
+// if (location.pathname == "/welcome") {
+//     ReactDOM.render(<Welcome />, document.querySelector("main"));
+// } else {
+//     ReactDOM.render(<img src="logo.gif" />, document.querySelector("main"));
+// }
 
-function HelloWorld() {
-    return <div>Hello, World!</div>;
+let element = <img src="logo.gif" />;
+
+if (location.pathname == "/welcome") {
+    element = <Welcome />;
 }
+ReactDOM.render(element, document.querySelector("main"));
