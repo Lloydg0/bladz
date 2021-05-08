@@ -5,26 +5,32 @@ export default class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.name,
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
         };
     }
-    submit() {
+    submitForm(e) {
+        e.preventDefault();
+        const { first_name, last_name, email, password } = this.state;
+        console.log("click");
         axios
-            .post("/welcome", {
-                first_name: this.state.first,
-                last_name: this.state.last,
-                email: this.state.email,
-                password_hash: this.state.password,
+            .post("/registration", {
+                first_name,
+                last_name,
+                email,
+                password,
             })
             .then((response) => {
                 console.log(
                     "Response worked in axios post for registration route",
                     response
                 );
-                if (response.success) {
+                if (response.data.success === true) {
                     // unload the page and request to the server
                     // location.href = "/";
-                    location.replace("/");
+                    location.replace("/home");
                 } else {
                     // sending error message if something is wrong with the form
                     this.setState({
@@ -39,10 +45,11 @@ export default class Registration extends React.Component {
                 );
             });
     }
-    handleChange({ target }) {
+    handleChangeOnForm({ target }) {
         this.setState({
             [target.name]: target.value,
         });
+        console.log("Form Data added", target.value);
     }
     render() {
         return (
@@ -55,30 +62,35 @@ export default class Registration extends React.Component {
                         <input
                             name="first_name"
                             placeholder="First Name"
-                            onChange={(e) => this.handleChange(e)}
+                            onChange={(e) => this.handleChangeOnForm(e)}
                         />
                         <input
                             name="last_name"
                             placeholder="Last Name"
-                            onChange={(e) => this.handleChange(e)}
+                            onChange={(e) => this.handleChangeOnForm(e)}
                         />
                         <input
                             name="email"
                             type="email"
                             placeholder="first.last@email.com"
-                            onChange={(e) => this.handleChange(e)}
+                            onChange={(e) => this.handleChangeOnForm(e)}
                         />
                         <input
                             name="password"
                             type="password"
                             placeholder="Password"
-                            onChange={(e) => this.handleChange(e)}
+                            onChange={(e) => this.handleChangeOnForm(e)}
                         />
+                        <input
+                            type="hidden"
+                            name="_csrf"
+                            value="{{csrfToken}}"
+                        ></input>
                         <button
                             className="register-button"
-                            onClick={() => this.submit}
+                            onClick={(e) => this.submitForm(e)}
                         >
-                            Register
+                            Sign Up
                         </button>
                     </div>
                 </div>

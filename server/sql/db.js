@@ -11,7 +11,7 @@ module.exports.addUserRegistrationInformation = (
     password_hash
 ) => {
     const q = ` INSERT INTO users (first_name, last_name, email, password_hash)
-                VALUES ($1, $2, $3, $4) RETURING ID`;
+                VALUES ($1, $2, $3, $4) RETURNING ID`;
     const params = [first_name, last_name, email, password_hash];
     return db.query(q, params);
 };

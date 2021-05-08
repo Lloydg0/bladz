@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
+import Home from "./home";
 
 // we only called ReactDOM.render once in the whole project
 // if (location.pathname == "/welcome") {
@@ -8,7 +9,7 @@ import Welcome from "./welcome";
 //     ReactDOM.render(<img src="logo.gif" />, document.querySelector("main"));
 // }
 
-let element = <img src="logo.gif" />;
+let element = <Home />;
 
 if (location.pathname == "/welcome") {
     element = <Welcome />;

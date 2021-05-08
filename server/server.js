@@ -53,45 +53,44 @@ app.use((req, res, next) => {
 
 //////////////////////////////////////////////////////////////////////////////// GET REQUESTS
 
-// app.get("/welcome", (req, res) => {
-//     if (req.session.user_Id) {
-//         res.redirect("/");
-//     } else {
-//         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-//     }
-// });
+app.get("/welcome", (req, res) => {
+    if (req.session.user_Id) {
+        res.redirect("/home");
+    } else {
+        res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+    }
+});
 
 //do not delete or comment out EVER
-// app.get("*", function (req, res) {
-//     if (!req.session.user_Id) {
-//         res.redirect("/welcome");
-//     } else {
-//         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-//     }
-// });
-
 app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+    if (!req.session.user_Id) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+    }
 });
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
-app.post("/welcome ", (req, res) => {
-    console.log("This was a POST REQUEST MADE TO THE /WELCOME route.");
+app.post("/registration", (req, res) => {
+    console.log("This was a POST REQUEST MADE TO THE /Registration route.");
     const { first_name, last_name, email, password } = req.body;
     if (password) {
         //hash password
         hash(password)
             .then((password_hash) => {
                 //hash the password
-                db.addUserRegistrationInformation({
+                db.addUserRegistrationInformation(
                     first_name,
                     last_name,
                     email,
-                    password_hash,
-                })
+                    password_hash
+                )
                     .then((result) => {
-                        req.session.user_id = result.rows[0].id;
-                        res.redirect("/");
+                        req.session.user_Id = result.rows[0].id;
+                        console.log("USER ID COOKIE", req.session.user_Id);
+                        res.json({
+                            success: true,
+                        });
                     })
                     .catch((err) => {
                         console.log(
