@@ -109,6 +109,7 @@ export default class ResetPassword extends React.Component {
                     <>
                         <input
                             name="code"
+                            key="code"
                             type="text"
                             placeholder="Please Enter Verification Code"
                             required
@@ -116,6 +117,7 @@ export default class ResetPassword extends React.Component {
                         />
                         <input
                             name="password"
+                            key="password"
                             type="password"
                             placeholder="Please Enter New Password"
                             required

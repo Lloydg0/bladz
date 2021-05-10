@@ -169,11 +169,11 @@ app.post("/password/reset/email", (req, res) => {
                                 "Result in adding code to Database",
                                 result
                             );
-                            sendEmail(
-                                email,
-                                "Please find the Verification code in this email",
-                                "Verification Code"
-                            );
+                            // sendEmail(
+                            //     email,
+                            //     "Please find the Verification code in this email",
+                            //     result.rows[0].code
+                            // );
                             res.json({
                                 success: true,
                             });
@@ -197,19 +197,41 @@ app.post("/password/reset/email", (req, res) => {
 
 app.post("/password/reset/verify", (req, res) => {
     console.log("post request made to the /password/rest/verify route");
-    const { code, email } = req.body;
-    db.compareCodeToEmail(email, code)
+    db.compareCodeToEmail()
         .then((result) => {
             console.log("Result in comparing code to email", result);
-            res.json({
-                success: true,
-            });
+            const { password } = req.body;
+            const email = result.rows[0].email;
+            console.log("email", email);
+            console.log("password", password);
+            if (password) {
+                hash(password)
+                    .then((password_hash) => {
+                        db.updateUserPassword(password_hash, email).then(
+                            (result) => {
+                                console.log(
+                                    "Result in updating the password",
+                                    result
+                                );
+                                res.json({
+                                    success: true,
+                                });
+                            }
+                        );
+                    })
+                    .catch((err) => {
+                        console.log("error in hash", err);
+                    });
+            }
         })
         .catch((err) => {
             console.log(
                 "Error in comparing the the code and email verification",
                 err
             );
+            res.json({
+                success: false,
+            });
         });
 });
 
