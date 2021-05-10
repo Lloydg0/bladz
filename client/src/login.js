@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { HashRouter, Link } from "react-router-dom";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -77,6 +78,14 @@ export default class Login extends React.Component {
                         >
                             Login
                         </button>
+                        <HashRouter>
+                            <Link
+                                className="login-button-navbar"
+                                to="/password-reset"
+                            >
+                                Forgot Password
+                            </Link>
+                        </HashRouter>
                     </div>
                 </div>
             </div>

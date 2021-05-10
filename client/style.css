@@ -1,6 +1,7 @@
 body {
     box-sizing: border-box;
     margin: 0;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 /*-------------------- Welcome page---------------- */
@@ -134,7 +135,6 @@ input {
     border: none;
     margin: 14px 4px 4px 0;
     text-decoration: none;
-    font-family: "Roboto Condensed", sans-serif;
     color: #ffffff;
     text-align: center;
     background-color: #75a1de;
@@ -181,7 +181,6 @@ input {
     border: none;
     margin: 12px 10px 4px 0;
     text-decoration: none;
-    font-family: "Roboto Condensed", sans-serif;
     color: #ffffff;
     text-align: center;
     background-color: #75a1de;

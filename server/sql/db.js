@@ -1,7 +1,7 @@
 const spicedPg = require("spiced-pg");
 const db = spicedPg(
     process.env.DATABASE_URL ||
-        "postgres:postgres:postgres@localhost:5432/petition"
+        "postgres:postgres:postgres@localhost:5432/social"
 );
 
 //adding user registration data
@@ -23,4 +23,26 @@ module.exports.retrivingUserEmail = (email) => {
                 FROM users
                 WHERE email = $1`;
     return db.query(q, [email]);
+};
+
+//inserting code in to reset_codes DB
+module.exports.addResetCode = (code, email) => {
+    const q = ` INSERT INTO reset_codes (code, email) VALUES ($1, $2) RETURNING code, email`;
+    return db.query(q, [code, email]);
+};
+
+//inserting code in to reset_codes DB
+module.exports.compareCodeToEmail = (email, code) => {
+    const q = ` SELECT email, code 
+                FROM reset_codes 
+                WHERE email = $1, code = $2
+                WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes'`;
+    return db.query(q, [email, code]);
+};
+
+//Update password of users comparing email.
+module.exports.updateUserPassword = (password, email) => {
+    const q = ` UPDATE users SET password = $1 
+                WHERE email = $2`;
+    return db.query(q, [password, email]);
 };

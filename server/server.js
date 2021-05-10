@@ -9,6 +9,8 @@ const SECRET_KEY =
     process.env.SECRET_KEY || require("../secrets.json").SECRET_KEY;
 const { hash, compare } = require("../client/utils/bc.js");
 const csurf = require("csurf");
+const cryptoRandomString = require("crypto-random-string");
+const { sendEmail } = require("./ses");
 
 //this will compress/minimise the size of the response we send
 app.use(compression());
@@ -61,12 +63,9 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-// app.get("/login", (req, res) => {
-//     if (req.session.user_Id) {
-//         res.redirect("/home");
-//     } else {
-//         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-//     }
+// app.get("/home#/logout", (req, res) => {
+//     req.session = null;
+//     res.redirect("/welcome");
 // });
 
 //do not delete or comment out EVER
@@ -126,7 +125,7 @@ app.post("/login", (req, res) => {
                             // comparison will be true or false
                             if (comparison) {
                                 console.log("comparison results", result);
-                                req.session.user_id = result.rows[0].id;
+                                req.session.user_Id = result.rows[0].id;
                                 res.json({
                                     success: true,
                                 });
@@ -150,6 +149,68 @@ app.post("/login", (req, res) => {
                 console.log("Error in retriving Email", err);
             });
     }
+});
+
+app.post("/password/reset/email", (req, res) => {
+    console.log("A post request was made to the /password/reset/email route");
+    const { email } = req.body;
+    const code = cryptoRandomString({ length: 6 });
+    if (email) {
+        db.retrivingUserEmail(email)
+            .then((result) => {
+                if (result) {
+                    console.log(
+                        "Result in retrieving email for the password reset",
+                        result
+                    );
+                    db.addResetCode(code, email)
+                        .then((result) => {
+                            console.log(
+                                "Result in adding code to Database",
+                                result
+                            );
+                            sendEmail(
+                                email,
+                                "Please find the Verification code in this email",
+                                "Verification Code"
+                            );
+                            res.json({
+                                success: true,
+                            });
+                        })
+                        .catch((err) => {
+                            console.log(
+                                "Error in Adding new verifcation code to Data base",
+                                err
+                            );
+                            res.json({
+                                success: false,
+                            });
+                        });
+                }
+            })
+            .catch((err) => {
+                console.log("Error in retriving Email", err);
+            });
+    }
+});
+
+app.post("/password/reset/verify", (req, res) => {
+    console.log("post request made to the /password/rest/verify route");
+    const { code, email } = req.body;
+    db.compareCodeToEmail(email, code)
+        .then((result) => {
+            console.log("Result in comparing code to email", result);
+            res.json({
+                success: true,
+            });
+        })
+        .catch((err) => {
+            console.log(
+                "Error in comparing the the code and email verification",
+                err
+            );
+        });
 });
 
 app.listen(process.env.PORT || 3001, function () {

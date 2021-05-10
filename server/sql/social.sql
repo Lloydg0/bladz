@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS reset_codes;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -8,3 +9,10 @@ CREATE TABLE users (
     password_hash VARCHAR NOT NULL CHECK (password_hash != ''),
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ CREATE TABLE reset_codes(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR NOT NULL,
+    code VARCHAR NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );

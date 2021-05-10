@@ -3,6 +3,7 @@ import NavbarRegister from "./navbarRegister";
 import { HashRouter, Route } from "react-router-dom";
 import Registration from "./resistration";
 import Login from "./login";
+import ResetPassword from "./reset";
 
 // can be a function
 export default function Welcome() {
@@ -26,6 +27,10 @@ export default function Welcome() {
                         <div>
                             <Route exact path="/" component={Registration} />
                             <Route path="/login" component={Login} />
+                            <Route
+                                path="/password-reset"
+                                component={ResetPassword}
+                            />
                         </div>
                     </HashRouter>
                 </div>
