@@ -3,10 +3,12 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
+//cookie parser put in here
 const db = require("./sql/db");
 const SECRET_KEY =
     process.env.SECRET_KEY || require("../secrets.json").SECRET_KEY;
 const { hash, compare } = require("../client/utils/bc.js");
+const csurf = require("csurf");
 
 //this will compress/minimise the size of the response we send
 app.use(compression());
@@ -22,6 +24,14 @@ app.use(
     })
 );
 
+//Preventing Vulnerablilities (must come after cookie session)
+app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
+
 // url encoded parser
 app.use(
     express.urlencoded({
@@ -31,16 +41,6 @@ app.use(
 
 //express json
 app.use(express.json());
-
-// //Preventing Vulnerablilities (must come after cookie session)
-// app.use(csurf());
-// app.use(function (req, res, next) {
-//     //stopping clickjacking
-//     res.setHeader("x-frame-options", "deny");
-//     //stopping CSRF
-//     res.locals.csrfToken = req.csrfToken();
-//     next();
-// });
 
 //checking to see if there has been cookies
 app.use((req, res, next) => {
@@ -60,6 +60,14 @@ app.get("/welcome", (req, res) => {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
+
+// app.get("/login", (req, res) => {
+//     if (req.session.user_Id) {
+//         res.redirect("/home");
+//     } else {
+//         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+//     }
+// });
 
 //do not delete or comment out EVER
 app.get("*", function (req, res) {
@@ -101,6 +109,45 @@ app.post("/registration", (req, res) => {
             })
             .catch((err) => {
                 console.log("error in hash", err);
+            });
+    }
+});
+
+app.post("/login", (req, res) => {
+    console.log("This was a POST request to the /login route");
+    const { email, password } = req.body;
+    if (email) {
+        db.retrivingUserEmail(email)
+            .then((result) => {
+                if (result) {
+                    // Verifying Passwords:
+                    compare(password, result.rows[0].password_hash)
+                        .then((comparison) => {
+                            // comparison will be true or false
+                            if (comparison) {
+                                console.log("comparison results", result);
+                                req.session.user_id = result.rows[0].id;
+                                res.json({
+                                    success: true,
+                                });
+                            } else {
+                                if (!comparison) {
+                                    res.json({
+                                        success: false,
+                                    });
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(
+                                "Password Comparison does not match",
+                                err
+                            );
+                        });
+                }
+            })
+            .catch((err) => {
+                console.log("Error in retriving Email", err);
             });
     }
 });

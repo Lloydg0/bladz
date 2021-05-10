@@ -1,6 +1,8 @@
-import Registration from "./resistration";
 import NavbarRegister from "./navbarRegister";
 // import mainLogo from "../public/logo.png";
+import { HashRouter, Route } from "react-router-dom";
+import Registration from "./resistration";
+import Login from "./login";
 
 // can be a function
 export default function Welcome() {
@@ -20,7 +22,12 @@ export default function Welcome() {
                     </div>
                 </div>
                 <div className="left-side-bottom">
-                    <Registration />
+                    <HashRouter>
+                        <div>
+                            <Route exact path="/" component={Registration} />
+                            <Route path="/login" component={Login} />
+                        </div>
+                    </HashRouter>
                 </div>
             </div>
             <div className="main-page-right-container">

@@ -6,8 +6,8 @@ export default function Navbar() {
                 {/* <img src="" alt="" /> */}
             </div>
             <div className="navbar-links">
-                <button className="login-button-navbar">Log In</button>
-                <button className="register-button-navbar">Sign Up</button>
+                <button className="login-button-navbar">Do Something</button>
+                <button className="register-button-navbar">Sign Out</button>
             </div>
         </nav>
     );
