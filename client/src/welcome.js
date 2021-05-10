@@ -1,4 +1,3 @@
-import Navbar from "./navbar";
 import Registration from "./resistration";
 import NavbarRegister from "./navbarRegister";
 // import mainLogo from "../public/logo.png";
@@ -18,7 +17,6 @@ export default function Welcome() {
                             blah blah blah blah blah blah blah blah blah blah
                             blah
                         </h3>
-                        <h4>Sign up Below</h4>
                     </div>
                 </div>
                 <div className="left-side-bottom">

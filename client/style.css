@@ -3,6 +3,9 @@ body {
     margin: 0;
 }
 
+/*-------------------- Welcome page---------------- */
+
+/* welcome page containers */
 .main-page-main-container {
     display: flex;
 }
@@ -37,6 +40,7 @@ body {
     height: 50vh;
 }
 
+/* welcome page text styligns */
 .main-text {
     height: 100%;
     width: 100%;
@@ -49,6 +53,7 @@ body {
     text-align: center;
 }
 
+/* welcome page cirle drawigns */
 .circle-container {
     height: 45%;
     width: 45%;
@@ -79,6 +84,7 @@ body {
     transform: rotate(235deg);
 }
 
+/* Welcome page form stylins & containers */
 .form-container,
 .form-box,
 .form-content {
@@ -135,6 +141,8 @@ input {
     border-radius: 16px;
 }
 
+/* ------------------Navr Bar stylings --------------------- */
+
 /* Nav bar styling on /home route */
 .main-navbar {
     width: 100%;
@@ -156,6 +164,7 @@ input {
     justify-content: flex-end;
     align-items: center;
     margin-right: 20px;
+    flex-wrap: wrap;
 }
 .navbar-image {
     display: flex;
