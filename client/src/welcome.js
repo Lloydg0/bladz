@@ -37,7 +37,7 @@ export default function Welcome() {
             </div>
             <div className="main-page-right-container">
                 <NavbarRegister />
-                {/* <img src="/logo.png" /> */}
+                <img src="/logo.png" />
                 <div className="circle-container">
                     <div className="circle1">
                         <div className="circle2">

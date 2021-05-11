@@ -170,7 +170,8 @@ input {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    width: 100%;
+    margin-left: 20px;
+    width: 100px;
     height: 10vh;
 }
 

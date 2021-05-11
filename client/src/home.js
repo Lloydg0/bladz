@@ -48,7 +48,7 @@ export default class Home extends React.Component {
         return (
             <>
                 <div className="main-navbar">
-                    {/* <img className="navbar-image" src="/logo.png" /> */}
+                    <img className="navbar-image" src="/logo.png" />
                     <div className="profile-pic-container">
                         <Profilepic
                             toggleUploader={() => this.toggleUploader()}
