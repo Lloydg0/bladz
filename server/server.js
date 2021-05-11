@@ -10,6 +10,28 @@ const { hash, compare } = require("../client/utils/bc.js");
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
+//the following ocde is required to uoload files
+const s3 = require("../s3");
+let s3url = require("../config.json");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152, //files over 2mb cannot be uploaded used to stop ddos attacks (if upload does not work, check the size of the file as it might be too big and not a bug in the code).
+    },
+});
+////// end of code that uploads the files
 
 //this will compress/minimise the size of the response we send
 app.use(compression());
@@ -72,83 +94,68 @@ app.get("*", function (req, res) {
 });
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
-app.post("/registration", (req, res) => {
+app.post("/registration", async (req, res) => {
     console.log("This was a POST REQUEST MADE TO THE /Registration route.");
     const { first_name, last_name, email, password } = req.body;
-    if (password) {
-        //hash password
-        hash(password)
-            .then((password_hash) => {
-                //hash the password
-                db.addUserRegistrationInformation(
-                    first_name,
-                    last_name,
-                    email,
-                    password_hash
-                )
-                    .then((result) => {
-                        req.session.user_Id = result.rows[0].id;
-                        console.log("USER ID COOKIE", req.session.user_Id);
-                        res.json({
-                            success: true,
-                        });
-                    })
-                    .catch((err) => {
-                        console.log(
-                            "Error in saving Users registration data",
-                            err
-                        );
-                    });
-            })
-            .catch((err) => {
-                console.log("error in hash", err);
-            });
+
+    try {
+        const password_hash = await hash(password);
+        const { rows } = await db.addUserRegistrationInformation(
+            first_name,
+            last_name,
+            email,
+            password_hash
+        );
+        req.session.user_Id = rows[0].id;
+        res.json({
+            success: true,
+        });
+    } catch (err) {
+        console.log("Error in saving Users registration data", err);
     }
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     console.log("This was a POST request to the /login route");
     const { email, password } = req.body;
-    if (email) {
-        db.retrivingUserEmail(email)
-            .then((result) => {
-                if (result) {
-                    // Verifying Passwords:
-                    compare(password, result.rows[0].password_hash)
-                        .then((comparison) => {
-                            // comparison will be true or false
-                            if (comparison) {
-                                console.log("comparison results", result);
-                                req.session.user_Id = result.rows[0].id;
-                                res.json({
-                                    success: true,
-                                });
-                            } else {
-                                if (!comparison) {
-                                    res.json({
-                                        success: false,
-                                    });
-                                }
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(
-                                "Password Comparison does not match",
-                                err
-                            );
-                        });
-                }
-            })
-            .catch((err) => {
-                console.log("Error in retriving Email", err);
+
+    try {
+        const { rows } = await db.retrivingUserEmail(email);
+        const comparison = await compare(password, rows[0].password_hash);
+        if (comparison) {
+            req.session.user_Id = rows[0].id;
+            res.json({
+                success: true,
             });
+        }
+    } catch (err) {
+        console.log("Error in retriving Email", err);
+        res.json({
+            success: false,
+        });
     }
 });
 
-app.post("/password/reset/email", (req, res) => {
+app.post("/password/reset/email", async (req, res) => {
     console.log("A post request was made to the /password/reset/email route");
     const { email } = req.body;
     const code = cryptoRandomString({ length: 6 });
+
+    // try {
+    //     const gettingEmail = await db.retrivingUserEmail(email);
+    //     const { rows } = await db.addResetCode(code, gettingEmail);
+    //     const sendNewEmail = await sendEmail(rows[0].code);
+    //     res.json({
+    //         success: true,
+    //     });
+    //     return sendNewEmail;
+    // } catch (err) {
+    //     console.log("Error in retriving Email", err);
+    //     res.json({
+    //         success: false,
+    //     });
+    // }
+
     if (email) {
         db.retrivingUserEmail(email)
             .then((result) => {
@@ -189,89 +196,50 @@ app.post("/password/reset/email", (req, res) => {
     }
 });
 
-app.post("/password/reset/verify", (req, res) => {
+app.post("/password/reset/verify", async (req, res) => {
     console.log("post request made to the /password/rest/verify route");
-    db.compareCodeToEmail()
-        .then((result) => {
-            console.log("Result in comparing code to email", result);
-            const { password } = req.body;
-            const email = result.rows[0].email;
-            if (password) {
-                hash(password)
-                    .then((password_hash) => {
-                        db.updateUserPassword(password_hash, email).then(
-                            (result) => {
-                                console.log(
-                                    "Result in updating the password",
-                                    result
-                                );
-                                res.json({
-                                    success: true,
-                                });
-                            }
-                        );
-                    })
-                    .catch((err) => {
-                        console.log("error in hash", err);
-                    });
-            }
-        })
-        .catch((err) => {
-            console.log(
-                "Error in comparing the the code and email verification",
-                err
-            );
-            res.json({
-                success: false,
-            });
+    const { password } = req.body;
+
+    try {
+        const { rows } = await db.compareCodeToEmail();
+        const email = rows[0].email;
+        const password_hash = await hash(password);
+        const updateUserPassword = await db.updateUserPassword(
+            password_hash,
+            email
+        );
+        res.json({
+            success: true,
         });
+        return updateUserPassword;
+    } catch (err) {
+        console.log(
+            "Error in comparing the the code and email verification",
+            err
+        );
+        res.json({
+            success: false,
+        });
+    }
 });
 
-//the following ocde is required to uoload files
-const s3 = require("../s3");
-let s3url = require("../config.json");
-const multer = require("multer");
-const uidSafe = require("uid-safe");
-const diskStorage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, __dirname + "/uploads");
-    },
-    filename: function (req, file, callback) {
-        uidSafe(24).then(function (uid) {
-            callback(null, uid + path.extname(file.originalname));
-        });
-    },
-});
-const uploader = multer({
-    storage: diskStorage,
-    limits: {
-        fileSize: 2097152, //files over 2mb cannot be uploaded used to stop ddos attacks (if upload does not work, check the size of the file as it might be too big and not a bug in the code).
-    },
-});
-////// end of code that uploads the files
-
-app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
     console.log("upload Worked!!!!");
     console.log("req.file", req.file); // req.file comes fom multer
-    if (req.file) {
-        // this will run if everything works
-        let s3Url = s3url.s3Url;
-        const prefixedFilename = s3Url.concat(req.file.filename);
-        console.log("Prefixed Filename", prefixedFilename);
-        //instert into images
-        db.addImageUploadToAWS(prefixedFilename, req.session.user_Id)
-            .then((result) => {
-                console.log("Result in addimageUpload to AWS", result);
-                // send back a response using res.json
-                res.json({
-                    success: true,
-                    payload: result.rows,
-                });
-            })
-            .catch((err) => {
-                console.log("Error in adding the img to AWS", err);
-            });
-    } else {
+    let s3Url = s3url.s3Url;
+    const prefixedFilename = s3Url.concat(req.file.filename);
+
+    try {
+        const { rows } = await db.addImageUploadToAWS(
+            prefixedFilename,
+            req.session.user_Id
+        );
+        res.json({
+            success: true,
+            payload: rows,
+        });
+    } catch (err) {
+        console.log("Error in adding the img to AWS", err);
         res.json({
             success: false,
         });
