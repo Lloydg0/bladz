@@ -1,4 +1,4 @@
-import { HashRouter, Link } from "react-router-dom";
+// import { HashRouter, Link } from "react-router-dom";
 export default function Navbar() {
     return (
         <nav className="main-navbar">
@@ -6,8 +6,8 @@ export default function Navbar() {
                 <h1>Home Page</h1>
                 {/* <img src="" alt="" /> */}
             </div>
-            <div className="navbar-links">
-                {/* <HashRouter>
+            {/* <div className="navbar-links"> */}
+            {/* <HashRouter>
                     <Link className="login-button-navbar" to="/">
                         Do Somthing
                     </Link>
@@ -15,9 +15,9 @@ export default function Navbar() {
                         Log Out
                     </Link>
                 </HashRouter> */}
-                <button className="login-button-navbar">Do Something</button>
-                <button className="register-button-navbar">Sign Out</button>
-            </div>
+            {/* <button className="login-button-navbar">Do Something</button>
+                <button className="register-button-navbar">Sign Out</button> */}
+            {/* </div> */}
         </nav>
     );
 }

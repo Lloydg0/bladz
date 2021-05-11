@@ -154,7 +154,6 @@ input {
 .navbar-links,
 .navbar-image {
     width: 50%;
-    margin-right: 0;
 }
 
 .navbar-links,
@@ -167,19 +166,22 @@ input {
     flex-wrap: wrap;
 }
 .navbar-image {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    width: 100%;
+    height: 10vh;
 }
 
 .login-button-navbar,
 .register-button-navbar,
-.login-button-navbar-register {
+.login-button-navbar-register,
+.upload-button-navbar {
     display: inline-block;
     padding: 10px;
     border: none;
-    margin: 12px 10px 4px 0;
+    margin: 7px 10px 4px 0;
     text-decoration: none;
     color: #ffffff;
     text-align: center;
@@ -189,4 +191,95 @@ input {
 
 .navbar-links-on-register {
     width: 100%;
+}
+
+/* --------------------- Profile Picture --------------------------- */
+.profile-pic {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+    flex-wrap: wrap;
+}
+.profile-pic-container {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 10vh;
+    margin-top: 0px;
+}
+
+/* --------------------------- UPload modal stylings  --------------------------- */
+.upload-modal-housing {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: white;
+}
+
+.upload-modal-cover {
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-modal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 350px;
+    height: 350px;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
+
+.upload-form,
+.comments-form {
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+/* --------------------------- UPload button stylings ---------------------------  */
+
+.choose-file-button:focus,
+.upload-button:focus,
+.finished-button:focus {
+    outline: none;
+}
+
+.upload-button,
+.choose-file-button,
+.finished-button {
+    border: none;
+    width: 250px;
+    font-size: 20px;
+    height: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: center;
+    background: none;
+}
+#files {
+    visibility: hidden;
+    width: 0.1px;
 }

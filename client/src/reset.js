@@ -45,7 +45,6 @@ export default class ResetPassword extends React.Component {
     submitNewCodeAndPassword(e) {
         e.preventDefault();
         const { password, code } = this.state;
-        console.log("click");
         axios
             .post("/password/reset/verify", {
                 code,
@@ -77,7 +76,6 @@ export default class ResetPassword extends React.Component {
         this.setState({
             [target.name]: target.value,
         });
-        console.log("Form Data added", target.value);
     }
     determineViewToRender() {
         {

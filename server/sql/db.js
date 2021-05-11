@@ -9,11 +9,12 @@ module.exports.addUserRegistrationInformation = (
     first_name,
     last_name,
     email,
-    password_hash
+    password_hash,
+    url
 ) => {
-    const q = ` INSERT INTO users (first_name, last_name, email, password_hash)
-                VALUES ($1, $2, $3, $4) RETURNING ID`;
-    const params = [first_name, last_name, email, password_hash];
+    const q = ` INSERT INTO users (first_name, last_name, email, password_hash, url)
+                VALUES ($1, $2, $3, $4, $5) RETURNING ID`;
+    const params = [first_name, last_name, email, password_hash, url];
     return db.query(q, params);
 };
 
@@ -43,4 +44,13 @@ module.exports.updateUserPassword = (password_hash, email) => {
     const q = ` UPDATE users SET password_hash = $1 
                 WHERE email = $2 RETURNING password_hash, email`;
     return db.query(q, [password_hash, email]);
+};
+
+//DATABASE insert for uploading the images to AWS
+module.exports.addImageUploadToAWS = (url, id) => {
+    const q = ` UPDATE users 
+                SET url = $1
+                WHERE ID = $2 
+                RETURNING url, ID, first_name, last_name`;
+    return db.query(q, [url, id]);
 };

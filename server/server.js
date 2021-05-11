@@ -3,7 +3,6 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
-//cookie parser put in here
 const db = require("./sql/db");
 const SECRET_KEY =
     process.env.SECRET_KEY || require("../secrets.json").SECRET_KEY;
@@ -62,11 +61,6 @@ app.get("/welcome", (req, res) => {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
-
-// app.get("/home#/logout", (req, res) => {
-//     req.session = null;
-//     res.redirect("/welcome");
-// });
 
 //do not delete or comment out EVER
 app.get("*", function (req, res) {
@@ -169,11 +163,11 @@ app.post("/password/reset/email", (req, res) => {
                                 "Result in adding code to Database",
                                 result
                             );
-                            // sendEmail(
-                            //     email,
-                            //     "Please find the Verification code in this email",
-                            //     result.rows[0].code
-                            // );
+                            sendEmail(
+                                email,
+                                "Please find the Verification code in this email",
+                                result.rows[0].code
+                            );
                             res.json({
                                 success: true,
                             });
@@ -202,8 +196,6 @@ app.post("/password/reset/verify", (req, res) => {
             console.log("Result in comparing code to email", result);
             const { password } = req.body;
             const email = result.rows[0].email;
-            console.log("email", email);
-            console.log("password", password);
             if (password) {
                 hash(password)
                     .then((password_hash) => {
@@ -233,6 +225,57 @@ app.post("/password/reset/verify", (req, res) => {
                 success: false,
             });
         });
+});
+
+//the following ocde is required to uoload files
+const s3 = require("../s3");
+let s3url = require("../config.json");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152, //files over 2mb cannot be uploaded used to stop ddos attacks (if upload does not work, check the size of the file as it might be too big and not a bug in the code).
+    },
+});
+////// end of code that uploads the files
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("upload Worked!!!!");
+    console.log("req.file", req.file); // req.file comes fom multer
+    if (req.file) {
+        // this will run if everything works
+        let s3Url = s3url.s3Url;
+        const prefixedFilename = s3Url.concat(req.file.filename);
+        console.log("Prefixed Filename", prefixedFilename);
+        //instert into images
+        db.addImageUploadToAWS(prefixedFilename, req.session.user_Id)
+            .then((result) => {
+                console.log("Result in addimageUpload to AWS", result);
+                // send back a response using res.json
+                res.json({
+                    success: true,
+                    payload: result.rows,
+                });
+            })
+            .catch((err) => {
+                console.log("Error in adding the img to AWS", err);
+            });
+    } else {
+        res.json({
+            success: false,
+        });
+    }
 });
 
 app.listen(process.env.PORT || 3001, function () {
