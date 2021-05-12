@@ -48,9 +48,19 @@ module.exports.updateUserPassword = (password_hash, email) => {
 
 //DATABASE insert for uploading the images to AWS
 module.exports.addImageUploadToAWS = (url, id) => {
+    console.log("url, id", url, id);
     const q = ` UPDATE users 
                 SET url = $1
                 WHERE ID = $2 
                 RETURNING url, ID, first_name, last_name`;
     return db.query(q, [url, id]);
+};
+
+//DATABASE inswert for for adding bio
+module.exports.updateUserBio = (bio, id) => {
+    const q = ` UPDATE users
+                SET bio = $1
+                WHERE ID = $2
+                RETURNING bio, ID`;
+    return db.query(q, [bio, id]);
 };

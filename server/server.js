@@ -229,12 +229,13 @@ app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
     console.log("req.file", req.file); // req.file comes fom multer
     let s3Url = s3url.s3Url;
     const prefixedFilename = s3Url.concat(req.file.filename);
-
+    console.log("Prefixed Filename", prefixedFilename);
     try {
         const { rows } = await db.addImageUploadToAWS(
             prefixedFilename,
             req.session.user_Id
         );
+        console.log("rows", rows);
         res.json({
             success: true,
             payload: rows,
@@ -245,6 +246,23 @@ app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
             success: false,
         });
     }
+});
+
+app.post("/bio", (req, res) => {
+    console.log("post request made to the /bio route");
+    const { draftBio } = req.body;
+    console.log("draftBio", draftBio);
+    db.updateUserBio(draftBio, req.session.user_Id)
+        .then((result) => {
+            console.log("Result in adding user BIO", result);
+            res.json({
+                success: true,
+                payload: result.rows,
+            });
+        })
+        .catch((err) => {
+            console.log("Error in adding bio on server side", err);
+        });
 });
 
 app.listen(process.env.PORT || 3001, function () {

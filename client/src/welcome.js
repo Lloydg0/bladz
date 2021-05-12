@@ -12,14 +12,13 @@ export default function Welcome() {
             <div className="main-page-left-container">
                 <div className="left-side-top">
                     <div className="main-text">
-                        <h1>Welcome to the Social</h1>
+                        <h1>Welcome To Routes</h1>
                         <h3>
-                            blah blah blah blahblah blahblah blahblah blahblah
-                            blah blah blah blah blah blah blah blah blah blah
-                            blah blah blah blah blah blah blah blah blah blah
-                            blah blah blah blah blah blah blah blah blah blah
-                            blah
+                            Routes is a place for people who love the outdoors!
+                            A place for talk and share the experiences from
+                            their favourite trips!
                         </h3>
+                        <h3> Sign up below to find your next adventure!</h3>
                     </div>
                 </div>
                 <div className="left-side-bottom">
@@ -37,14 +36,7 @@ export default function Welcome() {
             </div>
             <div className="main-page-right-container">
                 <NavbarRegister />
-                <img src="/logo.png" />
-                <div className="circle-container">
-                    <div className="circle1">
-                        <div className="circle2">
-                            <div className="circle3"></div>
-                        </div>
-                    </div>
-                </div>
+                <img className="mainimg" src="/mainimg.png" />
             </div>
         </div>
     );

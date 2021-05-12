@@ -2,20 +2,30 @@ import React from "react";
 import axios from "./axios";
 import Profilepic from "./profilepic";
 import Uploader from "./uploader";
+import Profile from "./profile";
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            first_name: "",
-            last_name: "",
+            first_name: "lloyd",
+            last_name: "grogan",
             imgURL: "",
             uploaderIsVisible: false,
+            finishedBio: "",
         };
     }
 
     componentDidMount() {
         console.log("Home just mounted");
+        console.log("props in home mount", this.state);
+    }
+
+    setBio(newBio) {
+        console.log("Bio being Set in the home component", newBio);
+        this.setState({
+            finishedBio: newBio,
+        });
     }
 
     submitImage(file) {
@@ -25,7 +35,10 @@ export default class Home extends React.Component {
         axios
             .post("/upload", formData)
             .then((response) => {
-                console.log("response data", response.data.payload[0]);
+                console.log(
+                    "response in image upload",
+                    response.data.payload[0]
+                );
                 this.setState({
                     first_name: response.data.payload[0].first_name,
                     last_name: response.data.payload[0].last_name,
@@ -58,6 +71,20 @@ export default class Home extends React.Component {
                         />
                     </div>
                 </div>
+                <Profile
+                    setBio={(newBio) => this.setBio(newBio)}
+                    first_name={this.state.first_name}
+                    last_name={this.state.last_name}
+                    finishedBio={this.state.finishedBio}
+                    ProfilePic={
+                        <Profilepic
+                            toggleUploader={() => this.toggleUploader()}
+                            first_name={this.state.first_name}
+                            last_name={this.state.last_name}
+                            imgURL={this.state.imgURL}
+                        />
+                    }
+                />
 
                 {this.state.uploaderIsVisible && (
                     <Uploader
