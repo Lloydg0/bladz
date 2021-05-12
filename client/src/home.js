@@ -7,13 +7,20 @@ import Profile from "./profile";
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            first_name: "lloyd",
-            last_name: "grogan",
+
+        console.log("Constructor", localStorage.getItem("homeState"));
+        this.state = JSON.parse(localStorage.getItem("homeState")) || {
+            first_name: "",
+            last_name: "",
             imgURL: "",
             uploaderIsVisible: false,
             finishedBio: "",
         };
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem("homeState", JSON.stringify(this.state));
+        console.log("localStorage", localStorage.getItem("homeState"));
     }
 
     componentDidMount() {
@@ -26,28 +33,23 @@ export default class Home extends React.Component {
         this.setState({
             finishedBio: newBio,
         });
+        console.log("finshed Bio when setBio runs", this.state.finishedBio);
     }
 
-    submitImage(file) {
+    async submitImage(file) {
         console.log("e in submitFile is running");
         var formData = new FormData();
         formData.append("file", file);
-        axios
-            .post("/upload", formData)
-            .then((response) => {
-                console.log(
-                    "response in image upload",
-                    response.data.payload[0]
-                );
-                this.setState({
-                    first_name: response.data.payload[0].first_name,
-                    last_name: response.data.payload[0].last_name,
-                    imgURL: response.data.payload[0].url,
-                });
-            })
-            .catch((err) => {
-                console.log("err in POST/upload", err);
+        try {
+            const response = await axios.post("/upload", formData);
+            this.setState({
+                first_name: response.data.payload[0].first_name,
+                last_name: response.data.payload[0].last_name,
+                imgURL: response.data.payload[0].url,
             });
+        } catch (err) {
+            console.log("err in POST/upload", err);
+        }
     }
 
     toggleUploader() {
@@ -76,14 +78,6 @@ export default class Home extends React.Component {
                     first_name={this.state.first_name}
                     last_name={this.state.last_name}
                     finishedBio={this.state.finishedBio}
-                    ProfilePic={
-                        <Profilepic
-                            toggleUploader={() => this.toggleUploader()}
-                            first_name={this.state.first_name}
-                            last_name={this.state.last_name}
-                            imgURL={this.state.imgURL}
-                        />
-                    }
                 />
 
                 {this.state.uploaderIsVisible && (

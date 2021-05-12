@@ -183,6 +183,7 @@ input {
     margin-right: 20px;
     flex-wrap: wrap;
 }
+
 .profile-pic-container {
     display: inline-flex;
     flex-direction: row;

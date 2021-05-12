@@ -248,21 +248,20 @@ app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
     }
 });
 
-app.post("/bio", (req, res) => {
+app.post("/bio", async (req, res) => {
     console.log("post request made to the /bio route");
     const { draftBio } = req.body;
-    console.log("draftBio", draftBio);
-    db.updateUserBio(draftBio, req.session.user_Id)
-        .then((result) => {
-            console.log("Result in adding user BIO", result);
-            res.json({
-                success: true,
-                payload: result.rows,
-            });
-        })
-        .catch((err) => {
-            console.log("Error in adding bio on server side", err);
+
+    try {
+        const { rows } = await db.updateUserBio(draftBio, req.session.user_Id);
+        console.log("rows", rows);
+        res.json({
+            success: true,
+            payload: rows,
         });
+    } catch (err) {
+        console.log("Error in adding bio on server side", err);
+    }
 });
 
 app.listen(process.env.PORT || 3001, function () {

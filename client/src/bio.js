@@ -14,7 +14,7 @@ export default class BioEditor extends React.Component {
         this.setState({
             draftBio: target.value,
         });
-        console.log("Form Data added to bio", target.value);
+        // console.log("Form Data added to bio", target.value);
     }
 
     SendingbackBio(newBio) {
@@ -23,11 +23,8 @@ export default class BioEditor extends React.Component {
 
     submitbio(e) {
         e.preventDefault();
-        //get bio from bio editors state send it along with request
         const { draftBio } = this.state;
-        console.log("draftBio", draftBio);
-        console.log("click");
-        //make axios post request with new bio when save is pressed
+        // console.log("draftBio", draftBio);
         axios
             .post("/bio", {
                 draftBio,
@@ -43,13 +40,6 @@ export default class BioEditor extends React.Component {
                     err
                 );
             });
-
-        // store uses bio in DB (add new row in table & create query)
-        // set the new bio you just send back in the state of home
-        // home state offical bio
-        // bio editor is a grand child of home
-        // invoke setBio from home here (NEEDS TO BE PASSED FROM HOME TO PROFILE TO BIOEDITOR)
-        // this.props.setBio(draftBio);
     }
 
     toggleBio(e) {
