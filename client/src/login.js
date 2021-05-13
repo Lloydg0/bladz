@@ -10,10 +10,28 @@ export default class Login extends React.Component {
             password: "",
         };
     }
+
     submitLogin(e) {
         e.preventDefault();
         const { email, password } = this.state;
         console.log("click");
+        // try {
+        //     const response = await axios.get("/login", { email, password });
+        //     console.log("response in login", response);
+        //     if (response.data.success === true) {
+        //         location.replace("/home");
+        //     } else {
+        //         this.setState({
+        //             error: true,
+        //         });
+        //     }
+        // } catch (err) {
+        //     console.log(
+        //         "Error in axios post request on registation form component",
+        //         err
+        //     );
+        // }
+
         axios
             .post("/login", {
                 email,

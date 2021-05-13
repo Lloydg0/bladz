@@ -14,32 +14,28 @@ export default class BioEditor extends React.Component {
         this.setState({
             draftBio: target.value,
         });
-        // console.log("Form Data added to bio", target.value);
     }
 
     SendingbackBio(newBio) {
         this.props.setBio(newBio);
     }
 
-    submitbio(e) {
+    async submitbio(e) {
         e.preventDefault();
         const { draftBio } = this.state;
-        // console.log("draftBio", draftBio);
-        axios
-            .post("/bio", {
-                draftBio,
-            })
-            .then((response) => {
-                const newBio = response.data.payload[0].bio;
-                console.log("newBio: ", newBio);
-                this.SendingbackBio(newBio);
-            })
-            .catch((err) => {
-                console.log(
-                    "Error in axios post request on registation form component",
-                    err
-                );
-            });
+        console.log("draftBio", draftBio);
+        try {
+            const response = await axios.post("/bio", { draftBio });
+            console.log("response", response);
+            const newBio = response.data.payload[0].bio;
+            console.log("newBio: ", newBio);
+            this.SendingbackBio(newBio);
+        } catch (err) {
+            console.log(
+                "Error in axios post request on registation form component",
+                err
+            );
+        }
     }
 
     toggleBio(e) {

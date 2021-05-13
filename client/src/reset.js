@@ -12,65 +12,54 @@ export default class ResetPassword extends React.Component {
             view: 1,
         };
     }
-    submitEmail(e) {
+    async submitEmail(e) {
         e.preventDefault();
         const { email } = this.state;
         console.log("click");
-        axios
-            .post("/password/reset/email", {
+        try {
+            const response = await axios.post("/password/reset/email", {
                 email,
-            })
-            .then((response) => {
-                console.log(
-                    "Response worked in axios post for registration route",
-                    response
-                );
-                if (response.data.success === true) {
-                    this.setState({
-                        view: 2,
-                    });
-                } else {
-                    this.setState({
-                        error: true,
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log(
-                    "Error in axios post request on registation form component",
-                    err
-                );
             });
+            if (response.data.success === true) {
+                this.setState({
+                    view: 2,
+                });
+            } else {
+                this.setState({
+                    error: true,
+                });
+            }
+        } catch (err) {
+            console.log(
+                "Error in axios post request on registation form component",
+                err
+            );
+        }
     }
-    submitNewCodeAndPassword(e) {
+
+    async submitNewCodeAndPassword(e) {
         e.preventDefault();
         const { password, code } = this.state;
-        axios
-            .post("/password/reset/verify", {
+        try {
+            const response = await axios.post("/password/reset/verify", {
                 code,
                 password,
-            })
-            .then((response) => {
-                console.log(
-                    "Response worked in axios post for registration route",
-                    response
-                );
-                if (response.data.success === true) {
-                    this.setState({
-                        view: 3,
-                    });
-                } else {
-                    this.setState({
-                        error: true,
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log(
-                    "Error in axios post request on registation form component",
-                    err
-                );
             });
+            if (response.data.success === true) {
+                this.setState({
+                    view: 3,
+                });
+            } else {
+                this.setState({
+                    error: true,
+                });
+            }
+        } catch (err) {
+            console.log(
+                "Error in axios post request on registation form component",
+                err
+            );
+        }
     }
     handleChangeOnForm({ target }) {
         this.setState({
