@@ -80,17 +80,27 @@ export default class Home extends React.Component {
                         <Route
                             exact
                             path="/"
-                            render={() => (
+                            render={(props) => (
                                 <Profile
                                     setBio={(newBio) => this.setBio(newBio)}
                                     first_name={this.state.first_name}
                                     last_name={this.state.last_name}
                                     finishedBio={this.state.finishedBio}
                                     imgURL={this.state.imgURL}
+                                    key={props.match.url}
                                 />
                             )}
                         />
-                        <Route path="/user/:id" component={OtherProfile} />
+                        <Route
+                            path="/user/:id"
+                            render={(props) => (
+                                <OtherProfile
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
                     </div>
                 </BrowserRouter>
                 ;
