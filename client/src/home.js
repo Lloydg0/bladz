@@ -78,6 +78,7 @@ export default class Home extends React.Component {
                     first_name={this.state.first_name}
                     last_name={this.state.last_name}
                     finishedBio={this.state.finishedBio}
+                    imgURL={this.state.imgURL}
                 />
 
                 {this.state.uploaderIsVisible && (

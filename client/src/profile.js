@@ -14,7 +14,8 @@ export default function Profile({
         <>
             <div className="main-profile-container">
                 <div className="main-profile-image-container">
-                    <Profilepic />
+                    <img className="main-profile-photo" src={imgURL} />
+                    {/* <Profilepic /> */}
                 </div>
                 <div className="userprofile-information-container">
                     <h2>{first_name}</h2>
