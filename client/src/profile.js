@@ -1,5 +1,5 @@
 //home is parent, profile is child, bioEditor is grandchild
-import Profilepic from "./profilepic";
+// import Profilepic from "./profilepic";
 import BioEditor from "./bio";
 
 export default function Profile({

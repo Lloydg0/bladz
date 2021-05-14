@@ -15,24 +15,23 @@ const ses = new aws.SES({
 });
 
 module.exports.sendEmail = function (recipient, message, subject) {
-    return ses
-        .sendEmail({
-            Source: "Lloyd Grogan <cabrawestgroovesociety@gmail.com>",
-            Destination: {
-                ToAddresses: [recipient],
-            },
-            Message: {
-                Body: {
-                    Text: {
-                        Data: message,
-                    },
-                },
-                Subject: {
-                    Data: subject,
+    ses.sendEmail({
+        Source: "Lloyd Grogan <cabrawestgroovesociety@gmail.com>",
+        Destination: {
+            ToAddresses: [recipient],
+        },
+        Message: {
+            Body: {
+                Text: {
+                    Data: message,
                 },
             },
-        })
+            Subject: {
+                Data: subject,
+            },
+        },
+    })
         .promise()
-        .then(() => console.log("it worked!", recipient))
+        .then(() => console.log("it worked!"))
         .catch((err) => console.log(err));
 };

@@ -11,51 +11,26 @@ export default class Login extends React.Component {
         };
     }
 
-    submitLogin(e) {
+    async submitLogin(e) {
         e.preventDefault();
         const { email, password } = this.state;
         console.log("click");
-        // try {
-        //     const response = await axios.get("/login", { email, password });
-        //     console.log("response in login", response);
-        //     if (response.data.success === true) {
-        //         location.replace("/home");
-        //     } else {
-        //         this.setState({
-        //             error: true,
-        //         });
-        //     }
-        // } catch (err) {
-        //     console.log(
-        //         "Error in axios post request on registation form component",
-        //         err
-        //     );
-        // }
-
-        axios
-            .post("/login", {
-                email,
-                password,
-            })
-            .then((response) => {
-                console.log(
-                    "Response worked in axios post for registration route",
-                    response
-                );
-                if (response.data.success === true) {
-                    location.replace("/home");
-                } else {
-                    this.setState({
-                        error: true,
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log(
-                    "Error in axios post request on registation form component",
-                    err
-                );
-            });
+        try {
+            const response = await axios.post("/login", { email, password });
+            console.log("response in login", response);
+            if (response.data.success === true) {
+                location.replace("/");
+            } else {
+                this.setState({
+                    error: true,
+                });
+            }
+        } catch (err) {
+            console.log(
+                "Error in axios post request on registation form component",
+                err
+            );
+        }
     }
     handleChangeOnForm({ target }) {
         this.setState({

@@ -264,6 +264,25 @@ app.post("/bio", async (req, res) => {
     }
 });
 
+app.post("/users/:id", (req, res) => {
+    console.log("Request made to the other users route", req);
+    const { id } = req.params;
+    db.retrivingOtherUserProfileInformation(id)
+        .then((result) => {
+            console.log("Result in getting other user Profile info", result);
+            res.json({
+                success: true,
+                payload: result.rows,
+            });
+        })
+        .catch((err) => {
+            console.log(
+                "Error in getting other user profiles information",
+                err
+            );
+        });
+});
+
 app.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });

@@ -3,6 +3,8 @@ import axios from "./axios";
 import Profilepic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
+import { BrowserRouter, Route } from "react-router-dom";
+import OtherProfile from "./otherprofile";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -73,14 +75,25 @@ export default class Home extends React.Component {
                         />
                     </div>
                 </div>
-                <Profile
-                    setBio={(newBio) => this.setBio(newBio)}
-                    first_name={this.state.first_name}
-                    last_name={this.state.last_name}
-                    finishedBio={this.state.finishedBio}
-                    imgURL={this.state.imgURL}
-                />
-
+                <BrowserRouter>
+                    <div>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    setBio={(newBio) => this.setBio(newBio)}
+                                    first_name={this.state.first_name}
+                                    last_name={this.state.last_name}
+                                    finishedBio={this.state.finishedBio}
+                                    imgURL={this.state.imgURL}
+                                />
+                            )}
+                        />
+                        <Route path="/user/:id" component={OtherProfile} />
+                    </div>
+                </BrowserRouter>
+                ;
                 {this.state.uploaderIsVisible && (
                     <Uploader
                         toggleUploader={() => this.toggleUploader()}
@@ -92,3 +105,13 @@ export default class Home extends React.Component {
         );
     }
 }
+
+//  {
+/* <Profile
+                    setBio={(newBio) => this.setBio(newBio)}
+                    first_name={this.state.first_name}
+                    last_name={this.state.last_name}
+                    finishedBio={this.state.finishedBio}
+                    imgURL={this.state.imgURL}
+                /> */
+//  }

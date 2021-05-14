@@ -64,3 +64,11 @@ module.exports.updateUserBio = (bio, id) => {
                 RETURNING bio, ID`;
     return db.query(q, [bio, id]);
 };
+
+// Database select for other users profiles
+module.exports.retrivingOtherUserProfileInformation = () => {
+    const q = ` SELECT first_name, last_name, url, bio
+                FROM users
+                `;
+    return db.query(q);
+};
