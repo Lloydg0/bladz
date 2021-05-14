@@ -66,9 +66,10 @@ module.exports.updateUserBio = (bio, id) => {
 };
 
 // Database select for other users profiles
-module.exports.retrivingOtherUserProfileInformation = () => {
-    const q = ` SELECT first_name, last_name, url, bio
+module.exports.retrivingOtherUserProfileInformation = (id) => {
+    const q = ` SELECT id, first_name, last_name, url, bio
                 FROM users
+                WHERE id= $1
                 `;
-    return db.query(q);
+    return db.query(q, [id]);
 };

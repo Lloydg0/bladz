@@ -265,7 +265,7 @@ app.post("/bio", async (req, res) => {
 });
 
 app.post("/users/:id", (req, res) => {
-    console.log("Request made to the other users route", req);
+    console.log("req.params", req.params);
     const { id } = req.params;
     db.retrivingOtherUserProfileInformation(id)
         .then((result) => {
@@ -273,6 +273,7 @@ app.post("/users/:id", (req, res) => {
             res.json({
                 success: true,
                 payload: result.rows,
+                user: req.session.user_Id,
             });
         })
         .catch((err) => {
