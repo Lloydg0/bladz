@@ -11,26 +11,26 @@ export default class OtherProfile extends React.Component {
             finishedBio: "",
         };
     }
-    componentDidMount() {
+    async componentDidMount() {
         console.log("The other users profile mounted");
-        axios
-            .post("/users/" + this.props.match.params.id)
-            .then((response) => {
-                console.log("response in other profile", response);
-                this.setState({
-                    first_name: response.data.payload[0].first_name,
-                    last_name: response.data.payload[0].last_name,
-                    imgURL: response.data.payload[0].url,
-                    finishedBio: response.data.payload[0].bio,
-                });
 
-                if (this.props.match.params.id == response.data.user) {
-                    this.props.history.push("/");
-                }
-            })
-            .catch((err) => {
-                console.log("Error in axios for other profile", err);
+        try {
+            const response = await axios.post(
+                "/users/" + this.props.match.params.id
+            );
+            this.setState({
+                first_name: response.data.payload[0].first_name,
+                last_name: response.data.payload[0].last_name,
+                imgURL: response.data.payload[0].url,
+                finishedBio: response.data.payload[0].bio,
             });
+
+            if (this.props.match.params.id == response.data.user) {
+                this.props.history.push("/");
+            }
+        } catch (err) {
+            console.log("Error in axios for other profile", err);
+        }
     }
     render() {
         return (
