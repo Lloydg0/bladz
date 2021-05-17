@@ -5,12 +5,12 @@ import Uploader from "./uploader";
 import Profile from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
+import FindPeople from "./findPeople";
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log("Constructor", localStorage.getItem("homeState"));
         this.state = JSON.parse(localStorage.getItem("homeState")) || {
             first_name: "",
             last_name: "",
@@ -95,6 +95,16 @@ export default class Home extends React.Component {
                             path="/user/:id"
                             render={(props) => (
                                 <OtherProfile
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/find/user/"
+                            render={(props) => (
+                                <FindPeople
                                     key={props.match.url}
                                     match={props.match}
                                     history={props.history}

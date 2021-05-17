@@ -73,3 +73,24 @@ module.exports.retrivingOtherUserProfileInformation = (id) => {
                 `;
     return db.query(q, [id]);
 };
+
+//Getting 3 newest users from Database
+module.exports.showingTopThreeUsers = () => {
+    const q = ` SELECT id, first_name, last_name, url
+                FROM users
+                ORDER BY id DESC
+                LIMIT 3`;
+    return db.query(q);
+};
+
+// Searching the Database for other users
+module.exports.searchForOtherUsers = (input) => {
+    const q = ` SELECT id, first_name, last_name, url
+                FROM users
+                WHERE (first_name || last_name) ILIKE $1
+                ORDER BY id DESC
+                LIMIT 3
+                `;
+    console.log("input", input);
+    return db.query(q, [input + "%"]);
+};

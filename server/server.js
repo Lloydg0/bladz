@@ -85,14 +85,6 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-//do not delete or comment out EVER
-app.get("*", function (req, res) {
-    if (!req.session.user_Id) {
-        res.redirect("/welcome");
-    } else {
-        res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-    }
-});
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
 app.post("/registration", async (req, res) => {
@@ -276,6 +268,44 @@ app.post("/users/:id", async (req, res) => {
         });
     } catch (err) {
         console.log("Error in getting other user profiles information", err);
+    }
+});
+
+app.get("/find/users", async (req, res) => {
+    console.log("a request made to the find users route");
+    try {
+        const { rows } = await db.showingTopThreeUsers();
+        console.log("Rows in showing top 3", rows);
+        res.json({
+            success: true,
+            payload: rows,
+        });
+    } catch (err) {
+        console.log("err in showing top 3 users from the Database", err);
+    }
+});
+
+app.get("/find/users/:id", async (req, res) => {
+    console.log("a request made to the find users search route");
+    console.log("req.params", req.params);
+    try {
+        const { rows } = await db.searchForOtherUsers(req.params.id);
+        console.log("result in searching for other users", rows);
+        res.json({
+            success: true,
+            payload: rows,
+        });
+    } catch (err) {
+        console.log("err in finding users from the Database", err);
+    }
+});
+
+//do not delete or comment out EVER
+app.get("*", function (req, res) {
+    if (!req.session.user_Id) {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
 
