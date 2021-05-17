@@ -126,12 +126,10 @@ input {
     display: inline-flex;
 }
 
-.navbar-links,
 .navbar-image {
     width: 50%;
 }
 
-.navbar-links,
 .navbar-links-on-register {
     display: flex;
     flex-direction: row;
@@ -168,6 +166,12 @@ input {
 
 .navbar-links-on-register {
     width: 100%;
+}
+
+.navbar-links {
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
 }
 
 /* --------------------- Profile Picture --------------------------- */
@@ -296,3 +300,32 @@ textarea {
     width: 200px;
     height: 200px;
 }
+
+/* ------------------- user search --------------------- */
+.user-searchbar,
+.usersearch-heading {
+    margin-left: 20px;
+}
+
+.user-search {
+    display: block;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-user-img {
+    width: 200px;
+    height: 200px;
+    display: inline-flex;
+    border-radius: 10px;
+}
+
+.search-user-name {
+    display: inline-flex;
+    padding-left: 30px;
+    font-size: 24px;
+}
+
+/* ----------------------------------------------------------- */

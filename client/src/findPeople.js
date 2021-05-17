@@ -58,16 +58,27 @@ export default function FindPeople() {
 
     return (
         <>
-            <h1>Find more People</h1>
-            <input name="searchPeople" onChange={onPeopleChange} />
+            <h1 className="usersearch-heading">Find more People</h1>
+            <input
+                className="user-searchbar"
+                name="searchPeople"
+                onChange={onPeopleChange}
+            />
             <div>
                 {console.log("people", people)}
                 {people.map((user, index) => {
                     return (
                         <>
-                            <img key={index} src={user.url} />
-                            <div key={index}>{user.first_name}</div>
-                            <div key={index}>{user.last_name}</div>
+                            <div className="user-search">
+                                <img
+                                    className="search-user-img"
+                                    key={index}
+                                    src={user.url}
+                                />
+                                <div className="search-user-name" key={index}>
+                                    {user.first_name + " " + user.last_name}
+                                </div>
+                            </div>
                         </>
                     );
                 })}

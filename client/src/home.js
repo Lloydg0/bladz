@@ -6,6 +6,7 @@ import Profile from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import FindPeople from "./findPeople";
+import NavBar from "./navbar";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -67,6 +68,7 @@ export default class Home extends React.Component {
                 <div className="main-navbar">
                     <img className="navbar-image" src="/logo.png" />
                     <div className="profile-pic-container">
+                        <NavBar />
                         <Profilepic
                             toggleUploader={() => this.toggleUploader()}
                             first_name={this.state.first_name}
