@@ -91,6 +91,33 @@ module.exports.searchForOtherUsers = (input) => {
                 ORDER BY id DESC
                 LIMIT 3
                 `;
-    console.log("input", input);
     return db.query(q, [input + "%"]);
+};
+
+// Querying the friendships DATABASE to find the connection for adding users buttons
+module.exports.decideFriendshipButtonToSend = (recipient_id, sender_id) => {
+    const q = ` SELECT * FROM friendships
+                WHERE (recipient_id = $1 AND sender_id = $2)
+                OR (recipient_id = $2 AND sender_id = $1);`;
+    return db.query(q, [recipient_id, sender_id]);
+};
+
+module.exports.friendRequestSent = (recipient_id, sender_id, accepted) => {
+    const q = ` INSERT INTO friendships (recipient_id, sender_id, accepted)
+                VALUES ($1, $2, $3)
+                RETURNING accepted`;
+    return db.query(q, [recipient_id, sender_id, accepted]);
+};
+
+module.exports.acceptRequestSent = (recipient_id, sender_id, accepted) => {
+    const q = ` UPDATE friendships
+                SET recipient_id = $1, sender_id = $2, accepted =  $3
+                RETURNING accepted`;
+    return db.query(q, [recipient_id, sender_id, accepted]);
+};
+
+module.exports.deleteFriend = (recipient_id, sender_id, accepted) => {
+    const q = ` DELETE FROM friendships
+                WHERE recipient_id = $1, sender_id = $2, accepted = $3`;
+    return db.query(q, [recipient_id, sender_id, accepted]);
 };

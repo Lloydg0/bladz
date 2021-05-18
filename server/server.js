@@ -300,6 +300,79 @@ app.get("/find/users/:id", async (req, res) => {
     }
 });
 
+app.get("/friendRequest/:id", async (req, res) => {
+    console.log("a request was made to the GET friuend request route");
+    const loggedInUser = req.session.user_Id;
+    const viewedUser = req.params.id;
+    console.log("LogginInUser", loggedInUser);
+    console.log("ViewedUser", req.params.id);
+
+    try {
+        const { rows } = await db.decideFriendshipButtonToSend(
+            loggedInUser,
+            viewedUser
+        );
+        console.log("Result in friendship butting GET request", rows);
+        res.json({
+            success: true,
+            payload: rows,
+        });
+    } catch (err) {
+        console.log("Error in friendship button get reqwuest", err);
+    }
+});
+
+app.post("/friendRequest/:id", async (req, res) => {
+    const viewedUserId = req.params.id;
+    const buttonText = req.body.buttonText;
+    const loggedInUser = req.session.user_Id;
+    console.log("a request was made to the POST friend request route");
+    console.log("req.param in friend request post", viewedUserId);
+    console.log("req.body in friend request post", buttonText);
+    console.log("req.body in friend request post", loggedInUser);
+
+    if (buttonText == "Add Friend")
+        try {
+            const { rows } = await db.friendRequestSent(
+                viewedUserId,
+                loggedInUser,
+                false
+            );
+            res.json({
+                success: true,
+                payload: rows[0].accepted,
+            });
+        } catch (err) {
+            console.log("ERROR IN SENDING FRIEND REQUEST", err);
+        }
+
+    if (buttonText == "Accept Friend Request")
+        try {
+            const { rows } = await db.acceptRequestSent(
+                viewedUserId,
+                loggedInUser,
+                true
+            );
+            res.json({
+                success: true,
+                payload: rows[0].accepted,
+            });
+        } catch (err) {
+            console.log("ERROR IN ACCEPTING FRIEND REQUEST", err);
+        }
+
+    if (buttonText == "Remove Friend")
+        try {
+            const { rows } = db.deleteFriend(viewedUserId, loggedInUser);
+            res.json({
+                success: true,
+                payload: rows,
+            });
+        } catch (err) {
+            console.log("ERROR IN REMOVING FRIEND REQUEST", err);
+        }
+});
+
 //do not delete or comment out EVER
 app.get("*", function (req, res) {
     if (!req.session.user_Id) {
