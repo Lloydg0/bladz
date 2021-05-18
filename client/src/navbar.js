@@ -2,7 +2,6 @@ export default function Navbar() {
     return (
         <>
             <a
-                href="javascript: false"
                 onClick={(e) => {
                     e.preventDefault();
                     location.replace("/find/user");
@@ -12,7 +11,6 @@ export default function Navbar() {
                 Search
             </a>
             <a
-                href="javascript: false"
                 onClick={(e) => {
                     e.preventDefault();
                     e.nativeEvent.stopImmediatePropagation();

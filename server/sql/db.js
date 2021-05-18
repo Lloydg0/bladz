@@ -102,22 +102,24 @@ module.exports.decideFriendshipButtonToSend = (recipient_id, sender_id) => {
     return db.query(q, [recipient_id, sender_id]);
 };
 
+// inserting friend request into database
 module.exports.friendRequestSent = (recipient_id, sender_id, accepted) => {
     const q = ` INSERT INTO friendships (recipient_id, sender_id, accepted)
                 VALUES ($1, $2, $3)
                 RETURNING accepted`;
     return db.query(q, [recipient_id, sender_id, accepted]);
 };
-
+// updating database when friend request is sent
 module.exports.acceptRequestSent = (recipient_id, sender_id, accepted) => {
     const q = ` UPDATE friendships
                 SET recipient_id = $1, sender_id = $2, accepted =  $3
                 RETURNING accepted`;
     return db.query(q, [recipient_id, sender_id, accepted]);
 };
-
-module.exports.deleteFriend = (recipient_id, sender_id, accepted) => {
+// deleteing friend request from database
+module.exports.deleteFriend = (recipient_id, sender_id) => {
     const q = ` DELETE FROM friendships
-                WHERE recipient_id = $1, sender_id = $2, accepted = $3`;
-    return db.query(q, [recipient_id, sender_id, accepted]);
+                WHERE (recipient_id = $1 AND sender_id = $2)
+                OR (recipient_id = $2 AND sender_id = $1)`;
+    return db.query(q, [recipient_id, sender_id]);
 };

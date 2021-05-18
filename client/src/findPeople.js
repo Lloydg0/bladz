@@ -66,16 +66,16 @@ export default function FindPeople() {
             />
             <div>
                 {console.log("people", people)}
-                {people.map((user, index) => {
+                {people.map((user) => {
                     return (
                         <>
                             <div className="user-search">
                                 <img
                                     className="search-user-img"
-                                    key={index}
+                                    key={user.id}
                                     src={user.url}
                                 />
-                                <div className="search-user-name" key={index}>
+                                <div className="search-user-name" key={user.id}>
                                     {user.first_name + " " + user.last_name}
                                 </div>
                             </div>

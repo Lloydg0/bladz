@@ -14,21 +14,6 @@ export default function FriendshipButton(id) {
                     "/friendRequest/" + viewedUserId
                 );
                 console.log("data in axios.get request for buttonText", data);
-
-                if (data.payload == 0) {
-                    setButtonText("Add Friend");
-                } else if (data.payload[0].accepted == false) {
-                    setButtonText("Accept Friend Request");
-                }
-                // else if (
-                //     accepted == false &&
-                //     data.payload.sender_id == viewedUserId
-                // ) {
-                //     setButtonText("Cancel Friend Request");
-                // }
-                else if (data.payload[0].accepted == true) {
-                    setButtonText("Remove Friend");
-                }
             } catch (err) {
                 console.log(
                     "err in axios request for making a request for button text in search",
@@ -44,6 +29,7 @@ export default function FriendshipButton(id) {
             .post("/friendRequest/" + viewedUserId, { buttonText: buttonText })
             .then((response) => {
                 console.log("Response in POST friendRequest Route", response);
+                setButtonText(response.data.buttonText);
             })
             .catch((err) => {
                 console.log("Error in POST friendRequest route", err);
@@ -52,7 +38,12 @@ export default function FriendshipButton(id) {
 
     return (
         <>
-            <button onClick={(e) => onButtonTextClick(e)}>{buttonText}</button>
+            <button
+                className="add-friend-button"
+                onClick={(e) => onButtonTextClick(e)}
+            >
+                {buttonText}
+            </button>
         </>
     );
 }

@@ -327,9 +327,6 @@ app.post("/friendRequest/:id", async (req, res) => {
     const buttonText = req.body.buttonText;
     const loggedInUser = req.session.user_Id;
     console.log("a request was made to the POST friend request route");
-    console.log("req.param in friend request post", viewedUserId);
-    console.log("req.body in friend request post", buttonText);
-    console.log("req.body in friend request post", loggedInUser);
 
     if (buttonText == "Add Friend")
         try {
@@ -341,6 +338,7 @@ app.post("/friendRequest/:id", async (req, res) => {
             res.json({
                 success: true,
                 payload: rows[0].accepted,
+                buttonText: "Cancel Friend Request",
             });
         } catch (err) {
             console.log("ERROR IN SENDING FRIEND REQUEST", err);
@@ -356,17 +354,19 @@ app.post("/friendRequest/:id", async (req, res) => {
             res.json({
                 success: true,
                 payload: rows[0].accepted,
+                buttonText: "Remove Friend",
             });
         } catch (err) {
             console.log("ERROR IN ACCEPTING FRIEND REQUEST", err);
         }
 
-    if (buttonText == "Remove Friend")
+    if (buttonText == "Remove Friend" || buttonText == "Cancel Friend Request")
         try {
             const { rows } = db.deleteFriend(viewedUserId, loggedInUser);
             res.json({
                 success: true,
                 payload: rows,
+                buttonText: "Add Friend",
             });
         } catch (err) {
             console.log("ERROR IN REMOVING FRIEND REQUEST", err);
