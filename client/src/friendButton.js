@@ -14,6 +14,24 @@ export default function FriendshipButton(id) {
                     "/friendRequest/" + viewedUserId
                 );
                 console.log("data in axios.get request for buttonText", data);
+                if (data.payload == 0) {
+                    setButtonText("Add Friend");
+                }
+
+                if (data.payload[0].accepted == false) {
+                    setButtonText("Accept Friend Request");
+                }
+
+                if (
+                    data.payload[0].accepted == false &&
+                    data.payload[0].sender_id != viewedUserId
+                ) {
+                    setButtonText("Cancel Friend Request");
+                }
+
+                if (data.payload[0].accepted == true) {
+                    setButtonText("Remove Friend");
+                }
             } catch (err) {
                 console.log(
                     "err in axios request for making a request for button text in search",

@@ -153,7 +153,8 @@ input {
 .register-button-navbar,
 .login-button-navbar-register,
 .upload-button-navbar,
-.save-button {
+.save-button,
+.add-friend-button {
     display: inline-block;
     padding: 10px;
     border: none;
@@ -162,6 +163,11 @@ input {
     color: #ffffff;
     text-align: center;
     background-color: #00897b;
+}
+
+.add-friend-button {
+    display: block;
+    margin-left: 55px;
 }
 
 .navbar-links-on-register {
@@ -307,7 +313,7 @@ input {
 }
 textarea {
     width: 300px;
-    height: 40px;
+    height: 0px;
 }
 .main-profile-photo {
     width: 200px;
