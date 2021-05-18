@@ -1,18 +1,29 @@
-import { HashRouter, Link } from "react-router-dom";
 export default function Navbar() {
     return (
         <>
-            <HashRouter>
-                <Link className="navbar-links" to="/">
-                    Profile
-                </Link>
-                <Link className="navbar-links" to="/find/user">
-                    Search Users
-                </Link>
-                <Link className="navbar-links" to="/logout">
-                    Log Out
-                </Link>
-            </HashRouter>
+            <a
+                href="javascript: false"
+                onClick={(e) => {
+                    e.preventDefault();
+                    location.replace("/find/user");
+                }}
+                className="navbar-links"
+            >
+                Search
+            </a>
+            <a
+                href="javascript: false"
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.nativeEvent.stopImmediatePropagation();
+                    location.replace("/");
+                }}
+                type="button"
+                className="navbar-links"
+            >
+                Profile
+            </a>
+            <a className="navbar-links">Log Out</a>
         </>
     );
 }

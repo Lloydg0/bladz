@@ -18,9 +18,10 @@ export default function Profile({
                     {/* <Profilepic /> */}
                 </div>
                 <div className="userprofile-information-container">
-                    <h2>{first_name}</h2>
-                    <h2>{last_name}</h2>
-                    <h2>{finishedBio}</h2>
+                    <h2 className="user-info-profile">
+                        {first_name} {last_name}
+                    </h2>
+                    <h3 className="user-info-profile">{finishedBio}</h3>
                     <BioEditor setBio={setBio} />
                 </div>
             </div>

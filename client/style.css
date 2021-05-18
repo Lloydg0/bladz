@@ -273,34 +273,51 @@ input {
 .main-profile-container {
     width: 100vw;
     height: 500px;
+    margin-left: 20px;
 }
 .main-profile-image-container {
     width: 200px;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
-    display: inline-block;
+    /* display: inline-block; */
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     margin-top: 30px;
 }
 
 .userprofile-information-container {
-    margin-left: 50px;
-    height: 500px;
-    width: 500px;
-    display: inline-block;
+    margin-top: 30px;
+    margin-left: 30px;
+    height: 300px;
+    width: 300px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* display: inline-block; */
     vertical-align: top;
+    overflow-wrap: break-word;
+
+    text-align: left;
 }
 .save-button {
     display: block;
 }
 textarea {
     width: 300px;
-    height: 100px;
+    height: 40px;
 }
 .main-profile-photo {
     width: 200px;
     height: 200px;
+    border-radius: 10px;
 }
 
+.user-info-profile {
+    margin: 10px;
+}
 /* ------------------- user search --------------------- */
 .user-searchbar,
 .usersearch-heading {
