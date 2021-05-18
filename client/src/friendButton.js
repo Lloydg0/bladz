@@ -14,22 +14,21 @@ export default function FriendshipButton(id) {
                     "/friendRequest/" + viewedUserId
                 );
                 console.log("data in axios.get request for buttonText", data);
+                const btnStatus = data.payload[0];
+
                 if (data.payload == 0) {
                     setButtonText("Add Friend");
-                }
-
-                if (data.payload[0].accepted == false) {
+                } else if (
+                    btnStatus.accepted == false &&
+                    btnStatus.sender_id == viewedUserId
+                ) {
                     setButtonText("Accept Friend Request");
-                }
-
-                if (
-                    data.payload[0].accepted == false &&
-                    data.payload[0].sender_id != viewedUserId
+                } else if (
+                    btnStatus.accepted == false &&
+                    btnStatus.sender_id != viewedUserId
                 ) {
                     setButtonText("Cancel Friend Request");
-                }
-
-                if (data.payload[0].accepted == true) {
+                } else if (btnStatus.accepted == true) {
                     setButtonText("Remove Friend");
                 }
             } catch (err) {

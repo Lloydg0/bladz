@@ -1,5 +1,6 @@
 import axios from "./axios";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default function FindPeople() {
     const [people, setPeople] = useState([]);
@@ -11,6 +12,7 @@ export default function FindPeople() {
             try {
                 const { data } = await axios.get("/find/users/");
                 if (!ignore) {
+                    console.log("top 3 people", data.payload);
                     setPeople(data.payload);
                 } else {
                     console.log("ignored response");
@@ -32,11 +34,10 @@ export default function FindPeople() {
         let ignore = false;
         (async () => {
             try {
-                console.log("people input", peopleInput);
                 const { data } = await axios.get("/find/users/" + peopleInput);
                 if (!ignore) {
-                    let newPeople = data.payload;
-                    setPeople(newPeople);
+                    console.log("new people", data.payload);
+                    setPeople(data.payload);
                 } else {
                     console.log("ignored response");
                 }
@@ -56,6 +57,11 @@ export default function FindPeople() {
         setPeopleInput(target.value);
     };
 
+    // const onPeopleClick = (e) => {
+    //     e.preventDefault();
+    //     location.href(`/find/user/${user.id}`);
+    // };
+
     return (
         <>
             <h1 className="usersearch-heading">Find more People</h1>
@@ -65,11 +71,41 @@ export default function FindPeople() {
                 onChange={onPeopleChange}
             />
             <div>
-                {console.log("people", people)}
                 {people.map((user) => {
                     return (
                         <>
-                            <div className="user-search">
+                            <BrowserRouter>
+                                <div>
+                                    <Route
+                                        exact
+                                        path="/find/user/"
+                                        render={() => (
+                                            <div className="user-search">
+                                                <img
+                                                    // onClick={(e) =>
+                                                    //     onPeopleClick(e)
+                                                    // }
+                                                    className="search-user-img"
+                                                    key={user.id}
+                                                    src={user.url}
+                                                />
+                                                <div
+                                                    // onClick={(e) =>
+                                                    //     onPeopleClick(e)
+                                                    // }
+                                                    className="search-user-name"
+                                                    key={user.id}
+                                                >
+                                                    {user.first_name +
+                                                        " " +
+                                                        user.last_name}
+                                                </div>
+                                            </div>
+                                        )}
+                                    />
+                                </div>
+                            </BrowserRouter>
+                            {/* <div className="user-search">
                                 <img
                                     className="search-user-img"
                                     key={user.id}
@@ -78,7 +114,7 @@ export default function FindPeople() {
                                 <div className="search-user-name" key={user.id}>
                                     {user.first_name + " " + user.last_name}
                                 </div>
-                            </div>
+                            </div> */}
                         </>
                     );
                 })}
