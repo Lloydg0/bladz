@@ -24,18 +24,18 @@ export default class OtherProfile extends React.Component {
 
             if (otherUserId == response.data.user) {
                 this.props.history.push("/");
+            } else {
+                this.setState({
+                    first_name: response.data.payload[0].first_name,
+                    last_name: response.data.payload[0].last_name,
+                    imgURL: response.data.payload[0].url,
+                    finishedBio: response.data.payload[0].bio,
+                });
             }
 
             // if (otherUserId > otherUserId[otherUserId.length - 1]) {
             //     this.props.history.push("/");
             // }
-
-            this.setState({
-                first_name: response.data.payload[0].first_name,
-                last_name: response.data.payload[0].last_name,
-                imgURL: response.data.payload[0].url,
-                finishedBio: response.data.payload[0].bio,
-            });
         } catch (err) {
             console.log("Error in axios for other profile", err);
         }

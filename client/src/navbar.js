@@ -1,7 +1,7 @@
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Navbar() {
     return (
-        <BrowserRouter>
+        <>
             <Link className="navbar-links" to="/find/user">
                 Search
             </Link>
@@ -11,6 +11,6 @@ export default function Navbar() {
             <Link className="navbar-links" to="/logout">
                 Log Out
             </Link>
-        </BrowserRouter>
+        </>
     );
 }

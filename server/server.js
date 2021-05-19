@@ -316,6 +316,8 @@ app.get("/friendRequest/:id", async (req, res) => {
         res.json({
             success: true,
             payload: rows,
+            loggedInUser,
+            viewedUser,
         });
     } catch (err) {
         console.log("Error in friendship button get reqwuest", err);

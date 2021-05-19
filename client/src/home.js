@@ -65,19 +65,20 @@ export default class Home extends React.Component {
     render() {
         return (
             <>
-                <div className="main-navbar">
-                    <img className="navbar-image" src="/logo.png" />
-                    <div className="profile-pic-container">
-                        <NavBar />
-                        <Profilepic
-                            toggleUploader={() => this.toggleUploader()}
-                            first_name={this.state.first_name}
-                            last_name={this.state.last_name}
-                            imgURL={this.state.imgURL}
-                        />
-                    </div>
-                </div>
                 <BrowserRouter>
+                    <div className="main-navbar">
+                        <img className="navbar-image" src="/logo.png" />
+                        <div className="profile-pic-container">
+                            <NavBar />
+                            <Profilepic
+                                toggleUploader={() => this.toggleUploader()}
+                                first_name={this.state.first_name}
+                                last_name={this.state.last_name}
+                                imgURL={this.state.imgURL}
+                            />
+                        </div>
+                    </div>
+
                     <div>
                         <Route
                             exact

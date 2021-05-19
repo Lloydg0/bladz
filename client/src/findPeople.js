@@ -12,7 +12,6 @@ export default function FindPeople() {
             try {
                 const { data } = await axios.get("/find/users/");
                 if (!ignore) {
-                    console.log("top 3 people", data.payload);
                     setPeople(data.payload);
                 } else {
                     console.log("ignored response");
@@ -36,7 +35,6 @@ export default function FindPeople() {
             try {
                 const { data } = await axios.get("/find/users/" + peopleInput);
                 if (!ignore) {
-                    console.log("new people", data.payload);
                     setPeople(data.payload);
                 } else {
                     console.log("ignored response");
