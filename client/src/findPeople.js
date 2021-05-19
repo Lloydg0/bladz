@@ -1,6 +1,6 @@
 import axios from "./axios";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 export default function FindPeople() {
     const [people, setPeople] = useState([]);
@@ -57,11 +57,6 @@ export default function FindPeople() {
         setPeopleInput(target.value);
     };
 
-    // const onPeopleClick = (e) => {
-    //     e.preventDefault();
-    //     location.href(`/find/user/${user.id}`);
-    // };
-
     return (
         <>
             <h1 className="usersearch-heading">Find more People</h1>
@@ -71,53 +66,24 @@ export default function FindPeople() {
                 onChange={onPeopleChange}
             />
             <div>
-                {people.map((user) => {
-                    return (
-                        <>
-                            <BrowserRouter>
-                                <div>
-                                    <Route
-                                        exact
-                                        path="/find/user/"
-                                        render={() => (
-                                            <div className="user-search">
-                                                <img
-                                                    // onClick={(e) =>
-                                                    //     onPeopleClick(e)
-                                                    // }
-                                                    className="search-user-img"
-                                                    key={user.id}
-                                                    src={user.url}
-                                                />
-                                                <div
-                                                    // onClick={(e) =>
-                                                    //     onPeopleClick(e)
-                                                    // }
-                                                    className="search-user-name"
-                                                    key={user.id}
-                                                >
-                                                    {user.first_name +
-                                                        " " +
-                                                        user.last_name}
-                                                </div>
-                                            </div>
-                                        )}
-                                    />
-                                </div>
-                            </BrowserRouter>
-                            {/* <div className="user-search">
+                <Route>
+                    {people.map((user) => {
+                        return (
+                            <div className="user-search" key={user.id}>
                                 <img
                                     className="search-user-img"
-                                    key={user.id}
                                     src={user.url}
                                 />
-                                <div className="search-user-name" key={user.id}>
+                                <Link
+                                    className="search-user-name"
+                                    to={`/user/${user.id}`}
+                                >
                                     {user.first_name + " " + user.last_name}
-                                </div>
-                            </div> */}
-                        </>
-                    );
-                })}
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </Route>
             </div>
         </>
     );

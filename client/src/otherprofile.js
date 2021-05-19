@@ -14,16 +14,19 @@ export default class OtherProfile extends React.Component {
     }
     async componentDidMount() {
         console.log("The other users profile mounted");
+        const otherUserId = this.props.match.params.id;
+        console.log("otherUserid", otherUserId.length);
 
         try {
             const response = await axios.post(
                 "/users/" + this.props.match.params.id
             );
 
-            if (this.props.match.params.id == response.data.user) {
+            if (otherUserId == response.data.user) {
                 this.props.history.push("/");
             }
-            // else if (this.props.match.params.id) {
+
+            // if (otherUserId > otherUserId[otherUserId.length - 1]) {
             //     this.props.history.push("/");
             // }
 

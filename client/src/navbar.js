@@ -1,27 +1,16 @@
+import { BrowserRouter, Link } from "react-router-dom";
 export default function Navbar() {
     return (
-        <>
-            <a
-                onClick={(e) => {
-                    e.preventDefault();
-                    location.replace("/find/user");
-                }}
-                className="navbar-links"
-            >
+        <BrowserRouter>
+            <Link className="navbar-links" to="/find/user">
                 Search
-            </a>
-            <a
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.nativeEvent.stopImmediatePropagation();
-                    location.replace("/");
-                }}
-                type="button"
-                className="navbar-links"
-            >
+            </Link>
+            <Link className="navbar-links" to="/">
                 Profile
-            </a>
-            <a className="navbar-links">Log Out</a>
-        </>
+            </Link>
+            <Link className="navbar-links" to="/logout">
+                Log Out
+            </Link>
+        </BrowserRouter>
     );
 }
