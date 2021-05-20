@@ -123,3 +123,14 @@ module.exports.deleteFriend = (recipient_id, sender_id) => {
                 OR (recipient_id = $2 AND sender_id = $1)`;
     return db.query(q, [recipient_id, sender_id]);
 };
+
+//  returning a list of friends or friend requests from the Database
+module.exports.selectingFriendsOrFriendRequests = (id) => {
+    const q = ` SELECT users.id, first_name, last_name, url, accepted
+                FROM friendships
+                JOIN users
+                ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+                OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+                OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
+    return db.query(q, [id]);
+};

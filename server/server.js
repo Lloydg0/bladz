@@ -85,6 +85,11 @@ app.get("/welcome", (req, res) => {
     }
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
+});
+
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
 app.post("/registration", async (req, res) => {
@@ -329,7 +334,7 @@ app.post("/friendRequest/:id", async (req, res) => {
     const buttonText = req.body.buttonText;
     const loggedInUser = req.session.user_Id;
     console.log("a request was made to the POST friend request route");
-
+    console.log("buttonText", buttonText);
     if (buttonText == "Add Friend")
         try {
             const { rows } = await db.friendRequestSent(
@@ -348,11 +353,13 @@ app.post("/friendRequest/:id", async (req, res) => {
 
     if (buttonText == "Accept Friend Request")
         try {
+            console.log("before the db request");
             const { rows } = await db.acceptRequestSent(
                 viewedUserId,
                 loggedInUser,
                 true
             );
+            console.log("after the db request", rows);
             res.json({
                 success: true,
                 payload: rows[0].accepted,
@@ -364,7 +371,7 @@ app.post("/friendRequest/:id", async (req, res) => {
 
     if (buttonText == "Remove Friend" || buttonText == "Cancel Friend Request")
         try {
-            const { rows } = db.deleteFriend(viewedUserId, loggedInUser);
+            const { rows } = await db.deleteFriend(viewedUserId, loggedInUser);
             res.json({
                 success: true,
                 payload: rows,
@@ -373,6 +380,25 @@ app.post("/friendRequest/:id", async (req, res) => {
         } catch (err) {
             console.log("ERROR IN REMOVING FRIEND REQUEST", err);
         }
+});
+
+app.get("/friends-wannabes", async (req, res) => {
+    console.log("a request made to the friend/wannabes route");
+    const loggedInUser = req.session.user_Id;
+    console.log("LogginInUser", loggedInUser);
+    try {
+        const { rows } = await db.selectingFriendsOrFriendRequests(
+            loggedInUser
+        );
+        console.log("getting response for friend requests", rows);
+        res.json({
+            success: true,
+            payload: rows,
+            loggedInUser,
+        });
+    } catch (err) {
+        console.log("A error in the friend or requesters route", err);
+    }
 });
 
 //do not delete or comment out EVER

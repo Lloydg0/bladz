@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import FindPeople from "./findPeople";
 import NavBar from "./navbar";
+import FriendRequests from "./friendrequests";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -29,6 +30,8 @@ export default class Home extends React.Component {
     componentDidMount() {
         console.log("Home just mounted");
         console.log("props in home mount", this.state);
+        // axios request
+        // set state in local storage
     }
 
     setBio(newBio) {
@@ -114,9 +117,12 @@ export default class Home extends React.Component {
                                 />
                             )}
                         />
+                        <Route
+                            path="/friends-wannabees"
+                            render={() => <FriendRequests />}
+                        />
                     </div>
                 </BrowserRouter>
-                ;
                 {this.state.uploaderIsVisible && (
                     <Uploader
                         toggleUploader={() => this.toggleUploader()}
