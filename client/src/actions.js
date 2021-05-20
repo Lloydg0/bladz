@@ -10,7 +10,7 @@ import axios from "./axios";
 export async function getFriendsAndWannabes() {
     const { data } = await axios.get("/friends-wannabes");
     console.log("data in getting friends and wannabeas", data);
-    if (!data.payload.accepted) {
+    if (data.success) {
         return {
             type: "GET_FRIENDS_AND_WANNABES",
             friendsAndWannabes: data.payload,
@@ -23,7 +23,9 @@ export async function getFriendsAndWannabes() {
 export async function acceptFriend(id, buttonText) {
     console.log("method working");
     const { data } = await axios
-        .post("/friendRequest/" + id, { buttonText: "Accept Friend Request" })
+        .post("/friendRequest/" + id, {
+            buttonText: "Accept Friend Request",
+        })
         .catch(console.log);
     console.log("data in ACCEPTING FRIEND", data);
     if (data.success) {

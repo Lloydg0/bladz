@@ -19,6 +19,7 @@ export default function reducer(state = {}, action) {
                         ...state,
                         accepted: true,
                         buttonText: action.buttonText,
+                        id: action.id,
                     };
                 } else {
                     return user;
@@ -35,6 +36,7 @@ export default function reducer(state = {}, action) {
                         ...state,
                         accepted: false,
                         buttonText: action.buttonText,
+                        id: action.id,
                     };
                 } else {
                     return user;
