@@ -58,11 +58,13 @@ export default function FindPeople() {
     return (
         <>
             <h1 className="usersearch-heading">Find more People</h1>
-            <input
-                className="user-searchbar"
-                name="searchPeople"
-                onChange={onPeopleChange}
-            />
+            <div className="input-container">
+                <input
+                    className="user-searchbar"
+                    name="searchPeople"
+                    onChange={onPeopleChange}
+                />
+            </div>
             <div>
                 <Route>
                     {people.map((user) => {

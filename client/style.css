@@ -326,12 +326,17 @@ textarea {
     margin: 10px;
 }
 /* ------------------- user search --------------------- */
+.input-container {
+    width: 100%;
+}
+
 .user-searchbar,
 .usersearch-heading {
     margin-left: 20px;
 }
 
 .user-search {
+    width: 100%;
     display: block;
     padding: 20px 20px;
     display: flex;
@@ -340,8 +345,8 @@ textarea {
 }
 
 .search-user-img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     display: inline-flex;
     border-radius: 10px;
 }
