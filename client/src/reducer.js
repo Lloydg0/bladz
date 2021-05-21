@@ -17,6 +17,7 @@ export default function reducer(state = {}, action) {
                 if (user.id == action.id) {
                     return {
                         ...state,
+                        friendsAndWannabes: action.friendsAndWannabes,
                         accepted: true,
                         buttonText: action.buttonText,
                         id: action.id,
@@ -30,10 +31,11 @@ export default function reducer(state = {}, action) {
     if (action.type == "UNFRIEND") {
         state = {
             ...state,
-            friendsAndWannabes: state.friendsAndWannabes.map((user) => {
+            friendsAndWannabes: state.friendsAndWannabes.filter((user) => {
                 if (user.id == action.id) {
                     return {
                         ...state,
+                        friendsAndWannabes: action.friendsAndWannabes,
                         accepted: false,
                         buttonText: action.buttonText,
                         id: action.id,

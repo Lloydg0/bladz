@@ -31,6 +31,7 @@ export async function acceptFriend(id, buttonText) {
     if (data.success) {
         return {
             type: "ACCEPT_FRIEND",
+            friendsAndWannabes: data.payload,
             buttonText,
             id,
         };
@@ -45,6 +46,7 @@ export async function unfriend(id, buttonText) {
     if (data.success) {
         return {
             type: "UNFRIEND",
+            friendsAndWannabes: data.payload,
             id,
             buttonText,
         };

@@ -27,11 +27,16 @@ export default class Home extends React.Component {
         console.log("localStorage", localStorage.getItem("homeState"));
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         console.log("Home just mounted");
         console.log("props in home mount", this.state);
-        // axios request
-        // set state in local storage
+        const { data } = await axios.get("/home").catch(console.log);
+        this.setState({
+            first_name: data.payload[0].first_name,
+            last_name: data.payload[0].last_name,
+            imgURL: data.payload[0].url,
+            finishedBio: data.payload[0].bio,
+        });
     }
 
     setBio(newBio) {

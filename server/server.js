@@ -90,6 +90,21 @@ app.get("/logout", (req, res) => {
     res.redirect("/welcome");
 });
 
+app.get("/home", async (req, res) => {
+    console.log("a request made to home route");
+    const loggedInUser = req.session.user_Id;
+    try {
+        const { rows } = await db.selectingUserInfo(loggedInUser);
+        console.log("rows", rows);
+        res.json({
+            success: true,
+            payload: rows,
+        });
+    } catch (err) {
+        console.log("err in showing top 3 users from the Database", err);
+    }
+});
+
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
 app.post("/registration", async (req, res) => {

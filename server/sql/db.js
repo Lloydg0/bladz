@@ -18,6 +18,14 @@ module.exports.addUserRegistrationInformation = (
     return db.query(q, params);
 };
 
+// selecting all from userhomepage
+module.exports.selectingUserInfo = (id) => {
+    const q = ` SELECT first_name, last_name, url, bio
+                FROM users
+                WHERE id = $1`;
+    return db.query(q, [id]);
+};
+
 //retreiving user email & password from users database
 module.exports.retrivingUserEmail = (email) => {
     const q = ` SELECT users.id, password_hash
