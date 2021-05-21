@@ -16,7 +16,7 @@ export default class Home extends React.Component {
         this.state = JSON.parse(localStorage.getItem("homeState")) || {
             first_name: "",
             last_name: "",
-            imgURL: "",
+            imgURL: "" || "/defaultIcon.jpeg",
             uploaderIsVisible: false,
             finishedBio: "",
         };

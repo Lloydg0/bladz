@@ -10,6 +10,11 @@ const { hash, compare } = require("../client/utils/bc.js");
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
 
 //the following ocde is required to uoload files
 const s3 = require("../s3");
@@ -371,8 +376,7 @@ app.post("/friendRequest/:id", async (req, res) => {
             console.log("before the db request");
             const { rows } = await db.acceptRequestSent(
                 viewedUserId,
-                loggedInUser,
-                true
+                loggedInUser
             );
             console.log("after the db request", rows);
             res.json({
@@ -430,10 +434,23 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 
 // if (require.main == module) {
 //     app.listen(process.env.PORT || 3001);
 // }
+
+// SOCKETS
+io.on("connection", function (socket) {
+    console.log(`socket with the id ${socket.id} is now connected`);
+
+    // socket.emit("Hello", {
+    //     cohort: "Marjoram"
+    // });
+
+    socket.on("disconnect", function () {
+        console.log(`socket with the id ${socket.id} is now disconnected`);
+    });
+});
