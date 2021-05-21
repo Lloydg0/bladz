@@ -15,13 +15,8 @@ export default function reducer(state = {}, action) {
             ...state,
             friendsAndWannabes: state.friendsAndWannabes.map((user) => {
                 if (user.id == action.id) {
-                    return {
-                        ...state,
-                        friendsAndWannabes: action.friendsAndWannabes,
-                        accepted: true,
-                        buttonText: action.buttonText,
-                        id: action.id,
-                    };
+                    user["accepted"] = true;
+                    return user;
                 } else {
                     return user;
                 }
@@ -33,13 +28,22 @@ export default function reducer(state = {}, action) {
             ...state,
             friendsAndWannabes: state.friendsAndWannabes.filter((user) => {
                 if (user.id == action.id) {
-                    return {
-                        ...state,
-                        friendsAndWannabes: action.friendsAndWannabes,
-                        accepted: false,
-                        buttonText: action.buttonText,
-                        id: action.id,
-                    };
+                    user["accepted"] = null;
+                    return user;
+                } else {
+                    return user;
+                }
+            }),
+        };
+    }
+
+    if (action.type == "DECLINE") {
+        state = {
+            ...state,
+            friendsAndWannabes: state.friendsAndWannabes.filter((user) => {
+                if (user.id == action.id) {
+                    user["accepted"] = null;
+                    return user;
                 } else {
                     return user;
                 }

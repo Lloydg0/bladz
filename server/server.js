@@ -377,14 +377,19 @@ app.post("/friendRequest/:id", async (req, res) => {
             console.log("after the db request", rows);
             res.json({
                 success: true,
-                payload: rows[0].accepted,
+                // payload: rows[0].accepted,
+                payload: rows,
                 buttonText: "Remove Friend",
             });
         } catch (err) {
             console.log("ERROR IN ACCEPTING FRIEND REQUEST", err);
         }
 
-    if (buttonText == "Remove Friend" || buttonText == "Cancel Friend Request")
+    if (
+        buttonText == "Remove Friend" ||
+        buttonText == "Cancel Friend Request" ||
+        buttonText == "Decline Friend Request"
+    )
         try {
             const { rows } = await db.deleteFriend(viewedUserId, loggedInUser);
             res.json({

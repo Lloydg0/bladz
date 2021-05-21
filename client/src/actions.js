@@ -14,24 +14,24 @@ export async function getFriendsAndWannabes() {
         return {
             type: "GET_FRIENDS_AND_WANNABES",
             friendsAndWannabes: data.payload,
-            buttonText: "Accept Friend Request",
+            // buttonText: "Accept Friend Request",
         };
     }
 }
 
 // accepting request data and Adding it to the global state.
 export async function acceptFriend(id, buttonText) {
-    console.log("method working");
+    console.log("method working", buttonText);
     const { data } = await axios
         .post("/friendRequest/" + id, {
-            buttonText: "Accept Friend Request",
+            buttonText,
         })
         .catch(console.log);
     console.log("data in ACCEPTING FRIEND", data);
     if (data.success) {
         return {
             type: "ACCEPT_FRIEND",
-            friendsAndWannabes: data.payload,
+            // friendsAndWannabes: data.payload,
             buttonText,
             id,
         };
@@ -39,14 +39,30 @@ export async function acceptFriend(id, buttonText) {
 }
 // // Getting the friend and request data and Adding it to the global state.
 export async function unfriend(id, buttonText) {
+    console.log("method working", buttonText);
     const { data } = await axios.post("/friendRequest/" + id, {
-        buttonText: "Remove Friend",
+        buttonText,
     });
     console.log("data in UNFRIENDING", data);
     if (data.success) {
         return {
             type: "UNFRIEND",
-            friendsAndWannabes: data.payload,
+            id,
+            buttonText,
+        };
+    }
+}
+
+// // Getting the friend and request data and Adding it to the global state.
+export async function decline(id, buttonText) {
+    console.log("method working", buttonText);
+    const { data } = await axios.post("/friendRequest/" + id, {
+        buttonText,
+    });
+    console.log("data in declining", data);
+    if (data.success) {
+        return {
+            type: "DECLINE",
             id,
             buttonText,
         };

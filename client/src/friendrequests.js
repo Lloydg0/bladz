@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { acceptFriend, unfriend, getFriendsAndWannabes } from "./actions";
+import {
+    acceptFriend,
+    unfriend,
+    decline,
+    getFriendsAndWannabes,
+} from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Link } from "react-router-dom";
 
@@ -16,11 +21,10 @@ export default function FriendRequests() {
             state.friendsAndWannabes.filter((user) => user.accepted == false)
     );
 
-    const buttonText = useSelector((state) => state.buttonText);
+    // const buttonText = useSelector((state) => state.buttonText);
 
     console.log("friends", friends);
     console.log("wanabees", wannabes);
-    console.log("buttonText", buttonText);
 
     useEffect(() => {
         dispatch(getFriendsAndWannabes());
@@ -45,7 +49,7 @@ export default function FriendRequests() {
                                 <button
                                     className="add-friend-button"
                                     onClick={() =>
-                                        dispatch(unfriend(id, buttonText))
+                                        dispatch(unfriend(id, "Remove Friend"))
                                     }
                                 >
                                     Remove Friend
@@ -69,10 +73,28 @@ export default function FriendRequests() {
                                 <button
                                     className="add-friend-button"
                                     onClick={() =>
-                                        dispatch(acceptFriend(id, buttonText))
+                                        dispatch(
+                                            acceptFriend(
+                                                id,
+                                                "Accept Friend Request"
+                                            )
+                                        )
                                     }
                                 >
                                     Accept Friend Request
+                                </button>
+                                <button
+                                    className="add-friend-button"
+                                    onClick={() =>
+                                        dispatch(
+                                            decline(
+                                                id,
+                                                "Decline Friend Request"
+                                            )
+                                        )
+                                    }
+                                >
+                                    Decline Friend Request
                                 </button>
                             </div>
                         );
