@@ -456,15 +456,12 @@ io.on("connection", function (socket) {
         return socket.disconnect(true);
     }
     console.log("userID in sockets", user_Id);
-
-    socket.on("chatMessages", async (msgs) => {
-        console.log("msgs", msgs);
-        const { rows } = await db
-            .getting10MostRecentMessages()
-            .catch(console.log);
-        console.log("rows in gettin the 10 messages", rows);
-        io.sockets.emit("chatMessages ", rows.reverse());
-    });
+    db.getting10MostRecentMessages()
+        .then((results) => {
+            console.log("results", results);
+            io.sockets.emit("chatMessages", results.rows.reverse());
+        })
+        .catch(console.log);
 
     socket.on("chatMessage", (msg) => {
         console.log("msg", msg);

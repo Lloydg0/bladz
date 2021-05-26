@@ -152,11 +152,11 @@ module.exports.selectingFriendsOrFriendRequests = (id) => {
 
 // getting the 10 most receient messages
 module.exports.getting10MostRecentMessages = () => {
-    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, created_at
+    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, messages.created_at
                 FROM messages
                 JOIN users
-                ON users.id = sender_id
-                ORDER BY message.id DESC
+                ON users.id = messages.sender_id
+                ORDER BY messages.created_at DESC
                 LIMIT 10`;
     return db.query(q);
 };

@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
     return (
         <>
+            <Link className="navbar-links" to="/Routes">
+                Routes
+            </Link>
             <Link className="navbar-links" to="/chat">
                 Chat
             </Link>

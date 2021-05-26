@@ -9,6 +9,7 @@ import FindPeople from "./findPeople";
 import NavBar from "./navbar";
 import FriendRequests from "./friendrequests";
 import Chat from "./chat";
+import Routes from "./routes";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -130,6 +131,7 @@ export default class Home extends React.Component {
                             render={() => <FriendRequests />}
                         />
                         <Route path="/chat" component={Chat} />
+                        <Route path="/routes" render={() => <Routes />} />
                     </div>
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (

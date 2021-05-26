@@ -54,12 +54,9 @@ export default function reducer(state = {}, action) {
     if (action.type == "CHAT_MESSAGES") {
         console.log("action messages", action.msgs);
         console.log("state messages", state.chatMessages);
-        const newChatMessages = state.chatMessages
-            ? [...state.chatMessages, action.msg]
-            : [action.msg];
         state = {
             ...state,
-            chatMessages: newChatMessages,
+            chatMessages: action.msgs,
         };
     }
 
