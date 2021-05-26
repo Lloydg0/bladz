@@ -149,3 +149,34 @@ module.exports.selectingFriendsOrFriendRequests = (id) => {
                 OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`;
     return db.query(q, [id]);
 };
+
+// getting the 10 most receient messages
+module.exports.getting10MostRecentMessages = () => {
+    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, created_at
+                FROM messages
+                JOIN users
+                ON users.id = sender_id
+                ORDER BY id DESC
+                LIMIT 10`;
+    return db.query(q);
+};
+
+// inserting a new message
+module.exports.insertNewMessage = (sender_id, text) => {
+    const q = `INSERT INTO messages (sender_id, text)
+                VALUES ($1, $2)
+                RETURNING sender_id, text`;
+    return db.query(q, [sender_id, text]);
+};
+
+// retrieving latest messgage
+module.exports.retrieveInsertedNewMessage = (sender_id) => {
+    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, messages.created_at
+                FROM messages
+                JOIN users
+                ON users.id = sender_id
+                WHERE sender_id = $1
+                ORDER BY messages.id DESC
+                LIMIT 1`;
+    return db.query(q, [sender_id]);
+};

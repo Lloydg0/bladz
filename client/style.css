@@ -361,3 +361,13 @@ textarea {
 }
 
 /* ----------------------------------------------------------- */
+
+.chat-message-container {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message-line {
+    height: 50px;
+    width: 500px;
+}

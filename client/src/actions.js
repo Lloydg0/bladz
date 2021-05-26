@@ -68,3 +68,19 @@ export async function decline(id, buttonText) {
         };
     }
 }
+
+// // getting the 10 most recent messages
+export function chatMessages(msgs) {
+    return {
+        type: "CHAT_MESSAGES",
+        msgs,
+    };
+}
+
+// // getting the  most recent message
+export function chatMessage(msg) {
+    return {
+        type: "CHAT_MESSAGE",
+        msg,
+    };
+}

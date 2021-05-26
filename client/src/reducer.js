@@ -51,5 +51,25 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "CHAT_MESSAGES") {
+        console.log("action messages", action.msgs);
+        console.log("state messages", state.chatMessages);
+        state = {
+            ...state,
+            chatMessages: state.chatMessages,
+        };
+    }
+
+    if (action.type == "CHAT_MESSAGE") {
+        const newChatMessages = state.chatMessages
+            ? [...state.chatMessages, action.msg]
+            : [action.msg];
+        console.log("state in chate Message", state);
+        state = {
+            ...state,
+            chatMessages: newChatMessages,
+        };
+    }
+
     return state;
 }

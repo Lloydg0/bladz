@@ -46,12 +46,23 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 // Cookie session
-app.use(
-    cookieSession({
-        secret: `${SECRET_KEY}`,
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
-    })
-);
+// app.use(
+//     cookieSession({
+//         secret: `${SECRET_KEY}`,
+//         maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
+//     })
+// );
+
+// const cookieSession = require("cookie-session");
+const cookieSessionMiddleware = cookieSession({
+    secret: `${SECRET_KEY}`,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 //Preventing Vulnerablilities (must come after cookie session)
 app.use(csurf());
@@ -438,19 +449,44 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 
+io.on("connection", function (socket) {
+    const user_Id = socket.request.session.user_Id;
+    console.log(`Socket with the ID ${socket.id} is now connected`);
+    if (!socket.request.session.user_Id) {
+        return socket.disconnect(true);
+    }
+    console.log("userID in sockets", user_Id);
+
+    socket.on("chatMessages", (msgs) => {
+        console.log("msgs", msgs);
+        db.getting10MostRecentMessages()
+            .then((result) => {
+                console.log("Result in getting last 10 messages", result);
+                io.sockets.emit("chatMessages", result.rows.reverse());
+            })
+            .catch((err) => console.log(err));
+    });
+
+    socket.on("chatMessage", (msg) => {
+        console.log("msg", msg);
+
+        db.insertNewMessage(user_Id, msg)
+            .then((result) => {
+                console.log("Result in inserting the message", result.rows[0]);
+                db.retrieveInsertedNewMessage(user_Id, msg)
+                    .then((result) => {
+                        console.log(
+                            "Result in retrieving last message",
+                            result.rows[0]
+                        );
+                        io.sockets.emit("chatMessage", result.rows[0]);
+                    })
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    });
+});
+
 // if (require.main == module) {
 //     app.listen(process.env.PORT || 3001);
 // }
-
-// SOCKETS
-io.on("connection", function (socket) {
-    console.log(`socket with the id ${socket.id} is now connected`);
-
-    // socket.emit("Hello", {
-    //     cohort: "Marjoram"
-    // });
-
-    socket.on("disconnect", function () {
-        console.log(`socket with the id ${socket.id} is now disconnected`);
-    });
-});
