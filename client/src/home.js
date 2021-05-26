@@ -131,7 +131,7 @@ export default class Home extends React.Component {
                             render={() => <FriendRequests />}
                         />
                         <Route path="/chat" component={Chat} />
-                        <Route path="/routes" render={() => <Routes />} />
+                        <Route path="/routes" component={Routes} />
                     </div>
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (

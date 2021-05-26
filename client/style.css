@@ -399,3 +399,20 @@ textarea {
 .chat-text {
     width: 150px;
 }
+
+.map-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-title-container {
+    text-align: center;
+}
+
+.leaflet-container {
+    height: 500px;
+    width: 500px;
+}

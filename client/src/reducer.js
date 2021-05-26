@@ -52,8 +52,6 @@ export default function reducer(state = {}, action) {
     }
 
     if (action.type == "CHAT_MESSAGES") {
-        console.log("action messages", action.msgs);
-        console.log("state messages", state.chatMessages);
         state = {
             ...state,
             chatMessages: action.msgs,
