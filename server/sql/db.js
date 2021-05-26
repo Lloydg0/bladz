@@ -156,7 +156,7 @@ module.exports.getting10MostRecentMessages = () => {
                 FROM messages
                 JOIN users
                 ON users.id = sender_id
-                ORDER BY id DESC
+                ORDER BY message.id DESC
                 LIMIT 10`;
     return db.query(q);
 };

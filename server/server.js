@@ -457,14 +457,13 @@ io.on("connection", function (socket) {
     }
     console.log("userID in sockets", user_Id);
 
-    socket.on("chatMessages", (msgs) => {
+    socket.on("chatMessages", async (msgs) => {
         console.log("msgs", msgs);
-        db.getting10MostRecentMessages()
-            .then((result) => {
-                console.log("Result in getting last 10 messages", result);
-                io.sockets.emit("chatMessages", result.rows.reverse());
-            })
-            .catch((err) => console.log(err));
+        const { rows } = await db
+            .getting10MostRecentMessages()
+            .catch(console.log);
+        console.log("rows in gettin the 10 messages", rows);
+        io.sockets.emit("chatMessages ", rows.reverse());
     });
 
     socket.on("chatMessage", (msg) => {
