@@ -59,9 +59,11 @@ export default function reducer(state = {}, action) {
     }
 
     if (action.type == "CHAT_MESSAGE") {
-        const newChatMessages = state.chatMessages
-            ? [...state.chatMessages, action.msg]
-            : [action.msg];
+        let newChatMessages = state.chatMessages.slice();
+        newChatMessages.push(action.msg);
+        // const newChatMessages = state.chatMessages
+        //     ? [...state.chatMessages, action.msg]
+        //     : [action.msg];
         state = {
             ...state,
             chatMessages: newChatMessages,

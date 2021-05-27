@@ -20,7 +20,7 @@ module.exports.addUserRegistrationInformation = (
 
 // selecting all from userhomepage
 module.exports.selectingUserInfo = (id) => {
-    const q = ` SELECT first_name, last_name, url, bio
+    const q = ` SELECT id, first_name, last_name, url, bio
                 FROM users
                 WHERE id = $1`;
     return db.query(q, [id]);
@@ -171,7 +171,7 @@ module.exports.insertNewMessage = (sender_id, text) => {
 
 // // retrieving latest messgage
 module.exports.retrieveInsertedNewMessage = (sender_id) => {
-    const q = `SELECT users.id, first_name, last_name, url, recipient_id, sender_id, text, messages.created_at
+    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, messages.created_at
                 FROM messages
                 JOIN users
                 ON users.id = sender_id

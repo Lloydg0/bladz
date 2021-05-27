@@ -21,6 +21,7 @@ export default class Home extends React.Component {
             imgURL: "" || "/defaultIcon.jpeg",
             uploaderIsVisible: false,
             finishedBio: "",
+            id: "",
         };
     }
 
@@ -38,6 +39,7 @@ export default class Home extends React.Component {
             last_name: data.payload[0].last_name,
             imgURL: data.payload[0].url,
             finishedBio: data.payload[0].bio,
+            id: data.payload[0].id,
         });
     }
 
@@ -103,6 +105,7 @@ export default class Home extends React.Component {
                                         this.state.imgURL || "/defaultIcon.jpeg"
                                     }
                                     key={props.match.url}
+                                    id={this.state.id}
                                 />
                             )}
                         />

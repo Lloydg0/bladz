@@ -482,16 +482,6 @@ io.on("connection", function (socket) {
         })
         .catch(console.log);
 
-    socket.on("commentOnWall", ({ id }) => {
-        console.log("ID IN COMMENT ON WALL", id);
-        db.latestComments(id)
-            .then((results) => {
-                console.log("results in getting latest comments", results);
-                io.to(socket.id).emit("comments", results.rows.reverse());
-            })
-            .catch(console.log);
-    });
-
     socket.on("chatMessage", (msg) => {
         console.log("msg", msg);
 
@@ -505,6 +495,16 @@ io.on("connection", function (socket) {
                     .catch((err) => console.log(err));
             })
             .catch((err) => console.log(err));
+    });
+
+    socket.on("commentOnWall", ({ id }) => {
+        console.log("ID IN COMMENT ON WALL", id);
+        db.latestComments(id)
+            .then((results) => {
+                console.log("results in getting latest comments", results);
+                io.to(socket.id).emit("comments", results.rows.reverse());
+            })
+            .catch(console.log);
     });
 
     socket.on("comment", ({ text, id }) => {
