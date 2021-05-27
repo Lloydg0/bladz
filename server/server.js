@@ -482,12 +482,15 @@ io.on("connection", function (socket) {
         })
         .catch(console.log);
 
-    db.latestComments()
-        .then((results) => {
-            console.log("results in getting latest comments", results);
-            io.sockets.emit("comments", results.rows.reverse());
-        })
-        .catch(console.log);
+    socket.on("commentOnWall", ({ id }) => {
+        console.log("ID IN COMMENT ON WALL", id);
+        db.latestComments(id)
+            .then((results) => {
+                console.log("results in getting latest comments", results);
+                io.to(socket.id).emit("comments", results.rows.reverse());
+            })
+            .catch(console.log);
+    });
 
     socket.on("chatMessage", (msg) => {
         console.log("msg", msg);
@@ -504,19 +507,21 @@ io.on("connection", function (socket) {
             .catch((err) => console.log(err));
     });
 
-    socket.on("comment", (com) => {
-        console.log("comment", com.query);
+    socket.on("comment", ({ text, id }) => {
+        console.log("comment", text);
+        let recipient_id = id;
+        console.log("recepient id", recipient_id);
 
-        db.postingComments(user_Id, com)
+        db.postingComments(recipient_id, user_Id, text)
             .then((result) => {
                 console.log("Result in inserting the comment", result.rows[0]);
-                db.retrievePostedComment(user_Id, com)
+                db.retrievePostedComment(user_Id, recipient_id)
                     .then((result) => {
                         console.log(
                             "Result in retrieving last comment",
                             result.rows[0]
                         );
-                        io.sockets.emit("comment", result.rows[0]);
+                        io.to(socket.id).emit("comment", result.rows[0]);
                     })
                     .catch((err) => console.log(err));
             })

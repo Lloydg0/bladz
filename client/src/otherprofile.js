@@ -57,7 +57,7 @@ export default class OtherProfile extends React.Component {
                         <h2>{this.state.finishedBio}</h2>
                     </div>
                     <FriendButton id={this.props.match.params.id} />
-                    <Wall />
+                    <Wall id={this.props.match.params.id} />
                 </div>
             </>
         );

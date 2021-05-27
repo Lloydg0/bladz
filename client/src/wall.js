@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { socket } from "./socket.js";
 import { useSelector } from "react-redux";
 
-export default function Wall() {
+export default function Wall({ id }) {
     const comments = useSelector((state) => state && state.comments);
     console.log("comments", comments);
     const elemRef = useRef();
@@ -12,10 +12,19 @@ export default function Wall() {
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
     }, [comments]);
 
+    useEffect(() => {
+        socket.emit("commentOnWall", {
+            id,
+        });
+    }, []);
+
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            socket.emit("comment", e.target.value);
+            socket.emit("comment", {
+                text: e.target.value,
+                id,
+            });
             e.target.value = "";
         }
     };

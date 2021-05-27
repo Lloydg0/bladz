@@ -169,9 +169,9 @@ module.exports.insertNewMessage = (sender_id, text) => {
     return db.query(q, [sender_id, text]);
 };
 
-// retrieving latest messgage
+// // retrieving latest messgage
 module.exports.retrieveInsertedNewMessage = (sender_id) => {
-    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, messages.created_at
+    const q = `SELECT users.id, first_name, last_name, url, recipient_id, sender_id, text, messages.created_at
                 FROM messages
                 JOIN users
                 ON users.id = sender_id
@@ -182,34 +182,36 @@ module.exports.retrieveInsertedNewMessage = (sender_id) => {
 };
 
 // getting the 5 most receient messages
-module.exports.latestComments = () => {
-    const q = `SELECT users.id, first_name, last_name, url, sender_id, comment_text, comments.created_at
+module.exports.latestComments = (id) => {
+    const q = `SELECT users.id, first_name, last_name, url, recipient_id, sender_id, comment_text, comments.created_at
                 FROM comments
                 JOIN users
-                ON users.id = comments.reciepient_id,
+                ON sender_id = users.id
+                WHERE recipient_id = $1
                 ORDER BY comments.created_at DESC
                 LIMIT 5`;
-    return db.query(q);
+    return db.query(q, [id]);
 };
 
 //DATABASE insert for posting comments
-module.exports.postingComments = (reciepient_id, sender_id, comment_text) => {
-    const q = ` INSERT INTO comments (reciepient_id, sender_id, comment_text)
+module.exports.postingComments = (recipient_id, sender_id, comment_text) => {
+    const q = ` INSERT INTO comments (recipient_id, sender_id, comment_text)
                 VALUES ($1, $2, $3)
-                RETURNING reciepient_id, sender_id, comment_text`;
-    const params = [reciepient_id, sender_id, comment_text];
+                RETURNING recipient_id, sender_id, comment_text`;
+    const params = [recipient_id, sender_id, comment_text];
     return db.query(q, params);
 };
 //DATABASE select for getting the latest comments
-module.exports.retrievePostedComment = (reciepient_id) => {
+module.exports.retrievePostedComment = (recipient_id, sender_id) => {
     const q = ` SELECT users.id, first_name, last_name, url, comments.comment_text, comments.created_at 
                 FROM comments
                 JOIN users
-                ON users.id = reciepient_id,
-                WHERE reciepient_id, = $1
+                ON users.id = sender_id
+                WHERE (sender_id = $1 AND recipient_id = $2)
+                OR (recipient_id = $1 AND sender_id = $2)
                 ORDER BY comments.id DESC
                 LIMIT 1`;
-    return db.query(q, [reciepient_id]);
+    return db.query(q, [recipient_id, sender_id]);
 };
 
 // deleting user from user table

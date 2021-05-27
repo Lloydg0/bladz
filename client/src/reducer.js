@@ -62,7 +62,6 @@ export default function reducer(state = {}, action) {
         const newChatMessages = state.chatMessages
             ? [...state.chatMessages, action.msg]
             : [action.msg];
-        console.log("state in chate Message", state);
         state = {
             ...state,
             chatMessages: newChatMessages,
@@ -77,9 +76,8 @@ export default function reducer(state = {}, action) {
     }
 
     if (action.type == "COMMENT") {
-        const newComments = state.coms
-            ? [...state.coms, action.com]
-            : [action.com];
+        let newComments = state.comments.slice();
+        newComments.push(action.com);
         state = {
             ...state,
             comments: newComments,

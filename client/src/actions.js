@@ -94,6 +94,7 @@ export function comments(coms) {
 
 // // getting the  most recent message
 export function comment(com) {
+    console.log("com", com);
     return {
         type: "COMMENT",
         com,

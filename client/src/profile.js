@@ -1,7 +1,7 @@
 //home is parent, profile is child, bioEditor is grandchild
 // import Profilepic from "./profilepic";
 import BioEditor from "./bio";
-import Wall from "./wall";
+// import Wall from "./wall";
 import Delete from "./deleteProfile";
 
 export default function Profile({
@@ -10,6 +10,7 @@ export default function Profile({
     imgURL,
     finishedBio,
     setBio,
+    // id,
 }) {
     console.log("props", first_name, last_name, imgURL, finishedBio, setBio);
     return (
@@ -28,7 +29,7 @@ export default function Profile({
                     <BioEditor setBio={setBio} />
                 </div>
             </div>
-            <Wall />
+            {/* <Wall id={id} /> */}
         </>
     );
 }
