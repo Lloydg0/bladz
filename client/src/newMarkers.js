@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 
 export default function NewMarkers() {
     const [markers, setMarkers] = useState([
@@ -8,6 +10,8 @@ export default function NewMarkers() {
             lng: 13.404954,
         },
     ]);
+
+    useEffect(() => {}, []);
 
     useMapEvents({
         click: (e) => {
