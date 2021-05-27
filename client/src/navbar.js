@@ -17,9 +17,14 @@ export default function Navbar() {
             <Link className="navbar-links" to="/">
                 Profile
             </Link>
-            <Link className="navbar-links" to="/logout">
+            <a
+                className="navbar-links"
+                onClick={() => {
+                    window.location.href = "/logout";
+                }}
+            >
                 Log Out
-            </Link>
+            </a>
         </>
     );
 }

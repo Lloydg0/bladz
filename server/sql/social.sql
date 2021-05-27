@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS reset_codes;
 DROP TABLE IF EXISTS friendships;
 DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -33,4 +34,12 @@ CREATE TABLE messages(
   sender_id     INT REFERENCES users(id) NOT NULL,
   text          VARCHAR(300),
   created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments( 
+    id              SERIAL PRIMARY KEY,
+    sender_id       INT REFERENCES users(id) NOT NULL,
+    recipient_id    INT REFERENCES users(id) NOT NULL,
+    comment_text    TEXT,
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

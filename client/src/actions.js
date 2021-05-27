@@ -84,3 +84,18 @@ export function chatMessage(msg) {
         msg,
     };
 }
+// // getting comments on users wall
+export function comments(coms) {
+    return {
+        type: "COMMENTS",
+        coms,
+    };
+}
+
+// // getting the  most recent message
+export function comment(com) {
+    return {
+        type: "COMMENT",
+        com,
+    };
+}

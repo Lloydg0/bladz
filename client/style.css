@@ -154,7 +154,9 @@ input {
 .login-button-navbar-register,
 .upload-button-navbar,
 .save-button,
-.add-friend-button {
+.add-friend-button,
+.post-button,
+.delete-button {
     display: inline-block;
     padding: 10px;
     border: none;
@@ -279,7 +281,7 @@ input {
 
 .main-profile-container {
     width: 100vw;
-    height: 500px;
+    height: 350px;
     margin-left: 20px;
 }
 .main-profile-image-container {
@@ -360,19 +362,32 @@ textarea {
     cursor: pointer;
 }
 
-/* ----------------------------------------------------------- */
+/* ------------------------- Chat message Stylings & comment stylings---------------------------------- */
 
-.full-chat-container {
+.full-chat-container,
+.full-comment-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.chat-message-container {
-    height: 300px;
+.chat-message-container,
+.comment-container {
+    height: 350px;
     width: 500px;
     overflow-y: auto;
+}
+.comment-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.comment-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .message-line {
@@ -384,21 +399,46 @@ textarea {
     flex-direction: row;
 }
 
+.comment-box {
+    height: 100px;
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    background-color: #25a79a;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+.comment-text {
+    color: white;
+}
+
+.chat-img {
+    border-radius: 3px;
+}
+
 .chat-img,
-.chat-text {
+.chat-text,
+.comment-text {
     height: 50px;
     width: 50px;
     display: inline;
     margin-right: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .chat-text {
     width: 150px;
 }
+
+/* ---------------------------------------Wall post stylings ----------------------------- */
+
+/* ----------------------------------- Map Stylings ------------------------------------ */
 
 .map-container {
     margin-top: 50px;

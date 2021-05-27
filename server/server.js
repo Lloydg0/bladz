@@ -436,6 +436,24 @@ app.get("/friends-wannabes", async (req, res) => {
     }
 });
 
+app.post("/delete-user", async (req, res) => {
+    const loggedInUser = req.session.user_Id;
+
+    Promise.all([
+        db.deleteUserFromUsers(loggedInUser),
+        db.deleteUserFromMessages(loggedInUser),
+        db.deleteUserFromComments(loggedInUser),
+    ])
+        .then(() => {
+            req.session = null;
+            res.redirect("/welcome");
+            // await db.deleteUser(loggedInUser);
+        })
+        .catch((err) => {
+            console.log("A error in deleting user", err);
+        });
+});
+
 //do not delete or comment out EVER
 app.get("*", function (req, res) {
     if (!req.session.user_Id) {
@@ -452,14 +470,22 @@ server.listen(process.env.PORT || 3001, function () {
 io.on("connection", function (socket) {
     const user_Id = socket.request.session.user_Id;
     console.log(`Socket with the ID ${socket.id} is now connected`);
+
     if (!socket.request.session.user_Id) {
         return socket.disconnect(true);
     }
     console.log("userID in sockets", user_Id);
     db.getting10MostRecentMessages()
         .then((results) => {
-            console.log("results", results);
+            // console.log("results", results);
             io.sockets.emit("chatMessages", results.rows.reverse());
+        })
+        .catch(console.log);
+
+    db.latestComments()
+        .then((results) => {
+            console.log("results in getting latest comments", results);
+            io.sockets.emit("comments", results.rows.reverse());
         })
         .catch(console.log);
 
@@ -471,11 +497,26 @@ io.on("connection", function (socket) {
                 console.log("Result in inserting the message", result.rows[0]);
                 db.retrieveInsertedNewMessage(user_Id, msg)
                     .then((result) => {
+                        io.sockets.emit("chatMessage", result.rows[0]);
+                    })
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    });
+
+    socket.on("comment", (com) => {
+        console.log("comment", com.query);
+
+        db.postingComments(user_Id, com)
+            .then((result) => {
+                console.log("Result in inserting the comment", result.rows[0]);
+                db.retrievePostedComment(user_Id, com)
+                    .then((result) => {
                         console.log(
-                            "Result in retrieving last message",
+                            "Result in retrieving last comment",
                             result.rows[0]
                         );
-                        io.sockets.emit("chatMessage", result.rows[0]);
+                        io.sockets.emit("comment", result.rows[0]);
                     })
                     .catch((err) => console.log(err));
             })

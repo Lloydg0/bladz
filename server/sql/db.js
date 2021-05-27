@@ -180,3 +180,54 @@ module.exports.retrieveInsertedNewMessage = (sender_id) => {
                 LIMIT 1`;
     return db.query(q, [sender_id]);
 };
+
+// getting the 5 most receient messages
+module.exports.latestComments = () => {
+    const q = `SELECT users.id, first_name, last_name, url, sender_id, comment_text, comments.created_at
+                FROM comments
+                JOIN users
+                ON users.id = comments.reciepient_id,
+                ORDER BY comments.created_at DESC
+                LIMIT 5`;
+    return db.query(q);
+};
+
+//DATABASE insert for posting comments
+module.exports.postingComments = (reciepient_id, sender_id, comment_text) => {
+    const q = ` INSERT INTO comments (reciepient_id, sender_id, comment_text)
+                VALUES ($1, $2, $3)
+                RETURNING reciepient_id, sender_id, comment_text`;
+    const params = [reciepient_id, sender_id, comment_text];
+    return db.query(q, params);
+};
+//DATABASE select for getting the latest comments
+module.exports.retrievePostedComment = (reciepient_id) => {
+    const q = ` SELECT users.id, first_name, last_name, url, comments.comment_text, comments.created_at 
+                FROM comments
+                JOIN users
+                ON users.id = reciepient_id,
+                WHERE reciepient_id, = $1
+                ORDER BY comments.id DESC
+                LIMIT 1`;
+    return db.query(q, [reciepient_id]);
+};
+
+// deleting user from user table
+module.exports.deleteUserFromUsers = (id) => {
+    const q = ` DELETE FROM users
+                WHERE ID = $1`;
+    return db.query(q, [id]);
+};
+// deleting user from Messages table
+module.exports.deleteUserFromMessages = (id) => {
+    const q = ` DELETE FROM messages
+                WHERE ID = $1`;
+    return db.query(q, [id]);
+};
+
+// deleting user from comments table
+module.exports.deleteUserFromComments = (id) => {
+    const q = ` DELETE FROM comments
+                WHERE ID = $1`;
+    return db.query(q, [id]);
+};

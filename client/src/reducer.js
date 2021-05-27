@@ -69,5 +69,22 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "COMMENTS") {
+        state = {
+            ...state,
+            comments: action.coms,
+        };
+    }
+
+    if (action.type == "COMMENT") {
+        const newComments = state.coms
+            ? [...state.coms, action.com]
+            : [action.com];
+        state = {
+            ...state,
+            comments: newComments,
+        };
+    }
+
     return state;
 }
