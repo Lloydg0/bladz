@@ -22,13 +22,18 @@ export default function NewMarkers() {
 
     return (
         <>
-            {markers.map((marker, index) => (
-                <Marker key={index} position={marker}>
-                    <Popup>
-                        <span>Point</span>
-                    </Popup>
-                </Marker>
-            ))}
+            {markers &&
+                markers.map((marker, index) => (
+                    <Marker key={index} position={marker}>
+                        <Popup>
+                            <span>
+                                {marker.lat}
+                                <br></br>
+                                {marker.lng}
+                            </span>
+                        </Popup>
+                    </Marker>
+                ))}
         </>
     );
 }

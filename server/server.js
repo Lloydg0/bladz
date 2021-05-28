@@ -467,8 +467,11 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 
+const onlineUsers = {};
 io.on("connection", function (socket) {
     const user_Id = socket.request.session.user_Id;
+    onlineUsers[socket.id] = user_Id;
+    console.log("online users", onlineUsers);
     console.log(`Socket with the ID ${socket.id} is now connected`);
 
     if (!socket.request.session.user_Id) {
@@ -526,6 +529,13 @@ io.on("connection", function (socket) {
                     .catch((err) => console.log(err));
             })
             .catch((err) => console.log(err));
+    });
+
+    socket.on("disconnect", () => {
+        console.log(
+            `User ${user_Id} just disconnected with socket ${socket.id}`
+        );
+        delete onlineUsers[socket.id];
     });
 });
 
