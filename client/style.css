@@ -1,0 +1,458 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Roboto Condensed", sans-serif;
+    background-color: #fcfcfc;
+}
+
+/*-------------------- Welcome page---------------- */
+
+/* welcome page containers */
+.main-page-main-container {
+    display: flex;
+}
+
+.main-page-left-container,
+.main-page-right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    width: 50vw;
+    height: 100vh;
+    display: inline-block;
+    flex-wrap: wrap;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.main-page-left-container {
+    width: 40vw;
+}
+.main-page-right-container {
+    position: relative;
+    width: 60vw;
+}
+
+.left-side-top {
+    height: 50vh;
+}
+.left-side-bottom {
+    height: 50vh;
+}
+
+/* welcome page text styligns */
+.main-text {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+
+.mainimg {
+    position: relative;
+    top: 5%;
+    image-rendering: auto;
+}
+
+/* Welcome page form stylins & containers */
+.form-container,
+.form-box,
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-container {
+    margin-top: 20px;
+    width: 100%;
+    height: 50vh;
+}
+
+.form-box,
+.form-content {
+    width: 500px;
+}
+
+.form-box {
+    margin-top: 20px;
+}
+
+.form-content {
+    width: 400px;
+}
+
+input {
+    display: block;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    background-color: #f5f6f7;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 5px;
+    height: 25px;
+    width: 200px;
+    z-index: 10;
+    outline: none;
+}
+
+.register-button {
+    display: inline-block;
+    padding: 10px 40px;
+    border: none;
+    margin: 14px 4px 4px 0;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    background-color: #00897b;
+}
+
+/* ------------------Navr Bar stylings --------------------- */
+
+/* Nav bar styling on /home route */
+.main-navbar {
+    width: 100%;
+    height: 10vh;
+    background-color: #fcfcfc;
+    display: inline-flex;
+}
+
+.navbar-image {
+    width: 50%;
+}
+
+.navbar-links-on-register {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+    flex-wrap: wrap;
+}
+.navbar-image {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.login-button-navbar,
+.register-button-navbar,
+.login-button-navbar-register,
+.upload-button-navbar,
+.save-button,
+.add-friend-button,
+.post-button,
+.delete-button {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    margin: 7px 10px 4px 0;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    background-color: #00897b;
+}
+
+.add-friend-button {
+    display: block;
+    margin-left: 55px;
+}
+
+.navbar-links-on-register {
+    width: 100%;
+}
+
+.navbar-links {
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* --------------------- Profile Picture --------------------------- */
+.profile-pic {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+    flex-wrap: wrap;
+}
+
+.profile-pic-container {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 10vh;
+    margin-top: 0px;
+}
+
+/* --------------------------- UPload modal stylings  --------------------------- */
+.upload-modal-housing {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.upload-modal-cover {
+    position: absolute;
+    top: 10%;
+    z-index: 10;
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcfcfc;
+}
+
+.upload-modal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 350px;
+    height: 350px;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
+
+.upload-form,
+.comments-form {
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+/* --------------------------- UPload button stylings ---------------------------  */
+
+.choose-file-button:focus,
+.upload-button:focus,
+.finished-button:focus {
+    outline: none;
+}
+
+.upload-button,
+.choose-file-button,
+.finished-button {
+    border: none;
+    width: 250px;
+    font-size: 20px;
+    height: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: center;
+    background: none;
+}
+#files {
+    visibility: hidden;
+    width: 0.1px;
+}
+
+/* ------------------USER Profile Information ------------------ */
+
+.main-profile-container {
+    width: 100vw;
+    height: 350px;
+    margin-left: 20px;
+}
+.main-profile-image-container {
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+    /* display: inline-block; */
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin-top: 30px;
+}
+
+.userprofile-information-container {
+    margin-top: 30px;
+    margin-left: 30px;
+    height: 300px;
+    width: 300px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* display: inline-block; */
+    vertical-align: top;
+    overflow-wrap: break-word;
+
+    text-align: left;
+}
+.save-button {
+    display: block;
+}
+textarea {
+    width: 300px;
+    height: 50px;
+}
+.main-profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.user-info-profile {
+    margin: 10px;
+}
+/* ------------------- user search --------------------- */
+.input-container {
+    width: 100%;
+}
+
+.user-searchbar,
+.usersearch-heading {
+    margin-left: 20px;
+}
+
+.user-search {
+    width: 100%;
+    display: block;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-user-img {
+    width: 150px;
+    height: 150px;
+    display: inline-flex;
+    border-radius: 10px;
+}
+
+.search-user-name {
+    display: inline-flex;
+    padding-left: 30px;
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* ------------------------- Chat message Stylings & comment stylings---------------------------------- */
+
+.full-chat-container,
+.full-comment-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-message-container,
+.comment-container {
+    height: 350px;
+    width: 500px;
+    overflow-y: auto;
+}
+.comment-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.comment-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-line {
+    height: 50px;
+    width: 500px;
+    border-radius: 10px;
+    background-color: rgb(231, 228, 228);
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-box {
+    height: 100px;
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    background-color: #25a79a;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+.comment-text {
+    color: white;
+}
+
+.chat-img {
+    border-radius: 3px;
+}
+
+.chat-img,
+.chat-text,
+.comment-text {
+    height: 50px;
+    width: 50px;
+    display: inline;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.chat-text {
+    width: 150px;
+}
+
+/* ---------------------------------------Wall post stylings ----------------------------- */
+
+/* ----------------------------------- Map Stylings ------------------------------------ */
+
+.map-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-title-container {
+    text-align: center;
+}
+
+.leaflet-container {
+    height: 500px;
+    width: 500px;
+}
