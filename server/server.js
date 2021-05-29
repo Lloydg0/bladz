@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+let { getToken, getTweets, filterTweets } = require("../client/twitter.js");
+const util = require("util");
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
@@ -44,14 +46,6 @@ app.use(compression());
 
 // retrieving static files
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
-
-// Cookie session
-// app.use(
-//     cookieSession({
-//         secret: `${SECRET_KEY}`,
-//         maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
-//     })
-// );
 
 // const cookieSession = require("cookie-session");
 const cookieSessionMiddleware = cookieSession({
@@ -121,6 +115,39 @@ app.get("/home", async (req, res) => {
     }
 });
 
+app.get("/news", (req, res) => {
+    console.log("made it to requesting news from twitter!");
+
+    getToken = util.promisify(getToken);
+    getTweets = util.promisify(getTweets);
+
+    getToken()
+        .then((token) => {
+            return Promise.all([
+                getTweets(token, "Cointelegraph"),
+                getTweets(token, "TheDailyHodl"),
+                getTweets(token, "CoinMarketCap"),
+            ]).then(([Cointelegraph, TheDailyHodl, CoinMarketCap]) => {
+                let combined = [
+                    ...Cointelegraph,
+                    ...TheDailyHodl,
+                    ...CoinMarketCap,
+                ];
+                let sortedChronologically = combined.sort((a, b) => {
+                    new Date(b.created_at) - new Date(a.created_at);
+                });
+                return sortedChronologically;
+            });
+        })
+        .then((tweets) => {
+            res.json(filterTweets(tweets));
+        })
+        .catch((err) => {
+            console.log("Error in Getting token", err);
+            res.sendStatus(500);
+        });
+});
+
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
 app.post("/registration", async (req, res) => {
@@ -169,21 +196,6 @@ app.post("/password/reset/email", async (req, res) => {
     console.log("A post request was made to the /password/reset/email route");
     const { email } = req.body;
     const code = cryptoRandomString({ length: 6 });
-
-    // try {
-    //     const gettingEmail = await db.retrivingUserEmail(email);
-    //     const { rows } = await db.addResetCode(code, gettingEmail);
-    //     const sendNewEmail = await sendEmail(rows[0].code);
-    //     res.json({
-    //         success: true,
-    //     });
-    //     return sendNewEmail;
-    // } catch (err) {
-    //     console.log("Error in retriving Email", err);
-    //     res.json({
-    //         success: false,
-    //     });
-    // }
 
     if (email) {
         db.retrivingUserEmail(email)

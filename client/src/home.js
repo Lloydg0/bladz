@@ -9,7 +9,8 @@ import FindPeople from "./findPeople";
 import NavBar from "./navbar";
 import FriendRequests from "./friendrequests";
 import Chat from "./chat";
-import Routes from "./routes";
+import News from "./news";
+import Chart from "./charts";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -27,12 +28,10 @@ export default class Home extends React.Component {
 
     componentDidUpdate() {
         localStorage.setItem("homeState", JSON.stringify(this.state));
-        console.log("localStorage", localStorage.getItem("homeState"));
     }
 
     async componentDidMount() {
         console.log("Home just mounted");
-        console.log("props in home mount", this.state);
         const { data } = await axios.get("/home").catch(console.log);
         this.setState({
             first_name: data.payload[0].first_name,
@@ -131,10 +130,11 @@ export default class Home extends React.Component {
                         />
                         <Route
                             path="/friends-wannabees"
-                            render={() => <FriendRequests />}
+                            component={FriendRequests}
                         />
                         <Route path="/chat" component={Chat} />
-                        <Route path="/routes" component={Routes} />
+                        <Route path="/marketnews" component={News} />
+                        <Route path="/charts" component={Chart} />
                     </div>
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (
@@ -148,13 +148,3 @@ export default class Home extends React.Component {
         );
     }
 }
-
-//  {
-/* <Profile
-                    setBio={(newBio) => this.setBio(newBio)}
-                    first_name={this.state.first_name}
-                    last_name={this.state.last_name}
-                    finishedBio={this.state.finishedBio}
-                    imgURL={this.state.imgURL}
-                /> */
-//  }

@@ -4,20 +4,10 @@ import { useSelector } from "react-redux";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state && state.chatMessages);
-    console.log("Chat Messages", chatMessages);
+    // console.log("Chat Messages", chatMessages);
     const elemRef = useRef();
 
     useEffect(() => {
-        // console.log("mounted");
-        // console.log("ElemRef.current.scrollTop", elemRef.current.scrollTop);
-        // console.log(
-        //     "ElemRef.current.clienteight",
-        //     elemRef.current.clientHeight
-        // );
-        // console.log(
-        //     "ElemRef.current.scrollheight",
-        //     elemRef.current.scrollHeight
-        // );
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
     }, [chatMessages]);
@@ -30,11 +20,11 @@ export default function Chat() {
         }
     };
 
-    console.log("elemRef", elemRef);
+    // console.log("elemRef", elemRef);
 
     return (
         <div className="full-chat-container">
-            <h1>Chat room</h1>
+            <h1>Discussion Board</h1>
             <div className="chat-message-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map(

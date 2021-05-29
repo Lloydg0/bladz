@@ -456,3 +456,9 @@ textarea {
     height: 500px;
     width: 500px;
 }
+
+.icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
