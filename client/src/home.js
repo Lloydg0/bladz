@@ -11,6 +11,7 @@ import FriendRequests from "./friendrequests";
 import Chat from "./chat";
 import News from "./news";
 import Chart from "./charts";
+import Coins from "./coins";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -135,6 +136,7 @@ export default class Home extends React.Component {
                         <Route path="/chat" component={Chat} />
                         <Route path="/marketnews" component={News} />
                         <Route path="/charts" component={Chart} />
+                        <Route path="/prices" component={Coins} />
                     </div>
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (

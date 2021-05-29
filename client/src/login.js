@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import { HashRouter, Link } from "react-router-dom";
+import NavbarRegister from "./navbarRegister";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div className="form-container">
+            <>
                 <div className="form-box">
                     <div className="form-content">
                         {this.state.error && (
@@ -49,7 +50,7 @@ export default class Login extends React.Component {
                         <input
                             name="email"
                             type="email"
-                            placeholder="first.last@email.com"
+                            placeholder="Email"
                             required
                             onChange={(e) => this.handleChangeOnForm(e)}
                         />
@@ -81,7 +82,8 @@ export default class Login extends React.Component {
                         </HashRouter>
                     </div>
                 </div>
-            </div>
+                <NavbarRegister />
+            </>
         );
     }
 }

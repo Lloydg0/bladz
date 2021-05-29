@@ -2,44 +2,53 @@ body {
     box-sizing: border-box;
     margin: 0;
     font-family: "Roboto Condensed", sans-serif;
-    background-color: #fcfcfc;
+    overflow: auto;
+    height: 100%;
+    background-image: linear-gradient(
+        135.8deg,
+        rgba(26, 26, 29, 1) 27.1%,
+        rgb(37, 12, 17) 77.5%
+    );
 }
-
 /*-------------------- Welcome page---------------- */
 
 /* welcome page containers */
-.main-page-main-container {
-    display: flex;
-}
-
-.main-page-left-container,
-.main-page-right-container {
+.main-page-main-container,
+.inner-form-container,
+.inner-form-container-right,
+.inner-form-container-left {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left: 0;
-    width: 50vw;
+}
+
+.main-page-main-container {
+    width: 100vw;
     height: 100vh;
-    display: inline-block;
-    flex-wrap: wrap;
-    overflow-y: hidden;
-    overflow-x: hidden;
 }
 
-.main-page-left-container {
-    width: 40vw;
-}
-.main-page-right-container {
-    position: relative;
-    width: 60vw;
+.inner-form-container {
+    width: 95vw;
+    height: 90vh;
+    background-color: white;
+    display: flex;
+    border-radius: 40px;
 }
 
-.left-side-top {
-    height: 50vh;
+.inner-form-container-right {
+    width: 50%;
+    height: 100%;
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(to right, #000000, #434343);
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
 }
-.left-side-bottom {
-    height: 50vh;
+
+.inner-form-container-left {
+    width: 50%;
+    overflow: hidden;
 }
 
 /* welcome page text styligns */
@@ -53,12 +62,14 @@ body {
     flex-wrap: wrap;
     font-family: "Montserrat", sans-serif;
     text-align: center;
+    color: white;
 }
 
 .mainimg {
     position: relative;
     top: 5%;
     image-rendering: auto;
+    overflow: hidden;
 }
 
 /* Welcome page form stylins & containers */
@@ -72,9 +83,11 @@ body {
 }
 
 .form-container {
-    margin-top: 20px;
     width: 100%;
-    height: 50vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .form-box,
@@ -93,27 +106,33 @@ body {
 input {
     display: block;
     border: none;
-    border: 1px solid rgba(0, 0, 0, 0.11);
-    background-color: #f5f6f7;
-    border-radius: 5px;
+    color: white;
+    background: transparent;
     text-align: center;
     margin-left: 0px;
-    margin-top: 5px;
+    margin-top: 10px;
     height: 25px;
     width: 200px;
     z-index: 10;
     outline: none;
+    background: transparent;
+}
+
+input::placeholder {
+    color: white;
 }
 
 .register-button {
     display: inline-block;
     padding: 10px 40px;
-    border: none;
-    margin: 14px 4px 4px 0;
+    margin: 40px 4px 4px 0;
     text-decoration: none;
-    color: #ffffff;
+    background-color: black;
     text-align: center;
-    background-color: #00897b;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    background: transparent;
 }
 
 /* ------------------Navr Bar stylings --------------------- */
@@ -122,7 +141,9 @@ input {
 .main-navbar {
     width: 100%;
     height: 10vh;
-    background-color: #fcfcfc;
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(to right, #000000, #434343);
     display: inline-flex;
 }
 
@@ -133,8 +154,10 @@ input {
 .navbar-links-on-register {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    top: 100px;
     margin-right: 20px;
     flex-wrap: wrap;
 }
@@ -160,11 +183,25 @@ input {
     display: inline-block;
     padding: 10px;
     border: none;
-    margin: 7px 10px 4px 0;
+    margin: 10px 5px 4px 0;
     text-decoration: none;
-    color: #ffffff;
+    color: white;
     text-align: center;
-    background-color: #00897b;
+    background-color: none;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.login-button-navbar-register {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.login-button-navbar-register:hover,
+.login-button-navbar:hover,
+.register-button:hover {
+    background-color: white;
+    color: black;
 }
 
 .add-friend-button {
@@ -457,7 +494,7 @@ textarea {
     width: 500px;
 }
 
-.icon {
+.exit-icon {
     height: 20px;
     width: 20px;
     margin-right: 5px;

@@ -6,6 +6,10 @@ export default function Navbar() {
                 <img className="icon" src="./discussion.png"></img>
                 charts
             </Link>
+            <Link className="navbar-links" to="/prices">
+                <img className="icon" src="./discussion.png"></img>
+                Prices
+            </Link>
             <Link className="navbar-links" to="/chat">
                 <img className="icon" src="./discussion.png"></img>
                 Discussion Board

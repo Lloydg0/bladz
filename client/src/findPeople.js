@@ -57,7 +57,7 @@ export default function FindPeople() {
 
     return (
         <>
-            <h1 className="usersearch-heading">Find more People</h1>
+            <h1 className="">Find more People</h1>
             <div className="input-container">
                 <input
                     className="user-searchbar"

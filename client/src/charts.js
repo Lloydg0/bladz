@@ -1,12 +1,13 @@
-// const Chart = r equire("./charts.html");
+// const Chart = require("./charts.html");
 
-// export default function Charts() {
-//     return (
-//         <>
-//             <Chart />
-//         </>
-//     );
-// }
+export default function Charts() {
+    return (
+        <>
+            <h1>Charts</h1>
+            {/* <Chart /> */}
+        </>
+    );
+}
 
 // import { useEffect } from "react";
 

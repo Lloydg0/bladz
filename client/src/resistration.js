@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import NavbarRegister from "./navbarRegister";
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -53,7 +54,7 @@ export default class Registration extends React.Component {
     }
     render() {
         return (
-            <div className="form-container">
+            <>
                 <div className="form-box">
                     <div className="form-content">
                         {this.state.error && (
@@ -74,7 +75,7 @@ export default class Registration extends React.Component {
                         <input
                             name="email"
                             type="email"
-                            placeholder="first.last@email.com"
+                            placeholder="Email"
                             required
                             onChange={(e) => this.handleChangeOnForm(e)}
                         />
@@ -98,7 +99,8 @@ export default class Registration extends React.Component {
                         </button>
                     </div>
                 </div>
-            </div>
+                <NavbarRegister />
+            </>
         );
     }
 }

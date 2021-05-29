@@ -23,6 +23,7 @@ const s3 = require("../s3");
 let s3url = require("../config.json");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
+const { getCoins } = require("../client/coinmarketcap.js");
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -147,6 +148,19 @@ app.get("/news", (req, res) => {
             res.sendStatus(500);
         });
 });
+
+// app.get("/coins", (req, res) => {
+//     console.log(
+//         "Made it into the server request for getting coins from CMC api"
+//     );
+//     getCoins()
+//         .then((response) => {
+//             console.log("result in getting the coins back", response);
+//         })
+//         .catch((err) => {
+//             console.log("error in getting coins", err);
+//         });
+// });
 
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
