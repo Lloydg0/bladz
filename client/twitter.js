@@ -48,7 +48,7 @@ module.exports.getTweets = (token, screen_name, callback) => {
     //creating GET options object that contains request data
     const options = {
         host: "api.twitter.com",
-        path: `/1.1/statuses/user_timeline.json?screen_name=${screen_name}&tweet_mode=extended`,
+        path: `/1.1/statuses/user_timeline.json?screen_name=${screen_name}&tweet_mode=extended_entities`,
         method: "GET",
         headers: {
             Authorization: "Bearer " + token,

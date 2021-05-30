@@ -13,24 +13,30 @@ export default function News() {
     }, []);
     return (
         <>
-            <h1>Market News</h1>
-            {news &&
-                news.slice(0, 10).map(({ href, text, source, time, name }) => {
-                    let date = new Date(time);
-                    let formattedDate = new Intl.DateTimeFormat("en-GB", {
-                        dateStyle: "long",
-                        timeStyle: "short",
-                    }).format(date);
-                    return (
-                        <div className="" key={time}>
-                            <img className="" src={href}></img>
-                            <span className="">{name}</span>
-                            <span className="">{text}</span>
-                            <span className="">{source}</span>
-                            <span className="">{formattedDate}</span>
-                        </div>
-                    );
-                })}
+            <h1 className="news-header">Market News</h1>
+            <div className="news-container">
+                {news &&
+                    news.slice(0, 20).map(({ href, text, time, name }) => {
+                        const newText = text.slice(0, -23);
+                        let date = new Date(time);
+                        let formattedDate = new Intl.DateTimeFormat("en-GB", {
+                            dateStyle: "long",
+                            timeStyle: "short",
+                        }).format(date);
+                        return (
+                            <div className="news-box" key={time}>
+                                <img className="news-img" src={href}></img>
+                                <div className="news-description">
+                                    {newText}
+                                </div>
+                                <a href={href} className="news-link">
+                                    {name}
+                                </a>
+                                <div className="news-date">{formattedDate}</div>
+                            </div>
+                        );
+                    })}
+            </div>
         </>
     );
 }
