@@ -29,9 +29,12 @@ export default function News() {
                                 <div className="news-description">
                                     {newText}
                                 </div>
-                                <a href={href} className="news-link">
+                                <button
+                                    href={href}
+                                    className="news-link save-button news-button"
+                                >
                                     {name}
-                                </a>
+                                </button>
                                 <div className="news-date">{formattedDate}</div>
                             </div>
                         );
