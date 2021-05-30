@@ -11,8 +11,8 @@ export default function deleteProfile() {
     };
 
     return (
-        <button className="delete-button" onClick={deleteProfile}>
-            Delete Profile
-        </button>
+        <a className="delete-button" onClick={deleteProfile}>
+            Delete Account
+        </a>
     );
 }

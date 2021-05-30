@@ -229,6 +229,13 @@ input::placeholder {
     border-radius: 5px;
 }
 
+.delete-button {
+    background-color: crimson;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
 .login-button-navbar-register {
     margin-right: 10px;
     margin-left: 10px;
