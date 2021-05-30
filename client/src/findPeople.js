@@ -57,33 +57,48 @@ export default function FindPeople() {
 
     return (
         <>
-            <h1 className="">Find more People</h1>
-            <div className="input-container">
-                <input
-                    className="user-searchbar"
-                    name="searchPeople"
-                    onChange={onPeopleChange}
-                />
-            </div>
-            <div>
-                <Route>
-                    {people.map((user) => {
-                        return (
-                            <div className="user-search" key={user.id}>
-                                <img
-                                    className="search-user-img"
-                                    src={user.url}
-                                />
-                                <Link
-                                    className="search-user-name"
-                                    to={`/user/${user.id}`}
-                                >
-                                    {user.first_name + " " + user.last_name}
-                                </Link>
-                            </div>
-                        );
-                    })}
-                </Route>
+            <div className="main-search-container">
+                <div className="search-container">
+                    <div className="friends-input-heading-container">
+                        <h1 className="find-friends-heading">Other Users</h1>
+                        <div className="input-container">
+                            <input
+                                className="user-searchbar"
+                                name="searchPeople"
+                                onChange={onPeopleChange}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="center-user-search">
+                            <Route>
+                                {people.map((user) => {
+                                    return (
+                                        <div
+                                            className="user-search"
+                                            key={user.id}
+                                        >
+                                            <div className="search-card">
+                                                <img
+                                                    className="search-user-img"
+                                                    src={user.url}
+                                                />
+                                                <Link
+                                                    className="search-user-name"
+                                                    to={`/user/${user.id}`}
+                                                >
+                                                    {user.first_name +
+                                                        " " +
+                                                        user.last_name}
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </Route>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

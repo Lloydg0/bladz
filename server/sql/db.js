@@ -87,7 +87,7 @@ module.exports.showingTopThreeUsers = () => {
     const q = ` SELECT id, first_name, last_name, url
                 FROM users
                 ORDER BY id DESC
-                LIMIT 3`;
+                LIMIT 6`;
     return db.query(q);
 };
 
@@ -97,7 +97,7 @@ module.exports.searchForOtherUsers = (input) => {
                 FROM users
                 WHERE (first_name || last_name) ILIKE $1
                 ORDER BY id DESC
-                LIMIT 3
+                LIMIT 9
                 `;
     return db.query(q, [input + "%"]);
 };
