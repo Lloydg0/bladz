@@ -4,7 +4,7 @@ body {
     font-family: "Roboto Condensed", sans-serif;
     overflow: hidden;
     height: 100%;
-    background-color: #edede9;
+    background-color: #25282d;
     /* background-image: linear-gradient(
         135.8deg,
         rgba(26, 26, 29, 1) 27.1%,
@@ -34,7 +34,7 @@ body {
 .inner-form-container {
     width: 95vw;
     height: 90vh;
-    background-color: white;
+    background-color: silver;
     display: flex;
     border-radius: 40px;
 }
@@ -65,7 +65,7 @@ body {
     flex-wrap: wrap;
     font-family: "Montserrat", sans-serif;
     text-align: center;
-    color: white;
+    color: silver;
 }
 
 .mainimg {
@@ -109,7 +109,7 @@ body {
 input {
     display: block;
     border: none;
-    color: white;
+    color: silver;
     background: transparent;
     text-align: center;
     margin-left: 0px;
@@ -122,7 +122,7 @@ input {
 }
 
 input::placeholder {
-    color: white;
+    color: silver;
 }
 
 .register-button {
@@ -130,11 +130,11 @@ input::placeholder {
     padding: 10px 40px;
     margin: 40px 4px 4px 0;
     text-decoration: none;
-    background-color: black;
+    background-color: #181a1d;
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid silver;
     border-radius: 5px;
-    color: white;
+    color: silver;
     background: transparent;
 }
 
@@ -172,7 +172,7 @@ input::placeholder {
 .sidenav-container {
     height: 100%;
     width: 20vw;
-    background-color: #423e3b;
+    background-color: #181a1d;
     position: absolute;
     top: 0;
     left: 0;
@@ -222,10 +222,10 @@ input::placeholder {
     border: none;
     margin: 10px 5px 4px 0;
     text-decoration: none;
-    color: white;
+    color: silver;
     text-align: center;
     background-color: none;
-    border: 1px solid white;
+    border: 1px solid silver;
     border-radius: 5px;
 }
 
@@ -237,8 +237,8 @@ input::placeholder {
 .login-button-navbar-register:hover,
 .login-button-navbar:hover,
 .register-button:hover {
-    background-color: white;
-    color: black;
+    background-color: silver;
+    color: #181a1d;
 }
 
 .navbar-links-on-register {
@@ -250,7 +250,7 @@ input::placeholder {
     display: inline-block;
     margin-right: 15px;
     text-decoration: none;
-    color: white;
+    color: silver;
     cursor: pointer;
     margin-bottom: 40px;
     margin-left: 50px;
@@ -286,7 +286,7 @@ input::placeholder {
 
 .navbar-name {
     display: block;
-    color: white;
+    color: silver;
     width: 100%;
     height: 20vh;
     height: 100px;
@@ -310,7 +310,7 @@ input::placeholder {
 }
 
 .upload-button {
-    color: white;
+    color: silver;
 }
 
 .upload-modal-housing {
@@ -322,7 +322,7 @@ input::placeholder {
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: #423e3b;
+    background-color: #181a1d;
 }
 
 .upload-modal-cover {
@@ -343,7 +343,7 @@ input::placeholder {
     height: 50%;
     padding: 20px 30px;
     border-radius: 5px;
-    color: white;
+    color: silver;
 }
 
 .upload-form,
@@ -356,7 +356,7 @@ input::placeholder {
     align-content: center;
     flex-wrap: wrap;
     height: auto;
-    color: white;
+    color: silver;
 }
 
 /* --------------------------- UPload button stylings ---------------------------  */
@@ -427,15 +427,16 @@ input::placeholder {
 
 .find-friends-heading {
     text-align: center;
+    color: silver;
 }
 
 .user-searchbar {
     background-color: transparent;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid silver;
     margin-bottom: 10px;
 
     display: block;
-    color: black;
+    color: silver;
 }
 
 .user-search {
@@ -448,8 +449,6 @@ input::placeholder {
 .search-card {
     display: flex;
     flex-direction: column;
-
-    filter: drop-shadow(0 0 0.25rem #423e3b);
     margin: 10px;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
@@ -471,7 +470,7 @@ input::placeholder {
     text-decoration: none;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: black;
+    color: silver;
     cursor: pointer;
 }
 
@@ -495,7 +494,7 @@ input::placeholder {
 .comment-container {
     margin-top: 10px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #181a1d;
 }
 
 .comment-inner-container {
@@ -527,7 +526,7 @@ input::placeholder {
 }
 
 .comment-text {
-    color: black;
+    color: #181a1d;
 }
 
 .chat-img {
@@ -557,6 +556,7 @@ input::placeholder {
     height: 50px;
     width: 75px;
     padding-right: 10px;
+    color: silver;
 }
 
 .comment-text {
@@ -589,14 +589,14 @@ input::placeholder {
     width: 400px;
     height: 500px;
     position: relative;
-    background-color: #dadad2;
+    background-color: silver;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: center;
     border-radius: 50px;
     padding-top: 30px;
-    filter: drop-shadow(0 0 0.25rem #423e3b);
+    filter: drop-shadow(0 0 0.25rem silver);
     z-index: 0;
 }
 
@@ -612,7 +612,7 @@ input::placeholder {
 
 .profile-card-name,
 .user-profile-card-name {
-    color: black;
+    color: #181a1d;
     font-size: 24px;
     text-align: center;
 }
@@ -626,7 +626,7 @@ input::placeholder {
 
 .profile-card-description,
 .user-profile-card-description {
-    color: black;
+    color: #181a1d;
     font-size: 14px;
     text-align: center;
     width: 200px;
@@ -642,8 +642,8 @@ input::placeholder {
 .post-button,
 .add-friend-button {
     display: block;
-    background-color: #423e3b;
-    color: white;
+    background-color: #181a1d;
+    color: silver;
     height: 30px;
     width: 100px;
     text-decoration: none;
@@ -671,7 +671,7 @@ textarea {
     height: 50px;
     outline: none;
     border: none;
-    background-color: #dadad2;
+    background-color: silver;
     margin: auto;
     text-align: center;
 }
@@ -681,6 +681,7 @@ textarea {
     margin: auto;
     text-align: center;
     margin-bottom: 20px;
+    color: silver;
 }
 
 .news-container {
@@ -690,13 +691,14 @@ textarea {
     grid-auto-rows: 1fr;
     grid-auto-flow: row;
     overflow: auto;
+    filter: drop-shadow(0 0 0.25rem silver);
 }
 
 .news-box {
     display: block;
     width: 200px;
     height: 450px;
-    background-color: #423e3b;
+    background-color: #181a1d;
     margin: 50px;
     border-radius: 10px;
 }
@@ -708,7 +710,7 @@ textarea {
     margin: auto;
     text-align: center;
     margin: 10px;
-    color: white;
+    color: silver;
 }
 
 .news-img {
