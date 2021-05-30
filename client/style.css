@@ -34,7 +34,7 @@ body {
 .inner-form-container {
     width: 95vw;
     height: 90vh;
-    background-color: silver;
+    background-color: white;
     display: flex;
     border-radius: 40px;
 }
@@ -52,6 +52,7 @@ body {
 .inner-form-container-left {
     width: 50%;
     overflow: hidden;
+    background-color: white;
 }
 
 /* welcome page text styligns */
@@ -156,6 +157,7 @@ input::placeholder {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     /* margin: 20px; */
 }
 
@@ -267,8 +269,8 @@ input::placeholder {
 
 /* --------------------- Profile Picture --------------------------- */
 .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     display: flex;
     flex-direction: row;
@@ -308,7 +310,7 @@ input::placeholder {
     position: absolute;
     z-index: 20;
     height: 100%;
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -492,7 +494,15 @@ input::placeholder {
     margin-left: 20px;
 }
 
-.chat-message-container,
+.chat-message-container {
+    border: 1px solid silver;
+    background-color: silver;
+    border-radius: 40px;
+    height: 700px;
+    width: 700px;
+    overflow: auto;
+}
+
 .comment-container {
     height: 350px;
     width: 500px;
@@ -512,12 +522,47 @@ input::placeholder {
 }
 
 .message-line {
-    height: 50px;
-    width: 500px;
-    border-radius: 10px;
-    background-color: rgb(231, 228, 228);
+    margin-top: 20px;
+    margin-left: 10px;
+    height: auto;
+    max-width: 500px;
     display: flex;
     flex-direction: row;
+}
+
+.chat-text {
+    width: fit-content;
+    min-width: 500px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-radius: 16px;
+    background-image: linear-gradient(
+        to right,
+        #232526 0%,
+        #414345 51%,
+        #232526 100%
+    );
+    color: silver;
+    display: block;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+}
+
+.chat-name {
+    color: black;
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 75px;
+}
+.chat-img {
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.chat-heading {
+    color: silver;
 }
 
 .comment-box {
@@ -536,12 +581,7 @@ input::placeholder {
     color: #181a1d;
 }
 
-.chat-img {
-    border-radius: 50%;
-}
-
 .chat-img,
-.chat-text,
 .comment-img,
 .comment-text,
 .comment-name {
@@ -572,10 +612,6 @@ input::placeholder {
     padding-left: 5px;
     border-radius: 10px;
     background-color: silver;
-}
-
-.chat-text {
-    width: 150px;
 }
 
 /* Profile Cards on Profile Page and BIO  & other Profile */
@@ -683,6 +719,7 @@ textarea {
     background-color: silver;
     margin: auto;
     text-align: center;
+    margin-top: 10px;
 }
 
 /* News stylings */
@@ -728,13 +765,17 @@ textarea {
 
 .news-img {
     height: 150px;
-    width: 200px;
+    width: 150px;
     display: block;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.news-a-tag {
+    text-decoration: none;
 }
 
 /* animation on all buttons */
@@ -755,4 +796,95 @@ button:hover {
     background-position: right center;
     color: #fff;
     text-decoration: none;
+}
+
+/* friend request page */
+.request-heading-friends,
+.request-heading-requests {
+    color: silver;
+}
+
+.request-heading-friends {
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+.request-heading-requests {
+    position: absolute;
+    top: 45%;
+    left: 20px;
+}
+
+.main-friends-container {
+    max-width: 800px;
+    height: 300px;
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+.main-request-container {
+    margin-top: 50px;
+    height: 300px;
+    max-width: 800px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.inner-request-scroll {
+    overflow: auto;
+    width: 800px;
+    display: inline;
+}
+
+.friend-request-container {
+    background-color: silver;
+    filter: drop-shadow(0 0 0.25rem silver);
+    width: 150px;
+    height: 250px;
+    border-radius: 40px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    margin: 30px 30px;
+}
+.friend-request-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.friend-request-name,
+.requset-button {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-decoration: none;
+}
+.friend-request-name {
+    color: black;
+    margin-bottom: 5px;
+}
+
+.request-button {
+    color: silver;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 100px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    margin: 5px;
+    padding-top: 6px;
 }

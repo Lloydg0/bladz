@@ -69,6 +69,7 @@ export default class BioEditor extends React.Component {
                 {this.state.showTextArea && (
                     <>
                         <textarea
+                            placeholder="Update Bio"
                             onChange={(e) => this.handleBioChange(e)}
                             defaultValue={this.state.draftBio}
                         ></textarea>

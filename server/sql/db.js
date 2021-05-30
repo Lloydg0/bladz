@@ -165,7 +165,7 @@ module.exports.getting10MostRecentMessages = () => {
 module.exports.insertNewMessage = (sender_id, text) => {
     const q = `INSERT INTO messages (sender_id, text)
                 VALUES ($1, $2)
-                RETURNING sender_id, text`;
+                RETURNING ID, sender_id, text`;
     return db.query(q, [sender_id, text]);
 };
 

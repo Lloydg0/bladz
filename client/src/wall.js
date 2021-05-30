@@ -67,7 +67,7 @@ export default function Wall({ id }) {
                 </div>
 
                 <textarea
-                    placeholder="Post on their your wall!"
+                    placeholder="Post on wall!"
                     onKeyDown={handleKeyDown}
                 ></textarea>
                 <button className="post-button">Post</button>

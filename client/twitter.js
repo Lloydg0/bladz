@@ -48,7 +48,7 @@ module.exports.getTweets = (token, screen_name, callback) => {
     //creating GET options object that contains request data
     const options = {
         host: "api.twitter.com",
-        path: `/1.1/statuses/user_timeline.json?screen_name=${screen_name}&tweet_mode=extended_entities`,
+        path: `/1.1/statuses/user_timeline.json?screen_name=${screen_name}&tweet_mode=extended`,
         method: "GET",
         headers: {
             Authorization: "Bearer " + token,
@@ -91,7 +91,6 @@ module.exports.filterTweets = (callback) => {
             let newObj = {
                 href: obj[i].entities.urls[0].url,
                 text: obj[i].full_text,
-                source: obj[i].source,
                 name: obj[i].user.name,
                 time: obj[i].created_at,
                 // url: obj[i].,

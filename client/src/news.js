@@ -8,6 +8,7 @@ export default function News() {
         console.log("useEffect for news just ran");
         (async () => {
             const { data } = await axios.get("/news").catch(console.log);
+
             setNews(data);
         })();
     }, []);
@@ -25,16 +26,18 @@ export default function News() {
                         }).format(date);
                         return (
                             <div className="news-box" key={time}>
-                                <img className="news-img" src={href}></img>
+                                <img
+                                    src="searchnews.png"
+                                    className="news-img"
+                                ></img>
                                 <div className="news-description">
                                     {newText}
                                 </div>
-                                <button
-                                    href={href}
-                                    className="news-link save-button news-button"
-                                >
-                                    {name}
-                                </button>
+                                <a className="news-a-tag" href={href}>
+                                    <button className="news-link save-button news-button">
+                                        {name}
+                                    </button>
+                                </a>
                                 <div className="news-date">{formattedDate}</div>
                             </div>
                         );
