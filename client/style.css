@@ -2,14 +2,17 @@ body {
     box-sizing: border-box;
     margin: 0;
     font-family: "Roboto Condensed", sans-serif;
-    overflow: auto;
+    overflow: hidden;
     height: 100%;
-    background-image: linear-gradient(
+    background-color: #edede9;
+    /* background-image: linear-gradient(
         135.8deg,
         rgba(26, 26, 29, 1) 27.1%,
         rgb(37, 12, 17) 77.5%
-    );
+    ); */
+    /* background-color: rgba(32, 33, 36, 1); */
 }
+
 /*-------------------- Welcome page---------------- */
 
 /* welcome page containers */
@@ -135,16 +138,53 @@ input::placeholder {
     background: transparent;
 }
 
+/* Main page seperations */
+.navbar-divider {
+    position: absolute;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    display: inline-flex;
+}
+
+.main-profile {
+    position: absolute;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
 /* ------------------Navr Bar stylings --------------------- */
 
 /* Nav bar styling on /home route */
-.main-navbar {
-    width: 100%;
-    height: 10vh;
-    background: #000000;
-    background: -webkit-linear-gradient(to right, #000000, #434343);
-    background: linear-gradient(to right, #000000, #434343);
-    display: inline-flex;
+.icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* navbar */
+.sidenav-container {
+    height: 100%;
+    width: 20vw;
+    background-color: #423e3b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.sidenav-positioning {
+    height: 100vh;
+    width: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .navbar-image {
@@ -176,7 +216,6 @@ input::placeholder {
 .register-button-navbar,
 .login-button-navbar-register,
 .upload-button-navbar,
-.save-button,
 .add-friend-button,
 .post-button,
 .delete-button {
@@ -214,72 +253,109 @@ input::placeholder {
 }
 
 .navbar-links {
+    width: 200px;
+    display: inline-block;
     margin-right: 15px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
+    margin-bottom: 40px;
+    margin-left: 50px;
+    display: flex;
+    overflow: hidden;
 }
 
 /* --------------------- Profile Picture --------------------------- */
 .profile-pic {
-    width: 50px;
-    height: 50px;
-
-    border-radius: 10px;
-    display: inline-flex;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-right: 20px;
     flex-wrap: wrap;
+    margin-top: 45px;
 }
 
 .profile-pic-container {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%;
     height: 10vh;
-    margin-top: 0px;
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+}
+
+.navbar-name {
+    display: block;
+    color: white;
+    width: 100%;
+    height: 20vh;
+    height: 100px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 /* --------------------------- UPload modal stylings  --------------------------- */
-.upload-modal-housing {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.upload-modal-cover {
+.upload-container {
     position: absolute;
-    top: 10%;
-    z-index: 10;
-    width: 100vw;
-    height: 90vh;
+    z-index: 20;
+    height: 100%;
+    width: 95%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #fcfcfc;
+    backdrop-filter: blur(5px) grayscale(1);
+}
+
+.upload-button {
+    color: white;
+}
+
+.upload-modal-housing {
+    height: 40%;
+    width: 40%;
+    border-radius: 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #423e3b;
+}
+
+.upload-modal-cover {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .upload-modal-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
-    width: 350px;
-    height: 350px;
+    align-items: center;
+    width: 50%;
+    height: 50%;
     padding: 20px 30px;
     border-radius: 5px;
+    color: white;
 }
 
 .upload-form,
 .comments-form {
-    width: 100vw;
+    width: 100%;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -287,6 +363,7 @@ input::placeholder {
     align-content: center;
     flex-wrap: wrap;
     height: auto;
+    color: white;
 }
 
 /* --------------------------- UPload button stylings ---------------------------  */
@@ -318,19 +395,21 @@ input::placeholder {
 
 .main-profile-container {
     width: 100vw;
-    height: 350px;
-    margin-left: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
-.main-profile-image-container {
-    width: 200px;
-    height: 300px;
+.profile-card-container {
+    width: 500px;
+    height: 500px;
     overflow: hidden;
-    /* display: inline-block; */
-    display: inline-flex;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-content: center;
-    margin-top: 30px;
+    border: 1px solid black;
 }
 
 .userprofile-information-container {
@@ -348,17 +427,11 @@ input::placeholder {
 
     text-align: left;
 }
-.save-button {
-    display: block;
-}
-textarea {
-    width: 300px;
-    height: 50px;
-}
+
 .main-profile-photo {
     width: 200px;
     height: 200px;
-    border-radius: 10px;
+    border-radius: 50%;
 }
 
 .user-info-profile {
@@ -473,29 +546,77 @@ textarea {
     width: 150px;
 }
 
-/* ---------------------------------------Wall post stylings ----------------------------- */
+/* Profile Card on Profile Page and BIO  */
 
-/* ----------------------------------- Map Stylings ------------------------------------ */
-
-.map-container {
-    margin-top: 50px;
+.profile-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 40px rgba(#000000, 0.2);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
+.profile {
+    width: 400px;
+    height: 500px;
+    position: relative;
+    background-color: #dadad2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    border-radius: 50px;
+    padding-top: 30px;
+    filter: drop-shadow(0 0 0.25rem #423e3b);
+    z-index: 0;
+}
 
-.map-title-container {
+.profile-card-img {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.profile-card-name {
+    color: black;
+    font-size: 24px;
     text-align: center;
 }
 
-.leaflet-container {
-    height: 500px;
-    width: 500px;
+.profile-card-description-container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
 }
 
-.exit-icon {
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
+.profile-card-description {
+    color: black;
+    font-size: 14px;
+    text-align: center;
+    width: 200px;
+}
+
+.save-button {
+    display: block;
+    background-color: #423e3b;
+    color: white;
+    height: 30px;
+    width: 100px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    margin: 5px 0px 5px 38%;
+}
+textarea {
+    width: 300px;
+    height: 50px;
+    outline: none;
+    border: none;
+    background-color: #dadad2;
+    margin-left: 11%;
 }

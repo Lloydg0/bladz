@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-import Profilepic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -78,74 +77,74 @@ export default class Home extends React.Component {
         return (
             <>
                 <BrowserRouter>
-                    <div className="main-navbar">
-                        <img className="navbar-image" src="/logo.png" />
-                        <div className="profile-pic-container">
-                            <NavBar />
-                            <Profilepic
-                                toggleUploader={() => this.toggleUploader()}
-                                first_name={this.state.first_name}
-                                last_name={this.state.last_name}
-                                imgURL={this.state.imgURL}
-                            />
-                        </div>
+                    <div className="navbar-divider">
+                        <NavBar
+                            first_name={this.state.first_name}
+                            last_name={this.state.last_name}
+                            toggleUploader={() => this.toggleUploader()}
+                            imgURL={this.state.imgURL}
+                        />
                     </div>
-
-                    <div>
-                        <Route
-                            exact
-                            path="/"
-                            render={(props) => (
-                                <Profile
-                                    setBio={(newBio) => this.setBio(newBio)}
-                                    first_name={this.state.first_name}
-                                    last_name={this.state.last_name}
-                                    finishedBio={this.state.finishedBio}
-                                    imgURL={
-                                        this.state.imgURL || "/defaultIcon.jpeg"
-                                    }
-                                    key={props.match.url}
-                                    id={this.state.id}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/user/:id"
-                            render={(props) => (
-                                <OtherProfile
-                                    key={props.match.url}
-                                    match={props.match}
-                                    history={props.history}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/find/user/"
-                            render={(props) => (
-                                <FindPeople
-                                    key={props.match.url}
-                                    match={props.match}
-                                    history={props.history}
-                                />
-                            )}
-                        />
-                        <Route
-                            path="/friends-wannabees"
-                            component={FriendRequests}
-                        />
-                        <Route path="/chat" component={Chat} />
-                        <Route path="/marketnews" component={News} />
-                        <Route path="/charts" component={Chart} />
-                        <Route path="/prices" component={Coins} />
+                    <div className="main-profile">
+                        <div>
+                            <Route
+                                exact
+                                path="/"
+                                render={(props) => (
+                                    <Profile
+                                        setBio={(newBio) => this.setBio(newBio)}
+                                        first_name={this.state.first_name}
+                                        last_name={this.state.last_name}
+                                        finishedBio={this.state.finishedBio}
+                                        imgURL={
+                                            this.state.imgURL ||
+                                            "/defaultIcon.jpeg"
+                                        }
+                                        key={props.match.url}
+                                        id={this.state.id}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/user/:id"
+                                render={(props) => (
+                                    <OtherProfile
+                                        key={props.match.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/find/user/"
+                                render={(props) => (
+                                    <FindPeople
+                                        key={props.match.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/friends-wannabees"
+                                component={FriendRequests}
+                            />
+                            <Route path="/chat" component={Chat} />
+                            <Route path="/marketnews" component={News} />
+                            <Route path="/charts" component={Chart} />
+                            <Route path="/prices" component={Coins} />
+                        </div>
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                toggleUploader={() => this.toggleUploader()}
+                                submitImage={(e) => this.submitImage(e)}
+                                handleChangeOnForm={(e) =>
+                                    this.handleChangeOnForm(e)
+                                }
+                            />
+                        )}
                     </div>
                 </BrowserRouter>
-                {this.state.uploaderIsVisible && (
-                    <Uploader
-                        toggleUploader={() => this.toggleUploader()}
-                        submitImage={(e) => this.submitImage(e)}
-                        handleChangeOnForm={(e) => this.handleChangeOnForm(e)}
-                    />
-                )}
             </>
         );
     }
