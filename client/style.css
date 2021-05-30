@@ -216,8 +216,6 @@ input::placeholder {
 .register-button-navbar,
 .login-button-navbar-register,
 .upload-button-navbar,
-.add-friend-button,
-.post-button,
 .delete-button {
     display: inline-block;
     padding: 10px;
@@ -241,11 +239,6 @@ input::placeholder {
 .register-button:hover {
     background-color: white;
     color: black;
-}
-
-.add-friend-button {
-    display: block;
-    margin-left: 55px;
 }
 
 .navbar-links-on-register {
@@ -391,52 +384,6 @@ input::placeholder {
     width: 0.1px;
 }
 
-/* ------------------USER Profile Information ------------------ */
-
-.main-profile-container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.profile-card-container {
-    width: 500px;
-    height: 500px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    border: 1px solid black;
-}
-
-.userprofile-information-container {
-    margin-top: 30px;
-    margin-left: 30px;
-    height: 300px;
-    width: 300px;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    /* display: inline-block; */
-    vertical-align: top;
-    overflow-wrap: break-word;
-
-    text-align: left;
-}
-
-.main-profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-.user-info-profile {
-    margin: 10px;
-}
 /* ------------------- user search --------------------- */
 .main-search-container {
     height: 700px;
@@ -536,6 +483,7 @@ input::placeholder {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
 }
 
 .chat-message-container,
@@ -547,6 +495,7 @@ input::placeholder {
 .comment-container {
     margin-top: 10px;
     text-align: center;
+    border: 1px solid black;
 }
 
 .comment-inner-container {
@@ -566,45 +515,66 @@ input::placeholder {
 }
 
 .comment-box {
-    height: 100px;
+    height: 80px;
     width: 350px;
     display: flex;
     flex-direction: row;
-    background-color: #25a79a;
-    justify-content: center;
+
+    justify-content: flex-start;
     align-items: center;
     margin: 2px;
     border-radius: 10px;
 }
 
 .comment-text {
-    color: white;
+    color: black;
 }
 
 .chat-img {
-    border-radius: 3px;
+    border-radius: 50%;
 }
 
 .chat-img,
 .chat-text,
-.comment-text {
+.comment-img,
+.comment-text,
+.comment-name {
     height: 50px;
     width: 50px;
     display: inline;
-    margin-right: 10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 }
 
+.comment-img {
+    margin-right: 5px;
+    border-radius: 50%;
+}
+.comment-name {
+    margin-left: 10px;
+    height: 50px;
+    width: 75px;
+    padding-right: 10px;
+}
+
+.comment-text {
+    height: 50px;
+    width: 200px;
+    padding-left: 5px;
+    border-radius: 10px;
+    background-color: silver;
+}
+
 .chat-text {
     width: 150px;
 }
 
-/* Profile Card on Profile Page and BIO  */
+/* Profile Cards on Profile Page and BIO  & other Profile */
 
-.profile-card {
+.profile-card,
+.user-profile-card {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -614,7 +584,8 @@ input::placeholder {
     justify-content: center;
     align-items: center;
 }
-.profile {
+.profile,
+.user-profile {
     width: 400px;
     height: 500px;
     position: relative;
@@ -629,7 +600,8 @@ input::placeholder {
     z-index: 0;
 }
 
-.profile-card-img {
+.profile-card-img,
+.user-profile-card-img {
     width: 200px;
     height: 200px;
     display: flex;
@@ -638,26 +610,37 @@ input::placeholder {
     border-radius: 50%;
 }
 
-.profile-card-name {
+.profile-card-name,
+.user-profile-card-name {
     color: black;
     font-size: 24px;
     text-align: center;
 }
 
-.profile-card-description-container {
+.profile-card-description-container,
+.user-profile-card-description-container {
     width: 400px;
     display: flex;
     justify-content: center;
 }
 
-.profile-card-description {
+.profile-card-description,
+.user-profile-card-description {
     color: black;
     font-size: 14px;
     text-align: center;
     width: 200px;
 }
 
-.save-button {
+.user-profile-card-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.save-button,
+.post-button,
+.add-friend-button {
     display: block;
     background-color: #423e3b;
     color: white;
@@ -668,13 +651,29 @@ input::placeholder {
     border: none;
     margin: 5px 0px 5px 38%;
 }
+.post-button {
+    margin: auto;
+    margin-top: 10px;
+}
+
+.add-friend-button {
+    margin-top: 50px;
+    padding: 20px;
+    min-width: 100px;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 textarea {
     width: 300px;
     height: 50px;
     outline: none;
     border: none;
     background-color: #dadad2;
-    margin-left: 11%;
+    margin: auto;
+    text-align: center;
 }
 
 /* Find Stylings */

@@ -50,10 +50,10 @@ export default function Wall({ id }) {
                                             key={created_at}
                                         >
                                             <img
-                                                className="chat-img"
+                                                className="comment-img"
                                                 src={url}
                                             ></img>
-                                            <span className="comment-text">
+                                            <span className="comment-name">
                                                 {first_name} {last_name}
                                             </span>
                                             <span className="comment-text">
