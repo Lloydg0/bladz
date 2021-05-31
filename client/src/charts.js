@@ -44,7 +44,7 @@ export default function Charts() {
                 </div>
             </div>
             <TechAnalysis />
-            {/* <MarketOverView /> */}
+            <MarketOverView />
         </>
     );
 }

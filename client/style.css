@@ -5,12 +5,6 @@ body {
     overflow: hidden;
     height: 100%;
     background-color: #25282d;
-    /* background-image: linear-gradient(
-        135.8deg,
-        rgba(26, 26, 29, 1) 27.1%,
-        rgb(37, 12, 17) 77.5%
-    ); */
-    /* background-color: rgba(32, 33, 36, 1); */
 }
 
 /*-------------------- Welcome page---------------- */
@@ -157,8 +151,6 @@ input::placeholder {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    /* margin: 20px; */
 }
 
 /* ------------------Navr Bar stylings --------------------- */
@@ -893,25 +885,19 @@ button:hover {
 
 /* Dashboard styligns -charts and graphs */
 
-/* .all-widgets-container {
-    height: 100%;
-    width: 100%;
-    background-color: yellow;
-} */
-
 .graph-container {
     width: 800px;
-    height: 600px;
+    height: 400px;
     position: absolute;
-    top: 17%;
-    left: 3%;
+    top: 7%;
+    left: 4%;
 }
 #widgetContainer {
-    position: relative;
-    left: 85%;
-    top: -10%;
-    height: 500px;
-    width: 500px;
+    position: absolute;
+    left: 20%;
+    top: 53%;
+    height: 400px;
+    width: 300px;
 }
 
 #tickerContainer {
@@ -919,6 +905,13 @@ button:hover {
     top: 0;
     left: 0;
     width: 100%;
+}
+#overviewContainer {
+    height: 700px;
+    width: 500px;
+    position: absolute;
+    left: 62%;
+    top: 15%;
 }
 
 /* coin page */
