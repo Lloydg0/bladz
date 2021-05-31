@@ -23,9 +23,9 @@ export default function Navbar({
                 <div className="sidenav-positioning">
                     <Link className="navbar-links" to="/charts">
                         <img className="icon" src="./chart.png"></img>
-                        Charts
+                        Dashboard
                     </Link>
-                    <Link className="navbar-links" to="/prices">
+                    <Link className="navbar-links" to="/coins">
                         <img className="icon" src="./price.png"></img>
                         Prices
                     </Link>

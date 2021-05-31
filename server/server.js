@@ -149,18 +149,18 @@ app.get("/news", (req, res) => {
         });
 });
 
-// app.get("/coins", (req, res) => {
-//     console.log(
-//         "Made it into the server request for getting coins from CMC api"
-//     );
-//     getCoins()
-//         .then((response) => {
-//             console.log("result in getting the coins back", response);
-//         })
-//         .catch((err) => {
-//             console.log("error in getting coins", err);
-//         });
-// });
+app.get("/coins", (req, res) => {
+    console.log(
+        "Made it into the server request for getting coins from CMC api"
+    );
+    getCoins()
+        .then((response) => {
+            console.log("result in getting the coins back", response);
+        })
+        .catch((err) => {
+            console.log("error in getting coins", err);
+        });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 

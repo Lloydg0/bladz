@@ -9,7 +9,7 @@ import NavBar from "./navbar";
 import FriendRequests from "./friendrequests";
 import Chat from "./chat";
 import News from "./news";
-import Chart from "./charts";
+import Charts from "./charts";
 import Coins from "./coins";
 
 export default class Home extends React.Component {
@@ -131,8 +131,8 @@ export default class Home extends React.Component {
                             />
                             <Route path="/chat" component={Chat} />
                             <Route path="/marketnews" component={News} />
-                            <Route path="/charts" component={Chart} />
-                            <Route path="/prices" component={Coins} />
+                            <Route path="/charts" component={Charts} />
+                            <Route path="/coins" component={Coins} />
                         </div>
                         {this.state.uploaderIsVisible && (
                             <Uploader
