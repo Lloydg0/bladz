@@ -893,31 +893,146 @@ button:hover {
 
 /* Dashboard styligns -charts and graphs */
 
-.graph-container {
-    width: 800px;
-    height: 500px;
-    position: absolute;
-    top: 40%;
-    left: 10px;
-}
-
-/* .tech-analysis {
-    position: absolute;
-    top: 35%;
-    left: 75%;
-    z-index: 100;
+/* .all-widgets-container {
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
 } */
 
-.tradingview-widget-container__widget {
+.graph-container {
+    width: 800px;
     height: 600px;
-    width: 600px;
     position: absolute;
-    left: 50%;
+    top: 17%;
+    left: 3%;
+}
+#widgetContainer {
+    position: relative;
+    left: 85%;
+    top: -10%;
+    height: 500px;
+    width: 500px;
+}
+
+#tickerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 /* coin page */
 .coin-container {
-    width: 800px;
+    width: 1000px;
     height: 800px;
     background-color: white;
+    overflow-y: auto;
+}
+
+.coin-bar-heading {
+    position: fixed;
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.coin-heading-colums {
+    width: 90px;
+    margin-left: 10px;
+
+    padding-left: 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.name-heading {
+    padding-left: 40px;
+    width: 40px;
+}
+
+.price-heading {
+    padding-left: 100px;
+    width: 40px;
+}
+.sevenday-heading {
+    padding-left: 80px;
+    width: 40px;
+}
+
+.day-heading {
+    padding-left: 60px;
+    width: 40px;
+}
+
+.mc-heading {
+    padding-left: 80px;
+}
+
+.vol-heading {
+    padding-left: 25px;
+}
+
+.supply-heading {
+    margin-right: 20px;
+    margin-left: 15px;
+    width: 112px;
+}
+
+.individual-coin {
+    margin: 20px 10px;
+    padding-left: 15px;
+    font-size: 12px;
+    text-align: left;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.coin-line {
+    text-align: justify;
+    font-size: 12px;
+    text-align: left;
+}
+
+.coin-list-position {
+    margin-top: 60px;
+}
+
+.name,
+.rank,
+.price,
+.day,
+.mc,
+.vol,
+.sevenday,
+.supply {
+    width: 90px;
+}
+
+.rank,
+.rank-heading {
+    width: 20px;
+}
+
+.name {
+    /* width: 100px; */
+    text-align: left;
+}
+
+.name,
+.price,
+.supply {
+    padding-left: 20px;
+}
+.supply {
+    padding-left: 40px;
+}
+
+.mc,
+.vol {
+    padding-left: 25px;
 }

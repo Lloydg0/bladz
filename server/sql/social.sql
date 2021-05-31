@@ -24,22 +24,22 @@ CREATE TABLE users (
 
 CREATE TABLE friendships(
     id            SERIAL PRIMARY KEY,
-    sender_id     INT REFERENCES users(id) NOT NULL,
-    recipient_id  INT REFERENCES users(id) NOT NULL,
+    sender_id     INT REFERENCES users(id) NOT NULL ,
+    recipient_id  INT REFERENCES users(id) NOT NULL ,
     accepted      BOOLEAN DEFAULT false
     );
 
 CREATE TABLE messages(
   id            SERIAL PRIMARY KEY,
-  sender_id     INT REFERENCES users(id) NOT NULL,
+  sender_id     INT REFERENCES users(id) NOT NULL ,
   text          VARCHAR(300),
   created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE comments( 
     id              SERIAL PRIMARY KEY,
-    sender_id       INT REFERENCES users(id) NOT NULL,
-    recipient_id    INT REFERENCES users(id) NOT NULL,
+    sender_id       INT REFERENCES users(id) NOT NULL ,
+    recipient_id    INT REFERENCES users(id) NOT NULL ,
     comment_text    TEXT,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

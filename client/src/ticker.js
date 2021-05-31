@@ -42,22 +42,15 @@ export default function Ticker() {
             locale: "en",
             container_id: "ticker_123",
         });
-        document.body.appendChild(script);
+        document.getElementById("tickerContainer").appendChild(script);
     }, []);
 
     return (
         <>
-            <div className="tradingview-widget-container">
-                <div
-                    id="ticker_123"
-                    className="tradingview-widget-container__widget"
-                ></div>
-                {/* <div className="tradingview-widget-copyright">
-                    <a href="https://www.tradingview.com" rel="noopener">
-                        <span className="blue-text">Ticker Tape</span>
-                    </a>{" "}
-                    by TradingView
-                </div> */}
+            <div id="tickerContainer">
+                <div className="tradingview-widget-container">
+                    <div className="tradingview-widget-container__widget"></div>
+                </div>
             </div>
         </>
     );

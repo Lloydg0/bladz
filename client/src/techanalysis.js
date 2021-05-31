@@ -9,41 +9,26 @@ export default function TechAnalysis() {
         script.async = true;
 
         script.innerHTML = JSON.stringify({
-            interval: "1m",
-            width: "425",
+            interval: "1W",
+            width: "100%",
             isTransparent: false,
-            height: "450",
+            height: "100%",
             symbol: "BITPANDAPRO:BTCEUR",
             showIntervalTabs: true,
             locale: "en",
             colorTheme: "dark",
-            id: "tech_analysis_123",
         });
 
-        document.body.appendChild(script);
+        document.getElementById("widgetContainer").appendChild(script);
     }, [
         "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js",
     ]);
 
     return (
         <>
-            <div className="tech-analysis">
+            <div id="widgetContainer">
                 <div className="tradingview-widget-container">
-                    <div
-                        id="tech_analysis_123"
-                        className="tradingview-widget-container__widget"
-                    ></div>
-                    {/* <div className="tradingview-widget-copyright">
-                        <a
-                            href="https://www.tradingview.com/symbols/BTCEUR/technicals/"
-                            rel="noopener"
-                        >
-                            <span className="blue-text">
-                                Technical Analysis for BTCEUR
-                            </span>
-                        </a>
-                        by TradingView
-                    </div> */}
+                    <div className="tradingview-widget-container__widget"></div>
                 </div>
             </div>
         </>

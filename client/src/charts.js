@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Ticker from "./ticker";
 import TechAnalysis from "./techanalysis";
+import MarketOverView from "./marketoverview";
 
 export default function Charts() {
     useEffect(() => {
@@ -34,26 +35,16 @@ export default function Charts() {
     return (
         <>
             <Ticker />
-            <div>
+            <div className="all-widgets-container">
                 <div className="tradingview-widget-container">
                     <div
                         className="graph-container"
                         id="tradingview_aaa66"
                     ></div>
-                    {/* <div className="tradingview-widget-copyright">
-                    <a
-                        href="https://www.tradingview.com/symbols/BTCEUR/?exchange=BITPANDAPRO"
-                        rel="noopener"
-                    >
-                        <span className="blue-text">AAPL Chart</span>
-                    </a>
-                    by TradingView
-                </div> */}
                 </div>
             </div>
-            <div className="tech-container">
-                <TechAnalysis />
-            </div>
+            <TechAnalysis />
+            {/* <MarketOverView /> */}
         </>
     );
 }
