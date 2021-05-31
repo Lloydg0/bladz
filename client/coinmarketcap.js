@@ -2,9 +2,9 @@ const axios = require("axios");
 const secrets = require("../secrets.json");
 
 module.exports.getCoins = () => {
-    axios({
+    return axios({
         method: "GET",
-        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/latest",
+        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
         qs: {
             start: "1",
             limit: "100",
@@ -17,8 +17,13 @@ module.exports.getCoins = () => {
         gzip: true,
     })
         .then((response) => {
-            console.log("response in axios on getCoins function", response);
+            console.log(
+                "response in axios on getCoins function",
+                response.data
+            );
             return response;
         })
-        .catch(console.log);
+        .catch((err) => {
+            console.log("error in getting coin", err);
+        });
 };

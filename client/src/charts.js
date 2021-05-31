@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Ticker from "./ticker";
-// import TechAnalysis from "./techanalysis";
+import TechAnalysis from "./techanalysis";
 
 export default function Charts() {
     useEffect(() => {
@@ -33,9 +33,14 @@ export default function Charts() {
 
     return (
         <>
-            <div className="tradingview-widget-container">
-                <div className="graph-container" id="tradingview_aaa66"></div>
-                {/* <div className="tradingview-widget-copyright">
+            <Ticker />
+            <div>
+                <div className="tradingview-widget-container">
+                    <div
+                        className="graph-container"
+                        id="tradingview_aaa66"
+                    ></div>
+                    {/* <div className="tradingview-widget-copyright">
                     <a
                         href="https://www.tradingview.com/symbols/BTCEUR/?exchange=BITPANDAPRO"
                         rel="noopener"
@@ -44,10 +49,10 @@ export default function Charts() {
                     </a>
                     by TradingView
                 </div> */}
+                </div>
             </div>
-            <div className="widget-container">
-                <Ticker />
-                {/* <TechAnalysis /> */}
+            <div className="tech-container">
+                <TechAnalysis />
             </div>
         </>
     );

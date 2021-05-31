@@ -132,7 +132,7 @@ export default class Home extends React.Component {
                             <Route path="/chat" component={Chat} />
                             <Route path="/marketnews" component={News} />
                             <Route path="/charts" component={Charts} />
-                            <Route path="/coins" component={Coins} />
+                            <Route path="/coinsinfo" component={Coins} />
                         </div>
                         {this.state.uploaderIsVisible && (
                             <Uploader

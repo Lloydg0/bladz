@@ -25,7 +25,7 @@ export default function Navbar({
                         <img className="icon" src="./chart.png"></img>
                         Dashboard
                     </Link>
-                    <Link className="navbar-links" to="/coins">
+                    <Link className="navbar-links" to="/coinsinfo">
                         <img className="icon" src="./price.png"></img>
                         Prices
                     </Link>

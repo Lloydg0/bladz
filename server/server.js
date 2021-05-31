@@ -156,7 +156,14 @@ app.get("/coins", (req, res) => {
 
     getCoins()
         .then((response) => {
-            console.log("result in getting the coins back", response);
+            console.log(
+                "result in getting the coins back",
+                response.data.data[0].quote
+            );
+            res.json({
+                success: true,
+                payload: response.data.data,
+            });
         })
         .catch((err) => {
             console.log("error in getting coins", err);

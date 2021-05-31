@@ -178,7 +178,8 @@ input::placeholder {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    /* z-index: 2; */
+    overflow: hidden;
 }
 
 .sidenav-positioning {
@@ -255,7 +256,7 @@ input::placeholder {
 }
 
 .navbar-links {
-    width: 200px;
+    width: 100px;
     display: inline-block;
     margin-right: 15px;
     text-decoration: none;
@@ -434,7 +435,8 @@ input::placeholder {
     display: block;
 }
 
-.find-friends-heading {
+.find-friends-heading,
+.coin-heading {
     text-align: center;
     color: silver;
 }
@@ -899,10 +901,23 @@ button:hover {
     left: 10px;
 }
 
-.tradingview-widget-container__widget {
-    height: 500px;
-    width: 500px;
+/* .tech-analysis {
     position: absolute;
     top: 35%;
     left: 75%;
+    z-index: 100;
+} */
+
+.tradingview-widget-container__widget {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    left: 50%;
+}
+
+/* coin page */
+.coin-container {
+    width: 800px;
+    height: 800px;
+    background-color: white;
 }
