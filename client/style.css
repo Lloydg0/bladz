@@ -167,9 +167,10 @@ input::placeholder {
     height: 100%;
     width: 20vw;
     background-color: #181a1d;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+
     /* z-index: 2; */
     overflow: hidden;
 }
@@ -229,6 +230,8 @@ input::placeholder {
     position: absolute;
     top: 5px;
     right: 15px;
+    color: #fdfeff;
+    border: 1px solid #fdfeff;
 }
 
 .login-button-navbar-register {
@@ -252,7 +255,7 @@ input::placeholder {
     display: inline-block;
     margin-right: 15px;
     text-decoration: none;
-    color: silver;
+    color: #fdfeff;
     cursor: pointer;
     margin-bottom: 40px;
     margin-left: 50px;
@@ -288,7 +291,7 @@ input::placeholder {
 
 .navbar-name {
     display: block;
-    color: silver;
+    color: #fdfeff;
     width: 100%;
     height: 20vh;
     height: 100px;
@@ -312,7 +315,7 @@ input::placeholder {
 }
 
 .upload-button {
-    color: silver;
+    color: #fdfeff;
 }
 
 .upload-modal-housing {
@@ -345,7 +348,7 @@ input::placeholder {
     height: 50%;
     padding: 20px 30px;
     border-radius: 5px;
-    color: silver;
+    color: #fdfeff;
 }
 
 .upload-form,
@@ -358,7 +361,7 @@ input::placeholder {
     align-content: center;
     flex-wrap: wrap;
     height: auto;
-    color: silver;
+    color: #fdfeff;
 }
 
 /* --------------------------- UPload button stylings ---------------------------  */
@@ -427,19 +430,17 @@ input::placeholder {
     display: block;
 }
 
-.find-friends-heading,
-.coin-heading {
+.find-friends-heading {
     text-align: center;
-    color: silver;
 }
 
 .user-searchbar {
     background-color: transparent;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid #fdfeff;
     margin-bottom: 10px;
 
     display: block;
-    color: silver;
+    color: #fdfeff;
 }
 
 .user-search {
@@ -473,7 +474,7 @@ input::placeholder {
     text-decoration: none;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: silver;
+    color: #fdfeff;
     cursor: pointer;
 }
 
@@ -489,9 +490,9 @@ input::placeholder {
 }
 
 .chat-message-container {
-    border: 1px solid rgb(142, 141, 141);
-    background-color: rgb(142, 141, 141);
-    border-radius: 40px;
+    border: 1px solid #fdfeff;
+    background-color: #fdfeff;
+    border-radius: 10px;
     height: 700px;
     width: 700px;
     overflow: auto;
@@ -536,7 +537,7 @@ input::placeholder {
         #414345 51%,
         #232526 100%
     );
-    color: silver;
+    color: #fdfeff;
     display: block;
     display: flex;
     align-items: center;
@@ -553,10 +554,6 @@ input::placeholder {
 .chat-img {
     border-radius: 50%;
     margin-left: 10px;
-}
-
-.chat-heading {
-    color: silver;
 }
 
 .comment-box {
@@ -597,7 +594,7 @@ input::placeholder {
     height: 50px;
     width: 75px;
     padding-right: 10px;
-    color: silver;
+    color: #fdfeff;
 }
 
 .comment-text {
@@ -605,7 +602,7 @@ input::placeholder {
     width: 200px;
     padding-left: 5px;
     border-radius: 10px;
-    background-color: silver;
+    background-color: #fdfeff;
 }
 
 /* Profile Cards on Profile Page and BIO  & other Profile */
@@ -626,14 +623,14 @@ input::placeholder {
     width: 400px;
     height: 500px;
     position: relative;
-    background-color: rgb(142, 141, 141);
+    background-color: #fdfeff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: center;
-    border-radius: 50px;
+    border-radius: 10px;
     padding-top: 30px;
-    filter: drop-shadow(0 0 0.25rem silver);
+    filter: drop-shadow(0 0 0.25rem #fdfeff);
     z-index: 0;
 }
 
@@ -681,7 +678,7 @@ input::placeholder {
     border-radius: 16px;
     display: block;
     background-color: #181a1d;
-    color: silver;
+    color: #fdfeff;
     height: 30px;
     width: 100px;
     text-decoration: none;
@@ -710,7 +707,7 @@ textarea {
     height: 50px;
     outline: none;
     border: none;
-    background-color: rgb(142, 141, 141);
+    background-color: #fdfeff;
     margin: auto;
     text-align: center;
     margin-top: 10px;
@@ -721,7 +718,7 @@ textarea {
     margin: auto;
     text-align: center;
     margin-bottom: 20px;
-    color: silver;
+    color: #fdfeff;
 }
 
 .news-container {
@@ -731,7 +728,7 @@ textarea {
     grid-auto-rows: 1fr;
     grid-auto-flow: row;
     overflow: auto;
-    filter: drop-shadow(0 0 0.25rem silver);
+    filter: drop-shadow(0 0 0.25rem #fdfeff);
 }
 
 .news-box {
@@ -750,7 +747,7 @@ textarea {
     margin: auto;
     text-align: center;
     margin: 10px;
-    color: silver;
+    color: #fdfeff;
 }
 
 .news-button {
@@ -793,9 +790,12 @@ button:hover {
 }
 
 /* friend request page */
+.find-friends-heading,
+.coin-heading,
 .request-heading-friends,
-.request-heading-requests {
-    color: silver;
+.request-heading-requests,
+.chat-heading {
+    color: #fdfeff;
 }
 
 .request-heading-friends {
@@ -835,8 +835,8 @@ button:hover {
 }
 
 .friend-request-container {
-    background-color: rgb(142, 141, 141);
-    filter: drop-shadow(0 0 0.25rem silver);
+    background-color: #fdfeff;
+    filter: drop-shadow(0 0 0.25rem #fdfeff);
     width: 150px;
     height: 250px;
     border-radius: 40px;
@@ -870,7 +870,7 @@ button:hover {
 }
 
 .request-button {
-    color: silver;
+    color: #fdfeff;
     border-radius: 16px;
     display: flex;
     justify-content: center;
