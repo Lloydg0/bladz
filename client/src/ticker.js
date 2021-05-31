@@ -59,12 +59,12 @@ export default function Ticker() {
                     id="ticker_123"
                     className="tradingview-widget-container__widget"
                 ></div>
-                <div className="tradingview-widget-copyright">
+                {/* <div className="tradingview-widget-copyright">
                     <a href="https://www.tradingview.com" rel="noopener">
                         <span className="blue-text">Ticker Tape</span>
                     </a>{" "}
                     by TradingView
-                </div>
+                </div> */}
             </div>
         </>
     );

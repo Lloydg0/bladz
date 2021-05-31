@@ -17,7 +17,7 @@ export default function News() {
             <h1 className="news-header">Market News</h1>
             <div className="news-container">
                 {news &&
-                    news.slice(0, 20).map(({ href, text, time, name }) => {
+                    news.slice(0, 24).map(({ href, text, time, name }) => {
                         const newText = text.slice(0, -23);
                         let date = new Date(time);
                         let formattedDate = new Intl.DateTimeFormat("en-GB", {

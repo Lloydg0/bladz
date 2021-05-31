@@ -1,42 +1,24 @@
-// const rp = require("request-promise");
-const https = require("https");
+const axios = require("axios");
+const secrets = require("../secrets.json");
 
 module.exports.getCoins = () => {
-    const requestOptions = {
+    axios({
         method: "GET",
-        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/latest",
         qs: {
             start: "1",
-            limit: "5000",
+            limit: "100",
             convert: "EUR",
         },
         headers: {
-            "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
+            "X-CMC_PRO_API_KEY": `${secrets.CMC_Secret}`,
         },
         json: true,
         gzip: true,
-    };
-
-    function rp(response) {
-        console.log("response", response);
-        if (response.statusCode != 200) {
-            console.log("something went wrong");
-        }
-        //adding the tweet chunks to the body
-        // let body = "";
-        // response.on("data", function (chunk) {
-        //     body += chunk;
-        //     console.log("body", body);
-        // });
-    }
-    // rp(requestOptions)
-    //     .then((response) => {
-    //         console.log("API call response:", response);
-    //     })
-    //     .catch((err) => {
-    //         console.log("API call error:", err.message);
-    //     });
-
-    const req = https.request(requestOptions, rp);
-    req.end();
+    })
+        .then((response) => {
+            console.log("response in axios on getCoins function", response);
+            return response;
+        })
+        .catch(console.log);
 };

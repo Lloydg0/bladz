@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 let { getToken, getTweets, filterTweets } = require("../client/twitter.js");
+let { getCoins } = require("../client/coinmarketcap.js");
 const util = require("util");
 const compression = require("compression");
 const path = require("path");
@@ -23,7 +24,6 @@ const s3 = require("../s3");
 let s3url = require("../config.json");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
-const { getCoins } = require("../client/coinmarketcap.js");
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -153,6 +153,7 @@ app.get("/coins", (req, res) => {
     console.log(
         "Made it into the server request for getting coins from CMC api"
     );
+
     getCoins()
         .then((response) => {
             console.log("result in getting the coins back", response);

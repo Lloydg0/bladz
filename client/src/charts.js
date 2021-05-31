@@ -35,7 +35,7 @@ export default function Charts() {
         <>
             <div className="tradingview-widget-container">
                 <div className="graph-container" id="tradingview_aaa66"></div>
-                <div className="tradingview-widget-copyright">
+                {/* <div className="tradingview-widget-copyright">
                     <a
                         href="https://www.tradingview.com/symbols/BTCEUR/?exchange=BITPANDAPRO"
                         rel="noopener"
@@ -43,7 +43,7 @@ export default function Charts() {
                         <span className="blue-text">AAPL Chart</span>
                     </a>
                     by TradingView
-                </div>
+                </div> */}
             </div>
             <div className="widget-container">
                 <Ticker />
