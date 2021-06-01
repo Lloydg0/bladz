@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import Ticker from "./ticker";
 import TechAnalysis from "./techanalysis";
 import MarketOverView from "./marketoverview";
+import MiniBtc from "./miniwidgetbtc";
+import MiniEth from "./miniwidgeteth";
 
 export default function Charts() {
     useEffect(() => {
@@ -34,17 +36,23 @@ export default function Charts() {
 
     return (
         <>
-            <Ticker />
-            <div className="all-widgets-container">
-                <div className="tradingview-widget-container">
-                    <div
-                        className="graph-container"
-                        id="tradingview_aaa66"
-                    ></div>
+            <div className="widget-container-for-media-querys">
+                <Ticker />
+                <div>
+                    <div className="all-widgets-container">
+                        <div className="tradingview-widget-container">
+                            <div
+                                className="graph-container"
+                                id="tradingview_aaa66"
+                            ></div>
+                        </div>
+                        <TechAnalysis />
+                        <MarketOverView />
+                        <MiniBtc />
+                        <MiniEth />
+                    </div>
                 </div>
             </div>
-            <TechAnalysis />
-            <MarketOverView />
         </>
     );
 }

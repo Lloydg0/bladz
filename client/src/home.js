@@ -9,7 +9,7 @@ import NavBar from "./navbar";
 import FriendRequests from "./friendrequests";
 import Chat from "./chat";
 import News from "./news";
-import Charts from "./charts";
+import Charts from "./widgets/charts";
 import Coins from "./coins";
 
 export default class Home extends React.Component {
