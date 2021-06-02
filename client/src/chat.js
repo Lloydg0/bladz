@@ -56,7 +56,7 @@ export default function Chat() {
                                         <div className="chat-text">{text}</div>
                                     </div>
                                     <div className="chat-name">
-                                        - {first_name} {last_name}-
+                                        -- {first_name} {last_name}
                                         {formattedDate}
                                     </div>
                                 </>

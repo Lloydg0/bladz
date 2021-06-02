@@ -60,7 +60,7 @@ export default function FindPeople() {
             <div className="main-search-container">
                 <div className="search-container">
                     <div className="friends-input-heading-container">
-                        <h1 className="find-friends-heading">Other Users</h1>
+                        <h1 className="find-friends-heading">Users</h1>
                         <div className="input-container">
                             <input
                                 className="user-searchbar"

@@ -16,9 +16,9 @@ export default function Navbar({
                         src={imgURL || "/defaultIcon.jpeg"}
                         alt={first_name + " " + last_name}
                     />
-                    <h4 className="navbar-name">
+                    <Link className="navbar-links-name" to="/">
                         {first_name} {last_name}
-                    </h4>
+                    </Link>
                 </div>
                 <div className="sidenav-container">
                     <div className="sidenav-positioning">
@@ -46,10 +46,10 @@ export default function Navbar({
                             <img className="icon" src="./search.png"></img>
                             Search
                         </Link>
-                        <Link className="navbar-links" to="/">
+                        {/* <Link className="navbar-links" to="/">
                             <img className="icon" src="./profile.png"></img>
                             Profile
-                        </Link>
+                        </Link> */}
                         <a
                             className="navbar-links"
                             onClick={() => {

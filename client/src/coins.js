@@ -18,7 +18,7 @@ export default function Coins() {
     }, []);
     return (
         <>
-            <h1 className="coin-heading">Coin Prices</h1>
+            <h1 className="coin-heading">Cryptocurrency Market</h1>
             <div className="coin-container">
                 <div className="coin-bar-heading">
                     <span className="coin-heading-colums rank-heading">#</span>
@@ -26,13 +26,13 @@ export default function Coins() {
                         Name
                     </span>
                     <span className="coin-heading-colums price-heading">
-                        Price
+                        Price (€)
                     </span>
                     <span className="coin-heading-colums day-heading">
                         24h %
                     </span>
                     <span className="coin-heading-colums sevenday-heading">
-                        7d &
+                        7d %
                     </span>
                     <span className="coin-heading-colums mc-heading">
                         Market Cap
@@ -55,9 +55,34 @@ export default function Coins() {
                                 symbol,
                                 quote,
                             }) => {
+                                let price = quote.USD.price
+                                    .toString()
+                                    .slice(0, 8);
+                                let twentyfourhourchange =
+                                    quote.USD.percent_change_24h
+                                        .toString()
+                                        .slice(0, 8);
+                                let sevendaychange = quote.USD.percent_change_7d
+                                    .toString()
+                                    .slice(0, 6);
+                                let market_cap = quote.USD.market_cap
+                                    .toString()
+                                    .slice(0, 14);
+                                let volume = quote.USD.volume_24h
+                                    .toString()
+                                    .slice(0, 13);
+
+                                var twentyfourhourprecentagechange =
+                                    "individual-coin day " +
+                                    (twentyfourhourchange >= 0
+                                        ? "green"
+                                        : "red");
+                                var sevendayprecentagechange =
+                                    "individual-coin day " +
+                                    (sevendaychange >= 0 ? "green" : "red");
                                 return (
                                     <>
-                                        <div>
+                                        <div key={id}>
                                             <div className="coin-line" key={id}>
                                                 <span className="individual-coin rank">
                                                     {cmc_rank}
@@ -66,25 +91,27 @@ export default function Coins() {
                                                     {name} ({symbol})
                                                 </span>
                                                 <span className="individual-coin price">
-                                                    {quote.USD.price}
+                                                    {price}
                                                 </span>
-                                                <span className="individual-coin day">
-                                                    {
-                                                        quote.USD
-                                                            .percent_change_24h
+                                                <span
+                                                    className={
+                                                        twentyfourhourprecentagechange
                                                     }
+                                                >
+                                                    {twentyfourhourchange}
                                                 </span>
-                                                <span className="individual-coin sevenday">
-                                                    {
-                                                        quote.USD
-                                                            .percent_change_7d
+                                                <span
+                                                    className={
+                                                        sevendayprecentagechange
                                                     }
+                                                >
+                                                    {sevendaychange}
                                                 </span>
                                                 <span className="individual-coin mc">
-                                                    {quote.USD.market_cap}
+                                                    {market_cap}
                                                 </span>
                                                 <span className="individual-coin vol">
-                                                    {quote.USD.volume_24h}
+                                                    {volume}
                                                 </span>
                                                 <span className="individual-coin supply">
                                                     {max_supply}
