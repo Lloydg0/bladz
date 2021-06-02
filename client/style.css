@@ -1031,7 +1031,8 @@ textarea {
 }
 
 .name-heading {
-    padding-left: 40px;
+    padding-left: 35px;
+    padding-right: 5px;
     width: 40px;
 }
 
@@ -1045,8 +1046,9 @@ textarea {
 }
 
 .day-heading {
-    padding-left: 65px;
+    padding-left: 55px;
     width: 40px;
+    width: 50px;
 }
 
 .mc-heading {
@@ -1060,7 +1062,7 @@ textarea {
 .supply-heading {
     /* margin-right: 22px; */
     margin-left: 22px;
-    padding-left: 20px;
+    padding-left: 22px;
     width: 112px;
 }
 

@@ -26,7 +26,7 @@ export default function Coins() {
                         Name
                     </span>
                     <span className="coin-heading-colums price-heading">
-                        Price (€)
+                        Price(€)
                     </span>
                     <span className="coin-heading-colums day-heading">
                         24h %
@@ -61,10 +61,10 @@ export default function Coins() {
                                 let twentyfourhourchange =
                                     quote.USD.percent_change_24h
                                         .toString()
-                                        .slice(0, 8);
+                                        .slice(0, 5);
                                 let sevendaychange = quote.USD.percent_change_7d
                                     .toString()
-                                    .slice(0, 6);
+                                    .slice(0, 5);
                                 let market_cap = quote.USD.market_cap
                                     .toString()
                                     .slice(0, 14);
