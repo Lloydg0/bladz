@@ -1054,12 +1054,13 @@ textarea {
 }
 
 .vol-heading {
-    padding-left: 25px;
+    padding-left: 45px;
 }
 
 .supply-heading {
-    margin-right: 22px;
+    /* margin-right: 22px; */
     margin-left: 22px;
+    padding-left: 20px;
     width: 112px;
 }
 
