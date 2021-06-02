@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 let { getToken, getTweets, filterTweets } = require("../client/twitter.js");
-let { getCoins, getGasPrice } = require("../client/coinmarketcap.js");
+let {
+    getCoins,
+    getGasPrice,
+    LiveTransactions,
+} = require("../client/coinmarketcap.js");
 const util = require("util");
 const compression = require("compression");
 const path = require("path");
@@ -183,6 +187,27 @@ app.get("/gasprice", (req, res) => {
                 success: true,
                 payload: response.data.result,
             });
+        })
+        .catch((err) => {
+            console.log("error in getting gasprice", err);
+        });
+});
+
+app.get("/livetransactions", (req, res) => {
+    console.log(
+        "Made it into the server request for getting Live Transactions"
+    );
+
+    LiveTransactions()
+        .then((response) => {
+            console.log(
+                "result in getting the gasprice back",
+                response.data.result
+            );
+            // res.json({
+            //     success: true,
+            //     payload: response.data.result,
+            // });
         })
         .catch((err) => {
             console.log("error in getting gasprice", err);

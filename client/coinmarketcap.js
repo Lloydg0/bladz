@@ -44,3 +44,23 @@ module.exports.getGasPrice = () => {
             console.log("error in getting blockChain", err);
         });
 };
+
+module.exports.LiveTransactions = () => {
+    return axios({
+        method: "GET",
+        url: `https://api.blockchain.com/v3/exchange/orders?symbol=BTC-EUR&from=1592830770594&to=1592830770594&status=FILLED&limit=10`,
+        headers: {
+            "X-API-Token": `${secrets.blockchain_secret}`,
+        },
+    })
+        .then((response) => {
+            console.log(
+                "response in axios on livetransactionsfunction",
+                response.data
+            );
+            return response;
+        })
+        .catch((err) => {
+            console.log("error in getting livetransactions", err);
+        });
+};
