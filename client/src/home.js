@@ -11,6 +11,7 @@ import Chat from "./chat";
 import News from "./news";
 import Charts from "./widgets/charts";
 import Coins from "./coins";
+import BlockChain from "./blockchain";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -133,6 +134,10 @@ export default class Home extends React.Component {
                             <Route path="/marketnews" component={News} />
                             <Route path="/charts" component={Charts} />
                             <Route path="/coinsinfo" component={Coins} />
+                            <Route
+                                path="/livetradesinfo"
+                                component={BlockChain}
+                            />
                         </div>
                         {this.state.uploaderIsVisible && (
                             <Uploader

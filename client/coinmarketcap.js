@@ -27,3 +27,20 @@ module.exports.getCoins = () => {
             console.log("error in getting coin", err);
         });
 };
+
+module.exports.getGasPrice = () => {
+    return axios({
+        method: "GET",
+        url: `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${secrets.ether_scan}`,
+    })
+        .then((response) => {
+            console.log(
+                "response in axios on getBlockChain function",
+                response.data
+            );
+            return response;
+        })
+        .catch((err) => {
+            console.log("error in getting blockChain", err);
+        });
+};

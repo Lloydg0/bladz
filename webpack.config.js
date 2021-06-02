@@ -6,6 +6,16 @@ module.exports = () => ({
     entry: [
         "@babel/polyfill",
         path.join(__dirname, "client", "style.css"),
+        // path.join(__dirname, "client", "css", "coins.css"),
+        // path.join(__dirname, "client", "css", "chat.css"),
+        // path.join(__dirname, "client", "css", "dashboard.css"),
+        // path.join(__dirname, "client", "css", "friendrequest.css"),
+        // path.join(__dirname, "client", "css", "landingpage.css"),
+        // path.join(__dirname, "client", "css", "navbar.css"),
+        // path.join(__dirname, "client", "css", "news.css"),
+        // path.join(__dirname, "client", "css", "profile.css"),
+        // path.join(__dirname, "client", "css", "search.css"),
+        // path.join(__dirname, "client", "css", "uploader.css"),
         path.join(__dirname, "client", "src", "start.js"),
     ],
     output: {
@@ -33,7 +43,8 @@ module.exports = () => ({
             {
                 test: /\.js$/,
                 loader: "babel-loader",
-            }, {
+            },
+            {
                 test: /\.css$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -47,7 +58,9 @@ module.exports = () => ({
             },
         ],
     },
-    plugins: [new MiniCssExtractPlugin({
-        filename: 'bundle.css',
-    })],
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "bundle.css",
+        }),
+    ],
 });

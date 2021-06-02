@@ -30,6 +30,10 @@ export default function Navbar({
                             <img className="icon" src="./price.png"></img>
                             Coins
                         </Link>
+                        <Link className="navbar-links" to="/livetradesinfo">
+                            <img className="icon" src="./live.png"></img>
+                            Live Trades
+                        </Link>
                         <Link className="navbar-links" to="/chat">
                             <img className="icon" src="./discussion.png"></img>
                             Discussion Board

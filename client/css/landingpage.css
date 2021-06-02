@@ -1,0 +1,150 @@
+/*-------------------- Welcome page---------------- */
+
+/* welcome page containers */
+.main-page-main-container,
+.inner-form-container,
+.inner-form-container-right,
+.inner-form-container-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page-main-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.inner-form-container {
+    width: 95vw;
+    height: 90vh;
+    background-color: white;
+    display: flex;
+    border-radius: 10px;
+}
+
+.inner-form-container-right {
+    width: 50%;
+    height: 100%;
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(to right, #000000, #434343);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.inner-form-container-left {
+    width: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* welcome page text styligns */
+.main-text {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    color: silver;
+}
+
+.mainimg {
+    position: relative;
+    top: 5%;
+    image-rendering: auto;
+    overflow: hidden;
+}
+
+/* Welcome page form stylins & containers */
+.form-container,
+.form-box,
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-box,
+.form-content {
+    width: 500px;
+}
+
+.form-box {
+    margin-top: 20px;
+}
+
+.form-content {
+    width: 400px;
+}
+
+input {
+    display: block;
+    border: none;
+    color: silver;
+    background: transparent;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 10px;
+    height: 25px;
+    width: 200px;
+    z-index: 10;
+    outline: none;
+    background: transparent;
+}
+
+input::placeholder {
+    color: silver;
+}
+
+.register-button {
+    display: inline-block;
+    padding: 10px 40px;
+    margin: 40px 4px 4px 0;
+    text-decoration: none;
+    background-color: #181a1d;
+    text-align: center;
+    border: 1px solid silver;
+    border-radius: 5px;
+    color: silver;
+    background: transparent;
+}
+
+/* Main page seperations */
+.navbar-divider {
+    position: absolute;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+}
+
+.main-profile {
+    position: absolute;
+    left: 20%;
+    width: 80%;
+    min-width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    overflow: hidden;
+}

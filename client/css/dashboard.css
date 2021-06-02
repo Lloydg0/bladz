@@ -1,0 +1,41 @@
+/* Dashboard styligns -charts and graphs */
+
+.graph-container {
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    top: 7%;
+    left: 4%;
+}
+#widgetContainer {
+    position: absolute;
+    left: 8%;
+    top: 53%;
+    height: 400px;
+    width: 300px;
+}
+
+#tickerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#overviewContainer {
+    height: 700px;
+    width: 500px;
+    position: absolute;
+    left: 62%;
+    top: 15%;
+}
+
+#minibtc {
+    position: absolute;
+    top: 57%;
+    left: 33%;
+}
+#minieth {
+    position: absolute;
+    top: 77%;
+    left: 33%;
+}
