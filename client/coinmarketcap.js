@@ -17,10 +17,6 @@ module.exports.getCoins = () => {
         gzip: true,
     })
         .then((response) => {
-            console.log(
-                "response in axios on getCoins function",
-                response.data
-            );
             return response;
         })
         .catch((err) => {
@@ -34,10 +30,6 @@ module.exports.getGasPrice = () => {
         url: `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${secrets.ether_scan}`,
     })
         .then((response) => {
-            console.log(
-                "response in axios on getBlockChain function",
-                response.data
-            );
             return response;
         })
         .catch((err) => {
@@ -45,19 +37,15 @@ module.exports.getGasPrice = () => {
         });
 };
 
-module.exports.LiveTransactions = () => {
+module.exports.TradeData = () => {
     return axios({
         method: "GET",
-        url: `https://api.blockchain.com/v3/exchange/orders?symbol=BTC-EUR&from=1592830770594&to=1592830770594&status=FILLED&limit=10`,
+        url: `	https://rest.coinapi.io/v1/trades/latest?limit=50&symbol_id=BITSTAMP_SPOT_BTC_EUR`,
         headers: {
-            "X-API-Token": `${secrets.blockchain_secret}`,
+            "X-CoinAPI-Key": `${secrets.coinapi_secret}`,
         },
     })
         .then((response) => {
-            console.log(
-                "response in axios on livetransactionsfunction",
-                response.data
-            );
             return response;
         })
         .catch((err) => {

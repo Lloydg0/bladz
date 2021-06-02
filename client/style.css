@@ -1173,13 +1173,16 @@ button:hover {
     justify-content: center;
 }
 
-.gasprices {
+.gas-prices {
     color: #fdfeff;
+    margin: 10px;
+}
+.gas-prices-gwei {
     margin: 10px;
 }
 
 .live-trades-main-container {
-    width: 800px;
+    width: 1000px;
     /* background-color: burlywood; */
 }
 
@@ -1193,7 +1196,7 @@ button:hover {
     position: fixed;
     width: 100px;
     height: 50px;
-    width: 800px;
+    width: 1000px;
     background-color: #25282d;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -1203,24 +1206,52 @@ button:hover {
     color: white;
 }
 
+.live-symbol {
+    margin-left: 10px;
+    padding: 20px;
+    width: 100px;
+}
 .live-hash {
-    margin-left: 150px;
-    padding: 30px;
+    margin-left: 140px;
+    padding: 20px;
     width: 100px;
 }
 .live-amount-coin {
-    margin-left: 125px;
-    padding: 30px;
-    width: 200px;
+    margin-left: 40px;
+    padding: 20px;
+    width: 100px;
 }
 .live-amount-fiat {
-    margin-left: 30px;
-    padding: 30px;
+    margin-left: 10px;
+    padding: 20px;
     width: 200px;
+}
+
+.live-time {
+    padding: 20px;
+    width: 100px;
+}
+
+.transaction-line-container {
+    overflow: auto;
+    width: 1000px;
+    height: 700px;
+}
+
+.transaction-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 1000px;
 }
 
 .transaction-line-position {
     margin-top: 75px;
+}
+
+.individual-transaction {
+    font-size: 12px;
 }
 .transaction-coin {
     text-align: left;
@@ -1232,4 +1263,22 @@ button:hover {
 
 .mil {
     margin-left: 100px;
+}
+
+.symbol {
+    width: 120px;
+    margin-right: 80px;
+}
+
+.uuid {
+    padding-left: 20px;
+    width: 120px;
+}
+
+.amount-coin {
+    width: 100px;
+}
+
+.amount-euro {
+    margin-left: 35px;
 }

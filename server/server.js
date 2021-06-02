@@ -5,6 +5,7 @@ let {
     getCoins,
     getGasPrice,
     LiveTransactions,
+    TradeData,
 } = require("../client/coinmarketcap.js");
 const util = require("util");
 const compression = require("compression");
@@ -193,21 +194,16 @@ app.get("/gasprice", (req, res) => {
         });
 });
 
-app.get("/livetransactions", (req, res) => {
-    console.log(
-        "Made it into the server request for getting Live Transactions"
-    );
+app.get("/tradedata", (req, res) => {
+    console.log("Made it into the server request for getting tradedata");
 
-    LiveTransactions()
+    TradeData()
         .then((response) => {
-            console.log(
-                "result in getting the gasprice back",
-                response.data.result
-            );
-            // res.json({
-            //     success: true,
-            //     payload: response.data.result,
-            // });
+            console.log("result in getting the tradedata back", response.data);
+            res.json({
+                success: true,
+                payload: response.data,
+            });
         })
         .catch((err) => {
             console.log("error in getting gasprice", err);

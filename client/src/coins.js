@@ -72,12 +72,12 @@ export default function Coins() {
                                     .toString()
                                     .slice(0, 13);
 
-                                var twentyfourhourprecentagechange =
+                                let twentyfourhourprecentagechange =
                                     "individual-coin day " +
                                     (twentyfourhourchange >= 0
                                         ? "green"
                                         : "red");
-                                var sevendayprecentagechange =
+                                let sevendayprecentagechange =
                                     "individual-coin day " +
                                     (sevendaychange >= 0 ? "green" : "red");
                                 return (
