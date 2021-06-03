@@ -1,5 +1,5 @@
-import Bio from "./bio";
-import axios from "./axios";
+import Bio from "../bio";
+import axios from "../axios";
 import { render, waitFor, fireEvent } from "@testing-library/react";
 
 // 1

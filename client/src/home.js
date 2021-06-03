@@ -130,7 +130,12 @@ export default class Home extends React.Component {
                                 path="/friends-wannabees"
                                 component={FriendRequests}
                             />
-                            <Route path="/chat" component={Chat} />
+                            <Route
+                                path="/chat"
+                                render={() => (
+                                    <Chat loggedInUser={this.state.id} />
+                                )}
+                            />
                             <Route path="/marketnews" component={News} />
                             <Route path="/charts" component={Charts} />
                             <Route path="/coinsinfo" component={Coins} />

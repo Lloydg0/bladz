@@ -4,7 +4,6 @@ let { getToken, getTweets, filterTweets } = require("../client/twitter.js");
 let {
     getCoins,
     getGasPrice,
-    LiveTransactions,
     TradeData,
 } = require("../client/coinmarketcap.js");
 const util = require("util");

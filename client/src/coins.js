@@ -82,7 +82,7 @@ export default function Coins() {
                                     (sevendaychange >= 0 ? "green" : "red");
                                 return (
                                     <>
-                                        <div key={id}>
+                                        <div>
                                             <div className="coin-line" key={id}>
                                                 <span className="individual-coin rank">
                                                     {cmc_rank}

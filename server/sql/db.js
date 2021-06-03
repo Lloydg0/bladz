@@ -152,7 +152,7 @@ module.exports.selectingFriendsOrFriendRequests = (id) => {
 
 // getting the 10 most receient messages
 module.exports.getting10MostRecentMessages = () => {
-    const q = `SELECT users.id, first_name, last_name, url, sender_id, text, messages.created_at
+    const q = `SELECT messages.id, first_name, last_name, url, sender_id, text, messages.created_at
                 FROM messages
                 JOIN users
                 ON users.id = messages.sender_id

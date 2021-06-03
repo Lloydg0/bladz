@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { socket } from "./socket.js";
 import { useSelector } from "react-redux";
 
-export default function Chat() {
+export default function Chat({ loggedInUser }) {
     const chatMessages = useSelector((state) => state && state.chatMessages);
     // console.log("Chat Messages", chatMessages);
     const elemRef = useRef();
@@ -36,6 +36,7 @@ export default function Chat() {
                             last_name,
                             url,
                             id,
+                            sender_id,
                         }) => {
                             console.log("message ID", id);
                             let date = new Date(created_at);
@@ -46,18 +47,43 @@ export default function Chat() {
                                     timeStyle: "short",
                                 }
                             ).format(date);
+
+                            let chatPosition =
+                                "message-line" +
+                                (sender_id === loggedInUser ? "" : "-reverse");
+
+                            let dynamicMessageColor =
+                                "chat-text" +
+                                (sender_id === loggedInUser ? "" : "-reverse");
+
+                            let dynamicChatNamePosition =
+                                "chat-name" +
+                                (sender_id === loggedInUser ? "" : "-reverse");
+
                             return (
                                 <>
-                                    <div className="message-line" key={id}>
-                                        <img
-                                            className="chat-img"
-                                            src={url}
-                                        ></img>
-                                        <div className="chat-text">{text}</div>
-                                    </div>
-                                    <div className="chat-name">
-                                        -- {first_name} {last_name}
-                                        {formattedDate}
+                                    <div key={id}>
+                                        <div
+                                            className={chatPosition}
+                                            // className="message-line"
+                                        >
+                                            <img
+                                                className="chat-img"
+                                                src={url}
+                                            ></img>
+                                            <div
+                                                // className="chat-text"
+                                                className={dynamicMessageColor}
+                                            >
+                                                {text}
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={dynamicChatNamePosition}
+                                        >
+                                            -- {first_name} {last_name}
+                                            {formattedDate}
+                                        </div>
                                     </div>
                                 </>
                             );
