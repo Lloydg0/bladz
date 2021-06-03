@@ -11,6 +11,7 @@ export default class OtherProfile extends React.Component {
             last_name: "",
             imgURL: "",
             finishedBio: "",
+            showPM: false,
         };
     }
     async componentDidMount() {
@@ -41,6 +42,15 @@ export default class OtherProfile extends React.Component {
             console.log("Error in axios for other profile", err);
         }
     }
+
+    togglePM(e) {
+        e.preventDefault();
+        console.log("you want to hide or show the private Message");
+        this.setState({
+            showPM: !this.state.showPM,
+        });
+    }
+
     render() {
         return (
             <>
@@ -59,10 +69,22 @@ export default class OtherProfile extends React.Component {
                                     {this.state.finishedBio}
                                 </p>
                             </div>
-                            <FriendButton id={this.props.match.params.id} />
+                            <FriendButton
+                                id={this.props.match.params.id}
+                                showPM={this.state.showPM}
+                            />
+                            <button
+                                onClick={(e) => this.togglePM(e)}
+                                className="pm-button"
+                            >
+                                Wall Post
+                            </button>
                         </div>
                     </div>
-                    <Wall id={this.props.match.params.id} />
+
+                    {this.state.showPM && (
+                        <Wall id={this.props.match.params.id} />
+                    )}
                 </div>
             </>
         );

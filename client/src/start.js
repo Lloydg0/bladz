@@ -13,13 +13,6 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
 
-// we only called ReactDOM.render once in the whole project
-// if (location.pathname == "/welcome") {
-//     ReactDOM.render(<Welcome />, document.querySelector("main"));
-// } else {
-//     ReactDOM.render(<img src="logo.gif" />, document.querySelector("main"));
-// }
-
 let element = (
     <Provider store={store}>
         <Home />

@@ -680,7 +680,7 @@ input::placeholder {
     height: 100%;
     border-radius: 10px;
     box-shadow: 0 8px 40px rgba(#000000, 0.2);
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -691,7 +691,7 @@ input::placeholder {
     height: 500px;
     position: relative;
     background-color: #fdfeff;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: center;
@@ -699,6 +699,11 @@ input::placeholder {
     padding-top: 30px;
     filter: drop-shadow(0 0 0.1rem #fdfeff);
     z-index: 0;
+}
+
+.private-message {
+    background-color: burlywood;
+    display: inline-block;
 }
 
 .profile-card-img,
@@ -741,7 +746,8 @@ input::placeholder {
 
 .save-button,
 .post-button,
-.add-friend-button {
+.add-friend-button,
+.pm-button {
     border-radius: 16px;
     display: block;
     background-color: #181a1d;
@@ -759,14 +765,19 @@ input::placeholder {
     margin-top: 10px;
 }
 
-.add-friend-button {
-    margin-top: 50px;
+.add-friend-button,
+.pm-button {
+    margin-top: 20px;
     padding: 20px;
     min-width: 100px;
     min-height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pm-button {
+    margin-top: 10px;
 }
 
 textarea {
