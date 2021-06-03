@@ -63,16 +63,12 @@ export default function Chat({ loggedInUser }) {
                             return (
                                 <>
                                     <div key={id}>
-                                        <div
-                                            className={chatPosition}
-                                            // className="message-line"
-                                        >
+                                        <div className={chatPosition}>
                                             <img
                                                 className="chat-img"
                                                 src={url}
                                             ></img>
                                             <div
-                                                // className="chat-text"
                                                 className={dynamicMessageColor}
                                             >
                                                 {text}

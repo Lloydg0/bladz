@@ -73,6 +73,7 @@ export default function FindPeople() {
                         <div className="center-user-search">
                             <Route>
                                 {people.map((user) => {
+                                    console.log("userID", user.id);
                                     return (
                                         <div
                                             className="user-search"

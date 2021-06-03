@@ -53,7 +53,7 @@ export default function BlockChain() {
             </div>
 
             <div className="live-trades-main-container">
-                <h3 className="live-trade-heading">Latest BTC Transations</h3>
+                <h3 className="live-trade-heading">Latest Transations</h3>
                 <div className="livetrade-bar-heading">
                     <span className="live-symbol">Symbol</span>
                     <span className="live-hash">Hash</span>

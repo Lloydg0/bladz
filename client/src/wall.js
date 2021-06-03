@@ -29,7 +29,6 @@ export default function Wall({ id }) {
         }
     };
 
-    //
     return (
         <div>
             <div className="full-comment-container">
@@ -66,11 +65,7 @@ export default function Wall({ id }) {
                     </div>
                 </div>
 
-                <textarea
-                    placeholder="Post on wall!"
-                    onKeyDown={handleKeyDown}
-                ></textarea>
-                <button className="post-button">Post</button>
+                <textarea onKeyDown={handleKeyDown}></textarea>
             </div>
         </div>
     );
