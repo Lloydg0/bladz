@@ -23,14 +23,14 @@ export default function BlockChain() {
         })();
     }, []);
 
-    // useEffect(() => {
-    //     console.log("useEffect for for mock tradeData just ran");
+    useEffect(() => {
+        console.log("useEffect for for mock tradeData just ran");
 
-    //     (async () => {
-    //         const { data } = await axios.get("/tradedata").catch(console.log);
-    //         settradeData(data);
-    //     })();
-    // }, []);
+        (async () => {
+            const { data } = await axios.get("/tradedata").catch(console.log);
+            settradeData(data);
+        })();
+    }, []);
     return (
         <>
             <div className="live-trades-heading-container">
@@ -59,7 +59,7 @@ export default function BlockChain() {
                     <span className="live-hash">Hash</span>
                     <span className="live-amount-coin">Amount</span>
                     <span className="live-amount-fiat">Amount (EUR)</span>
-                    <span className="live-time">Position</span>
+                    <span className="live-position">Position</span>
                     <span className="live-time">Time</span>
                 </div>
 
@@ -113,10 +113,13 @@ export default function BlockChain() {
                                                 <span className="individual-transaction tranaction-price amount-euro">
                                                     {price}
                                                 </span>
-                                                <span className={position}>
+                                                <span
+                                                    className={position}
+                                                    id="live-position"
+                                                >
                                                     {taker_side}
                                                 </span>
-                                                <span className="individual-transaction">
+                                                <span className="individual-transaction live-transaction-date">
                                                     {formattedDate}
                                                 </span>
                                             </div>

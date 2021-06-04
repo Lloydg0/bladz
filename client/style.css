@@ -688,7 +688,7 @@ input::placeholder {
 .profile,
 .user-profile {
     width: 400px;
-    height: 500px;
+    height: 600px;
     position: relative;
     background-color: #fdfeff;
     display: inline-flex;
@@ -699,6 +699,10 @@ input::placeholder {
     padding-top: 30px;
     filter: drop-shadow(0 0 0.1rem #fdfeff);
     z-index: 0;
+}
+
+.profile {
+    height: 500px;
 }
 
 .private-message {
@@ -757,7 +761,7 @@ input::placeholder {
     text-decoration: none;
     outline: none;
     border: none;
-    margin: 5px 0px 5px 38%;
+    margin: 10px 0px 5px 38%;
 }
 
 .post-button {
@@ -1261,19 +1265,25 @@ button:hover {
     width: 100px;
 }
 .live-amount-coin {
-    margin-left: 40px;
+    margin-left: 0px;
     padding: 20px;
     width: 100px;
 }
 .live-amount-fiat {
     margin-left: 10px;
     padding: 20px;
-    width: 200px;
+    width: 100px;
+}
+
+.live-position {
+    padding: 20px 0px 20px 20px;
+    width: 100px;
 }
 
 .live-time {
     padding: 20px;
     width: 100px;
+    margin-left: 50px;
 }
 
 .transaction-line-container {
@@ -1325,4 +1335,10 @@ button:hover {
 
 .amount-euro {
     margin-left: 35px;
+    width: 90px;
+}
+
+#live-position {
+    width: 150px;
+    margin-left: 50px;
 }
