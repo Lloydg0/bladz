@@ -44,31 +44,25 @@ export default class Home extends React.Component {
     }
 
     setBio(newBio) {
-        console.log("Bio being Set in the home component", newBio);
         this.setState({
             finishedBio: newBio,
         });
-        console.log("finshed Bio when setBio runs", this.state.finishedBio);
     }
 
     async submitImage(file) {
-        console.log("e in submitFile is running");
         var formData = new FormData();
         formData.append("file", file);
-        try {
-            const response = await axios.post("/upload", formData);
-            this.setState({
-                first_name: response.data.payload[0].first_name,
-                last_name: response.data.payload[0].last_name,
-                imgURL: response.data.payload[0].url,
-            });
-        } catch (err) {
-            console.log("err in POST/upload", err);
-        }
+        const response = await axios
+            .post("/upload", formData)
+            .catch(console.log);
+        this.setState({
+            first_name: response.data.payload[0].first_name,
+            last_name: response.data.payload[0].last_name,
+            imgURL: response.data.payload[0].url,
+        });
     }
 
     toggleUploader() {
-        console.log("you want to hide or show the uploader");
         this.setState({
             uploaderIsVisible: !this.state.uploaderIsVisible,
         });

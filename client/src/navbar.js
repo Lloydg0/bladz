@@ -50,10 +50,6 @@ export default function Navbar({
                             <img className="icon" src="./search.png"></img>
                             Search
                         </Link>
-                        {/* <Link className="navbar-links" to="/">
-                            <img className="icon" src="./profile.png"></img>
-                            Profile
-                        </Link> */}
                         <a
                             className="navbar-links"
                             onClick={() => {

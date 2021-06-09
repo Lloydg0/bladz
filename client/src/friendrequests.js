@@ -21,11 +21,6 @@ export default function FriendRequests() {
             state.friendsAndWannabes.filter((user) => user.accepted == false)
     );
 
-    // const buttonText = useSelector((state) => state.buttonText);
-
-    console.log("friends", friends);
-    console.log("wanabees", wannabes);
-
     useEffect(() => {
         dispatch(getFriendsAndWannabes());
     }, []);
