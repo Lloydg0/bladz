@@ -119,9 +119,6 @@ module.exports.friendRequestSent = (recipient_id, sender_id, accepted) => {
 };
 // updating database when friend request is sent
 module.exports.acceptRequestSent = (recipient_id, sender_id) => {
-    // const q = ` UPDATE friendships
-    //             SET recipient_id = $1, sender_id = $2, accepted =  $3
-    //             RETURNING accepted`;
     const q = `
         UPDATE friendships
         SET accepted = true
