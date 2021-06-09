@@ -20,7 +20,7 @@ module.exports.getCoins = () => {
             return response;
         })
         .catch((err) => {
-            console.log("error in getting coin", err);
+            console.log(err);
         });
 };
 
@@ -33,7 +33,7 @@ module.exports.getGasPrice = () => {
             return response;
         })
         .catch((err) => {
-            console.log("error in getting blockChain", err);
+            console.log(err);
         });
 };
 
@@ -49,6 +49,6 @@ module.exports.TradeData = () => {
             return response;
         })
         .catch((err) => {
-            console.log("error in getting livetransactions", err);
+            console.log(err);
         });
 };
