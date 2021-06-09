@@ -2,30 +2,20 @@ import axios from "./axios";
 import { useState, useEffect } from "react";
 
 export default function BlockChain() {
-    console.log("coins just mounted");
     const [gasPrice, setgasPrice] = useState([]);
     const [tradeData, settradeData] = useState([]);
-
-    console.log("tradeData", tradeData);
-
-    console.log("gasPrice", gasPrice);
 
     const { FastGasPrice, LastBlock, ProposeGasPrice, SafeGasPrice } = gasPrice;
 
     useEffect(() => {
-        console.log("useEffect for gasprice just ran");
-
         (async () => {
             const { data } = await axios.get("/gasprice").catch(console.log);
-            console.log("data", data.payload);
             let newGasData = data.payload;
             setgasPrice(newGasData);
         })();
     }, []);
 
     useEffect(() => {
-        console.log("useEffect for for mock tradeData just ran");
-
         (async () => {
             const { data } = await axios.get("/tradedata").catch(console.log);
             settradeData(data);
