@@ -9,18 +9,11 @@ export default function FindPeople() {
     useEffect(() => {
         let ignore = false;
         (async () => {
-            try {
-                const { data } = await axios.get("/find/users/");
-                if (!ignore) {
-                    setPeople(data.payload);
-                } else {
-                    console.log("ignored response");
-                }
-            } catch (err) {
-                console.log(
-                    "err in axios request for retrieving other users in search",
-                    err
-                );
+            const { data } = await axios.get("/find/users/").catch(console.log);
+            if (!ignore) {
+                setPeople(data.payload);
+            } else {
+                console.log("ignored response");
             }
         })();
         return () => {
@@ -29,21 +22,15 @@ export default function FindPeople() {
     }, []);
 
     useEffect(() => {
-        console.log("useEffect for searching for users just ran");
         let ignore = false;
         (async () => {
-            try {
-                const { data } = await axios.get("/find/users/" + peopleInput);
-                if (!ignore) {
-                    setPeople(data.payload);
-                } else {
-                    console.log("ignored response");
-                }
-            } catch (err) {
-                console.log(
-                    "err in axios request for retrieving other users in search",
-                    err
-                );
+            const { data } = await axios
+                .get("/find/users/" + peopleInput)
+                .catch(console.log);
+            if (!ignore) {
+                setPeople(data.payload);
+            } else {
+                console.log("ignored response");
             }
         })();
         return () => {

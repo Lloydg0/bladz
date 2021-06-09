@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 
 export default function Chat({ loggedInUser }) {
     const chatMessages = useSelector((state) => state && state.chatMessages);
-    // console.log("Chat Messages", chatMessages);
     const elemRef = useRef();
-    console.log("chat messages", chatMessages);
 
     useEffect(() => {
         elemRef.current.scrollTop =
@@ -20,8 +18,6 @@ export default function Chat({ loggedInUser }) {
             e.target.value = "";
         }
     };
-
-    // console.log("elemRef", elemRef);
 
     return (
         <div className="full-chat-container">
