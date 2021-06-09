@@ -3,12 +3,9 @@ import { useState, useEffect } from "react";
 
 export default function News() {
     const [news, setNews] = useState([]);
-    console.log("news items", news);
     useEffect(() => {
-        console.log("useEffect for news just ran");
         (async () => {
             const { data } = await axios.get("/news").catch(console.log);
-
             setNews(data);
         })();
     }, []);

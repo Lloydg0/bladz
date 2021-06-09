@@ -15,52 +15,42 @@ export default class ResetPassword extends React.Component {
     async submitEmail(e) {
         e.preventDefault();
         const { email } = this.state;
-        console.log("click");
-        try {
-            const response = await axios.post("/password/reset/email", {
+        const response = await axios
+            .post("/password/reset/email", {
                 email,
+            })
+            .catch(console.log);
+        if (response.data.success === true) {
+            this.setState({
+                view: 2,
             });
-            if (response.data.success === true) {
-                this.setState({
-                    view: 2,
-                });
-            } else {
-                this.setState({
-                    error: true,
-                });
-            }
-        } catch (err) {
-            console.log(
-                "Error in axios post request on registation form component",
-                err
-            );
+        } else {
+            this.setState({
+                error: true,
+            });
         }
     }
 
     async submitNewCodeAndPassword(e) {
         e.preventDefault();
         const { password, code } = this.state;
-        try {
-            const response = await axios.post("/password/reset/verify", {
+        const response = await axios
+            .post("/password/reset/verify", {
                 code,
                 password,
+            })
+            .catch(console.log);
+        if (response.data.success === true) {
+            this.setState({
+                view: 3,
             });
-            if (response.data.success === true) {
-                this.setState({
-                    view: 3,
-                });
-            } else {
-                this.setState({
-                    error: true,
-                });
-            }
-        } catch (err) {
-            console.log(
-                "Error in axios post request on registation form component",
-                err
-            );
+        } else {
+            this.setState({
+                error: true,
+            });
         }
     }
+
     handleChangeOnForm({ target }) {
         this.setState({
             [target.name]: target.value,

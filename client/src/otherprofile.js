@@ -15,37 +15,26 @@ export default class OtherProfile extends React.Component {
         };
     }
     async componentDidMount() {
-        console.log("The other users profile mounted");
         const otherUserId = this.props.match.params.id;
-        console.log("otherUserid", otherUserId.length);
 
-        try {
-            const response = await axios.post(
-                "/users/" + this.props.match.params.id
-            );
+        const response = await axios
+            .post("/users/" + this.props.match.params.id)
+            .catch(console.log);
 
-            if (otherUserId == response.data.user) {
-                this.props.history.push("/");
-            } else {
-                this.setState({
-                    first_name: response.data.payload[0].first_name,
-                    last_name: response.data.payload[0].last_name,
-                    imgURL: response.data.payload[0].url,
-                    finishedBio: response.data.payload[0].bio,
-                });
-            }
-
-            // if (otherUserId > otherUserId[otherUserId.length - 1]) {
-            //     this.props.history.push("/");
-            // }
-        } catch (err) {
-            console.log("Error in axios for other profile", err);
+        if (otherUserId == response.data.user) {
+            this.props.history.push("/");
+        } else {
+            this.setState({
+                first_name: response.data.payload[0].first_name,
+                last_name: response.data.payload[0].last_name,
+                imgURL: response.data.payload[0].url,
+                finishedBio: response.data.payload[0].bio,
+            });
         }
     }
 
     togglePM(e) {
         e.preventDefault();
-        console.log("you want to hide or show the private Message");
         this.setState({
             showPM: !this.state.showPM,
         });

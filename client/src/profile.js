@@ -1,5 +1,4 @@
 import BioEditor from "./bio";
-// import Wall from "./wall";
 import DeleteProfile from "./deleteProfile";
 
 export default function Profile({
@@ -8,9 +7,7 @@ export default function Profile({
     imgURL,
     finishedBio,
     setBio,
-    // id,
 }) {
-    console.log("props", first_name, last_name, imgURL, finishedBio, setBio);
     return (
         <>
             <DeleteProfile />
