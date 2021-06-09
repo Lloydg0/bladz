@@ -6,9 +6,6 @@ import ResetPassword from "./reset";
 export default function Welcome() {
     return (
         <>
-            {/* <div className="">
-                <NavbarRegister />
-            </div> */}
             <div className="main-page-main-container">
                 <div className="inner-form-container">
                     <div className="inner-form-container-left">

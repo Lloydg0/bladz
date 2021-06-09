@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 export default function Wall({ id }) {
     const comments = useSelector((state) => state && state.comments);
-    console.log("comments", comments);
     const elemRef = useRef();
 
     useEffect(() => {

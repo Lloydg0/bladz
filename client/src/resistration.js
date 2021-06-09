@@ -15,7 +15,6 @@ export default class Registration extends React.Component {
     submitForm(e) {
         e.preventDefault();
         const { first_name, last_name, email, password } = this.state;
-        console.log("click");
         axios
             .post("/registration", {
                 first_name,
@@ -24,33 +23,22 @@ export default class Registration extends React.Component {
                 password,
             })
             .then((response) => {
-                console.log(
-                    "Response worked in axios post for registration route",
-                    response
-                );
                 if (response.data.success === true) {
-                    // unload the page and request to the server
-                    // location.href = "/";
                     location.replace("/home");
                 } else {
-                    // sending error message if something is wrong with the form
                     this.setState({
                         error: true,
                     });
                 }
             })
             .catch((err) => {
-                console.log(
-                    "Error in axios post request on registation form component",
-                    err
-                );
+                console.log(err);
             });
     }
     handleChangeOnForm({ target }) {
         this.setState({
             [target.name]: target.value,
         });
-        console.log("Form Data added", target.value);
     }
     render() {
         return (
