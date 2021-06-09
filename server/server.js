@@ -41,18 +41,15 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152, //files over 2mb cannot be uploaded used to stop ddos attacks (if upload does not work, check the size of the file as it might be too big and not a bug in the code).
+        fileSize: 2097152,
     },
 });
 ////// end of code that uploads the files
 
-//this will compress/minimise the size of the response we send
 app.use(compression());
 
-// retrieving static files
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
-// const cookieSession = require("cookie-session");
 const cookieSessionMiddleware = cookieSession({
     secret: `${SECRET_KEY}`,
     maxAge: 1000 * 60 * 60 * 24 * 90,
@@ -63,7 +60,6 @@ io.use(function (socket, next) {
     cookieSessionMiddleware(socket.request, socket.request.res, next);
 });
 
-//Preventing Vulnerablilities (must come after cookie session)
 app.use(csurf());
 
 app.use(function (req, res, next) {
@@ -71,17 +67,14 @@ app.use(function (req, res, next) {
     next();
 });
 
-// url encoded parser
 app.use(
     express.urlencoded({
         extended: false,
     })
 );
 
-//express json
 app.use(express.json());
 
-//checking to see if there has been cookies
 app.use((req, res, next) => {
     console.log("req.url: ", req.url);
     console.log("req.session", req.session);
@@ -106,23 +99,17 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/home", async (req, res) => {
-    console.log("a request made to home route");
     const loggedInUser = req.session.user_Id;
-    try {
-        const { rows } = await db.selectingUserInfo(loggedInUser);
-        console.log("rows", rows);
-        res.json({
-            success: true,
-            payload: rows,
-        });
-    } catch (err) {
-        console.log("err in showing top 3 users from the Database", err);
-    }
+    const { rows } = await db
+        .selectingUserInfo(loggedInUser)
+        .catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+    });
 });
 
 app.get("/news", (req, res) => {
-    console.log("made it to requesting news from twitter!");
-
     getToken = util.promisify(getToken);
     getTweets = util.promisify(getTweets);
 
@@ -148,65 +135,92 @@ app.get("/news", (req, res) => {
             res.json(filterTweets(tweets));
         })
         .catch((err) => {
-            console.log("Error in Getting token", err);
+            console.log(err);
             res.sendStatus(500);
         });
 });
 
 app.get("/coins", (req, res) => {
-    console.log(
-        "Made it into the server request for getting coins from CMC api for coins"
-    );
-
     getCoins()
         .then((response) => {
-            console.log(
-                "result in getting the coins back",
-                response.data.data[0].quote
-            );
             res.json({
                 success: true,
                 payload: response.data.data,
             });
         })
         .catch((err) => {
-            console.log("error in getting coins", err);
+            console.log(err);
         });
 });
 
 app.get("/gasprice", (req, res) => {
-    console.log("Made it into the server request for getting gasprice");
-
     getGasPrice()
         .then((response) => {
-            console.log(
-                "result in getting the gasprice back",
-                response.data.result
-            );
             res.json({
                 success: true,
                 payload: response.data.result,
             });
         })
         .catch((err) => {
-            console.log("error in getting gasprice", err);
+            console.log(err);
         });
 });
 
 app.get("/tradedata", (req, res) => {
-    console.log("Made it into the server request for getting tradedata");
-
     TradeData()
         .then((response) => {
-            console.log("result in getting the tradedata back", response.data);
             res.json({
                 success: true,
                 payload: response.data,
             });
         })
         .catch((err) => {
-            console.log("error in getting gasprice", err);
+            console.log(err);
         });
+});
+
+app.get("/find/users", async (req, res) => {
+    const { rows } = await db.showingTopThreeUsers().catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+    });
+});
+
+app.get("/find/users/:id", async (req, res) => {
+    const { rows } = await db
+        .searchForOtherUsers(req.params.id)
+        .catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+    });
+});
+
+app.get("/friendRequest/:id", async (req, res) => {
+    const loggedInUser = req.session.user_Id;
+    const viewedUser = req.params.id;
+    const { rows } = await db
+        .decideFriendshipButtonToSend(loggedInUser, viewedUser)
+        .catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+        loggedInUser,
+        viewedUser,
+    });
+});
+
+app.get("/friends-wannabes", async (req, res) => {
+    const loggedInUser = req.session.user_Id;
+    const { rows } = await db
+        .selectingFriendsOrFriendRequests(loggedInUser)
+        .catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+        loggedInUser,
+    });
 });
 
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
@@ -380,59 +394,6 @@ app.post("/users/:id", async (req, res) => {
     }
 });
 
-app.get("/find/users", async (req, res) => {
-    console.log("a request made to the find users route");
-    try {
-        const { rows } = await db.showingTopThreeUsers();
-        console.log("Rows in showing top 3", rows);
-        res.json({
-            success: true,
-            payload: rows,
-        });
-    } catch (err) {
-        console.log("err in showing top 3 users from the Database", err);
-    }
-});
-
-app.get("/find/users/:id", async (req, res) => {
-    console.log("a request made to the find users search route");
-    console.log("req.params", req.params);
-    try {
-        const { rows } = await db.searchForOtherUsers(req.params.id);
-        console.log("result in searching for other users", rows);
-        res.json({
-            success: true,
-            payload: rows,
-        });
-    } catch (err) {
-        console.log("err in finding users from the Database", err);
-    }
-});
-
-app.get("/friendRequest/:id", async (req, res) => {
-    console.log("a request was made to the GET friuend request route");
-    const loggedInUser = req.session.user_Id;
-    const viewedUser = req.params.id;
-    console.log("LogginInUser", loggedInUser);
-    console.log("ViewedUser", req.params.id);
-
-    try {
-        const { rows } = await db.decideFriendshipButtonToSend(
-            loggedInUser,
-            viewedUser
-        );
-        console.log("Result in friendship butting GET request", rows);
-        res.json({
-            success: true,
-            payload: rows,
-            loggedInUser,
-            viewedUser,
-        });
-    } catch (err) {
-        console.log("Error in friendship button get reqwuest", err);
-    }
-});
-
 app.post("/friendRequest/:id", async (req, res) => {
     const viewedUserId = req.params.id;
     const buttonText = req.body.buttonText;
@@ -488,25 +449,6 @@ app.post("/friendRequest/:id", async (req, res) => {
         } catch (err) {
             console.log("ERROR IN REMOVING FRIEND REQUEST", err);
         }
-});
-
-app.get("/friends-wannabes", async (req, res) => {
-    console.log("a request made to the friend/wannabes route");
-    const loggedInUser = req.session.user_Id;
-    console.log("LogginInUser", loggedInUser);
-    try {
-        const { rows } = await db.selectingFriendsOrFriendRequests(
-            loggedInUser
-        );
-        console.log("getting response for friend requests", rows);
-        res.json({
-            success: true,
-            payload: rows,
-            loggedInUser,
-        });
-    } catch (err) {
-        console.log("A error in the friend or requesters route", err);
-    }
 });
 
 app.post("/delete-user", async (req, res) => {
