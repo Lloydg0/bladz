@@ -226,30 +226,24 @@ app.get("/friends-wannabes", async (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////POST REQUESTS
 
 app.post("/registration", async (req, res) => {
-    console.log("This was a POST REQUEST MADE TO THE /Registration route.");
     const { first_name, last_name, email, password } = req.body;
-
-    try {
-        const password_hash = await hash(password);
-        const { rows } = await db.addUserRegistrationInformation(
+    const password_hash = await hash(password);
+    const { rows } = await db
+        .addUserRegistrationInformation(
             first_name,
             last_name,
             email,
             password_hash
-        );
-        req.session.user_Id = rows[0].id;
-        res.json({
-            success: true,
-        });
-    } catch (err) {
-        console.log("Error in saving Users registration data", err);
-    }
+        )
+        .catch(console.log);
+    req.session.user_Id = rows[0].id;
+    res.json({
+        success: true,
+    });
 });
 
 app.post("/login", async (req, res) => {
-    console.log("This was a POST request to the /login route");
     const { email, password } = req.body;
-
     try {
         const { rows } = await db.retrivingUserEmail(email);
         const comparison = await compare(password, rows[0].password_hash);
@@ -268,24 +262,14 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/password/reset/email", async (req, res) => {
-    console.log("A post request was made to the /password/reset/email route");
     const { email } = req.body;
     const code = cryptoRandomString({ length: 6 });
-
     if (email) {
         db.retrivingUserEmail(email)
             .then((result) => {
                 if (result) {
-                    console.log(
-                        "Result in retrieving email for the password reset",
-                        result
-                    );
                     db.addResetCode(code, email)
                         .then((result) => {
-                            console.log(
-                                "Result in adding code to Database",
-                                result
-                            );
                             sendEmail(
                                 email,
                                 "Please find the Verification code in this email",
@@ -296,10 +280,7 @@ app.post("/password/reset/email", async (req, res) => {
                             });
                         })
                         .catch((err) => {
-                            console.log(
-                                "Error in Adding new verifcation code to Data base",
-                                err
-                            );
+                            console.log(err);
                             res.json({
                                 success: false,
                             });
@@ -307,15 +288,13 @@ app.post("/password/reset/email", async (req, res) => {
                 }
             })
             .catch((err) => {
-                console.log("Error in retriving Email", err);
+                console.log(err);
             });
     }
 });
 
 app.post("/password/reset/verify", async (req, res) => {
-    console.log("post request made to the /password/rest/verify route");
     const { password } = req.body;
-
     try {
         const { rows } = await db.compareCodeToEmail();
         const email = rows[0].email;
@@ -329,10 +308,7 @@ app.post("/password/reset/verify", async (req, res) => {
         });
         return updateUserPassword;
     } catch (err) {
-        console.log(
-            "Error in comparing the the code and email verification",
-            err
-        );
+        console.log(err);
         res.json({
             success: false,
         });
@@ -340,23 +316,19 @@ app.post("/password/reset/verify", async (req, res) => {
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
-    console.log("upload Worked!!!!");
-    console.log("req.file", req.file); // req.file comes fom multer
     let s3Url = s3url.s3Url;
     const prefixedFilename = s3Url.concat(req.file.filename);
-    console.log("Prefixed Filename", prefixedFilename);
     try {
         const { rows } = await db.addImageUploadToAWS(
             prefixedFilename,
             req.session.user_Id
         );
-        console.log("rows", rows);
         res.json({
             success: true,
             payload: rows,
         });
     } catch (err) {
-        console.log("Error in adding the img to AWS", err);
+        console.log(err);
         res.json({
             success: false,
         });
@@ -364,42 +336,30 @@ app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
 });
 
 app.post("/bio", async (req, res) => {
-    console.log("post request made to the /bio route");
     const { draftBio } = req.body;
-
-    try {
-        const { rows } = await db.updateUserBio(draftBio, req.session.user_Id);
-        console.log("rows", rows);
-        res.json({
-            success: true,
-            payload: rows,
-        });
-    } catch (err) {
-        console.log("Error in adding bio on server side", err);
-    }
+    const { rows } = await db
+        .updateUserBio(draftBio, req.session.user_Id)
+        .catch(console.log);
+    res.json({
+        success: true,
+        payload: rows,
+    });
 });
 
 app.post("/users/:id", async (req, res) => {
-    console.log("req.params", req.params);
     const { id } = req.params;
-    try {
-        const { rows } = await db.retrivingOtherUserProfileInformation(id);
-        res.json({
-            success: true,
-            payload: rows,
-            user: req.session.user_Id,
-        });
-    } catch (err) {
-        console.log("Error in getting other user profiles information", err);
-    }
+    const { rows } = await db.retrivingOtherUserProfileInformation(id);
+    res.json({
+        success: true,
+        payload: rows,
+        user: req.session.user_Id,
+    }).catch(console.log);
 });
 
 app.post("/friendRequest/:id", async (req, res) => {
     const viewedUserId = req.params.id;
     const buttonText = req.body.buttonText;
     const loggedInUser = req.session.user_Id;
-    console.log("a request was made to the POST friend request route");
-    console.log("buttonText", buttonText);
     if (buttonText == "Add Friend")
         try {
             const { rows } = await db.friendRequestSent(
@@ -413,25 +373,22 @@ app.post("/friendRequest/:id", async (req, res) => {
                 buttonText: "Cancel Friend Request",
             });
         } catch (err) {
-            console.log("ERROR IN SENDING FRIEND REQUEST", err);
+            console.log(err);
         }
 
     if (buttonText == "Accept Friend Request")
         try {
-            console.log("before the db request");
             const { rows } = await db.acceptRequestSent(
                 viewedUserId,
                 loggedInUser
             );
-            console.log("after the db request", rows);
             res.json({
                 success: true,
-                // payload: rows[0].accepted,
                 payload: rows,
                 buttonText: "Remove Friend",
             });
         } catch (err) {
-            console.log("ERROR IN ACCEPTING FRIEND REQUEST", err);
+            console.log(err);
         }
 
     if (
@@ -447,7 +404,7 @@ app.post("/friendRequest/:id", async (req, res) => {
                 buttonText: "Add Friend",
             });
         } catch (err) {
-            console.log("ERROR IN REMOVING FRIEND REQUEST", err);
+            console.log(err);
         }
 });
 
@@ -462,10 +419,9 @@ app.post("/delete-user", async (req, res) => {
         .then(() => {
             req.session = null;
             res.redirect("/welcome");
-            // await db.deleteUser(loggedInUser);
         })
         .catch((err) => {
-            console.log("A error in deleting user", err);
+            console.log(err);
         });
 });
 
