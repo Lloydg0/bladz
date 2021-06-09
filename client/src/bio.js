@@ -16,31 +16,22 @@ export default class BioEditor extends React.Component {
         });
     }
 
-    SendingbackBio(newBio) {
+    sendingBackBio(newBio) {
         this.props.setBio(newBio);
     }
 
     async submitbio(e) {
         e.preventDefault();
         const { draftBio } = this.state;
-        console.log("draftBio", draftBio);
-        try {
-            const response = await axios.post("/bio", { draftBio });
-            console.log("response", response);
-            const newBio = response.data.payload[0].bio;
-            console.log("newBio: ", newBio);
-            this.SendingbackBio(newBio);
-        } catch (err) {
-            console.log(
-                "Error in axios post request on registation form component",
-                err
-            );
-        }
+        const response = await axios
+            .post("/bio", { draftBio })
+            .catch(console.log);
+        const newBio = response.data.payload[0].bio;
+        this.sendingBackBio(newBio);
     }
 
     toggleBio(e) {
         e.preventDefault();
-        console.log("you want to hide or show the text area");
         this.setState({
             showTextArea: !this.state.showTextArea,
         });
